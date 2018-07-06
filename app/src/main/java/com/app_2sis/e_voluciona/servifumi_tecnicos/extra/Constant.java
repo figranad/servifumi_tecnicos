@@ -1,0 +1,54 @@
+package com.app_2sis.e_voluciona.servifumi_tecnicos.extra;
+
+public class Constant {
+    public static final String PREFIJO_CLAVE_ANDROID = "GEN";
+
+    public static final String CLAVE_CODE_VERSION_SERVIFUMI_TECNICOS = "1";
+
+    public static final String SERVIFUMI_VALUE = "0";
+    public static final String PLATAPLUS_VALUE = "1";
+
+    public static final String SERVIFUMI = "SERVIFUMI";
+    public static final String PLATAPLUS = "PLATAPLUS";
+
+    public static final String NO_VALUE = "0";
+    public static final String SI_VALUE = "1";
+
+    public static final String NO = "NO";
+    public static final String SI = "SI";
+
+    public static final String STATUS_ACTIVE = "ACTIVE";
+    public static final String STATUS_INACTIVE = "INACTIVE";
+
+    public static final String STATUS_ACTIVE_VALUE = "1";
+    public static final String STATUS_INACTIVE_VALUE = "0";
+
+
+    public static final String PROMPT = "SELECCIONA...";
+
+    //Frecuencia
+    public static final String FRECUENCIA_MENSUAL = "0";
+    public static final String FRECUENCIA_BIMESTRAL = "1";
+    public static final String FRECUENCIA_TRIMESTRAL = "2";
+    public static final String FRECUENCIA_SEMESTRAL = "3";
+    public static final String FRECUENCIA_ANUAL = "4";
+    public static final String FRECUENCIA_MENSUAL_VALUE = "MENSUAL";
+    public static final String FRECUENCIA_BIMESTRAL_VALUE = "BIMESTRAL";
+    public static final String FRECUENCIA_TRIMESTRAL_VALUE = "TRIMESTRAL";
+    public static final String FRECUENCIA_SEMESTRAL_VALUE = "SEMESTRAL";
+    public static final String FRECUENCIA_ANUAL_VALUE = "ANUAL";
+
+    public static final String NOMBRE_ENTORNO_BLANCO_BD = "BLANCO";
+    public static final String NOMBRE_ENTORNO_NEGRO_BD = "NEGRO";
+    public static final String NOMBRE_ENTORNO_GRIS_BD = "GRIS";
+    public static final String NOMBRE_ENTORNO_BLANCO_BD_VALUE = "1";
+    public static final String NOMBRE_ENTORNO_NEGRO_BD_VALUE = "2";
+    public static final String NOMBRE_ENTORNO_GRIS_BD_VALUE = "3";
+
+    public static final String SEPARADOR_COMA = ", ";
+
+    public static final String CLIENTE_ACTIVIDAD_NUEVO = "1";
+    public static final String CLIENTE_ACTIVIDAD_CARTERA = "2";
+    public static final String CLIENTE_ACTIVIDAD_PERDIDO = "3";
+    public static final String CLIENTE_ACTIVIDAD_INHABILITADO = "4";
+}
