@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorSuccess</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +16,43 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TIL" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginTop">8sp</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="ButtonMaterial" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="TextoDetallesInCard" parent="@android:style/TextAppearance">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="EtiquetaSpinner" parent="TIL">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorWarningDark</item>
+    </style>
+
+    <style name="EtiquetaInformativa" parent="TIL">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorNegro</item>
+        <item name="android:layout_marginTop">8sp</item>
+    </style>
+
+    <style name="TextoItemListAdapter" parent="@android:style/TextAppearance">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
 </resources>

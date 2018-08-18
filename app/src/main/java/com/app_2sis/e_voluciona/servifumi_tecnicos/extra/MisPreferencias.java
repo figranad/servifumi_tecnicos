@@ -8,20 +8,29 @@ public class MisPreferencias {
     private SharedPreferences.Editor editor;
     private static final String NAME_FILE_PREFERENCIAS = "MisPreferencias";
 
+    public static final String KEY_ID_USUARIO_LOGUEADO = "IdUsuarioLogueado";
+    public static final String KEY_ID_TECNICO_LOGUEADO = "IdTecnicoLogueado";
+
     public MisPreferencias(Context context) {
         prefs = context.getSharedPreferences(NAME_FILE_PREFERENCIAS, Context.MODE_PRIVATE);
         editor = prefs.edit();
     }
 
-//    public void setTelefonoDirectorioLogistica1(String telefono){
-//        editor.putString(KEY_CLAVE_DIRECTORIO_LOGISTICA1, telefono);
-//        editor.commit();
-//    }
-//    /**
-//     *
-//     * @return Cadena con el telefono o vacía si no hay numero guardado
-//     */
-//    public String getTelefonoDirectorioLogistica1(){
-//        return prefs.getString(KEY_CLAVE_DIRECTORIO_LOGISTICA1, "");
-//    }
+    public void setIdUsuarioLogueado(String idUsuario) {
+        editor.putString(KEY_ID_USUARIO_LOGUEADO, idUsuario);
+        editor.commit();
+    }
+
+    public String getIdUsuarioLogueado(){
+        return prefs.getString(KEY_ID_USUARIO_LOGUEADO, "");
+    }
+
+    public void setIdTecnicoLogueado(String idTecnico) {
+        editor.putString(KEY_ID_TECNICO_LOGUEADO, idTecnico);
+        editor.commit();
+    }
+
+    public String getIdTecnicoLogueado(){
+        return prefs.getString(KEY_ID_TECNICO_LOGUEADO, "");
+    }
 }

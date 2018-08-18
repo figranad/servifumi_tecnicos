@@ -6,4 +6,18 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="home">Inicio</string>
+    <string name="descargar">Descargar</string>
+    <string name="programacion_dia">Programación del Día</string>
+    <string name="salir">Salir</string>
+    <string name="acerca_de">Acerca de...</string>
+    <string name="cerrar_sesion">Cerrar Sesion</string>
+    <string name="subir_informacion">Enviar</string>
+    <string name="constancia_sf">Constancia Fumi</string>
+    <string name="constancia_pp">Constancia Plata</string>
+    <string name="bienvenido">BIENVENIDO</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="hint_usuario">Usuario</string>
+    <string name="hint_password">Password</string>
+    <string name="acceder">Acceder</string>
 </resources>

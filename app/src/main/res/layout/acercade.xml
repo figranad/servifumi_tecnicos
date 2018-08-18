@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/logo_2sis" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="2SIS E-VOLUCIONA"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:autoLink="email"
+        android:text="contacto@2sis.com.mx"
+        android:textAlignment="center"
+        android:textColorLink="@color/colorWarningDark" />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:autoLink="web"
+        android:text="https://www.facebook.com/2sisEvoluciona"
+        android:textAlignment="center"
+        android:textColorLink="@color/colorWarningDark" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="(981)8167139,1453544,1440837 y sin costo 018002120545"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textView48"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Calle Justo Sierra No, 22 entre Calle 16 y Pablo García, Col. San Román C.P. 24040 Campeche, Camp, MX"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/tv_acerca_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textAlignment="center"
+        android:visibility="gone" />
+</LinearLayout>

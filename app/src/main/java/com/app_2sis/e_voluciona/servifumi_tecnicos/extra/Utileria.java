@@ -1,5 +1,7 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.extra;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,11 +11,15 @@ import android.text.format.DateFormat;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.LoginActivity;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.security.MessageDigest;
@@ -200,31 +206,60 @@ public class Utileria {
         listView.setLayoutParams(params);
     }
 
-    //TODO implementar con los Activity de la app
-//    public static Intent getIntentNavigationDrawer(int id, Context context) {
-//        Intent intent = null;
-//        if (id == R.id.nav_home) {
-//            intent = new Intent(context, MainActivity.class);
-//
-//        } else if (id == R.id.nav_descargar) {
+    public static Intent getIntentNavigationDrawer(int id, Context context) {
+        Intent intent = null;
+        if (id == R.id.nav_home) {
+            intent = new Intent(context, MainActivity.class);
+
+//        } else if (id == R.id.nav_descarga) {
 //            intent = new Intent(context, SincronizarActivity.class);
 //
-//        } else if (id == R.id.nav_cargar) {
+//        } else if (id == R.id.nav_subida) {
 //            intent = new Intent(context, EnviarActivity.class);
 //
-//        } else if (id == R.id.nav_visitas) {
+//        } else if (id == R.id.nav_programacion) {
 //            intent = new Intent(context, VisitasVerActivity.class);
 //
-//        } else if (id == R.id.nav_logout) {
-//            intent = new Intent(context, LoginActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//        } else if (id == R.id.nav_inspecciones_sf) {
+//        } else if (id == R.id.nav_constancia_sf) {
 //            intent = new Intent(context, InspeccionesSFActivity.class);
-//        } else if (id == R.id.nav_inspecciones_pp) {
+//        } else if (id == R.id.nav_constancia_pp) {
 //            intent = new Intent(context, InspeccionesPPActivity.class);
-//        }
-//        return intent;
-//    }
+        }else if (id == R.id.nav_acerca) {
+            View view = ((Activity) context).getLayoutInflater().inflate(R.layout.acercade, null);
+            try {
+                TextView tv;
+                tv = view.getRootView().findViewById(R.id.tv_acerca_version);
+                tv.setText("Version: " + context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName);
+                tv.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            AlertDialog.Builder acercade = new AlertDialog.Builder(context);
+            acercade.setView(view);
+            acercade.setIcon(R.mipmap.ico_2sis);
+            acercade.setTitle("Desarrollado por:");
+            AlertDialog alert = acercade.create();
+            alert.show();
+        } else if (id == R.id.nav_salir) {
+            intent = new Intent(context, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        return intent;
+    }
+
+    /**
+     * Oculta el teclaodo si es que está mostrado en pantalla
+     *
+     * @param context Context de la aplicación donde va a funcionar
+     */
+    public static void hideTeclado(Context context) {
+        InputMethodManager inputManager = (InputMethodManager)
+                context.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 
     /**
      * Convierte un Path de archivo en el File Base64
