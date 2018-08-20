@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.DatosAplicacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter.ApiAdapter;
@@ -36,36 +37,25 @@ public class CheckUpdate implements Callback<String> {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        call = apiService.checkUpdateVersion(new DatosAplicacion(Constant.CLAVE_CODE_VERSION_SERVIFUMI_TECNICOS, version+""));
+        call = apiService.checkUpdateVersion(new DatosAplicacion(Constant.CLAVE_CODE_VERSION_SERVIFUMI_TECNICOS, version + ""));
         call.enqueue(this);
     }
 
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
-        boolean flag;
         if (response.body() != null) {
             int id = Integer.parseInt(response.body());
             if (id == 1) { //necesita Update
                 lanzarAlert();
-                flag = false;
-            } else {
-                flag = true;
             }
-//            if (activity instanceof DescargaActivity){ // TODO: 17/08/2018 descomentar al crear activity
-//                ((DescargaActivity)activity).habilitarBotones(flag);
-//            }
         }
     }
 
     @Override
     public void onFailure(Call<String> call, Throwable t) {
-//        if (activity instanceof DescargaActivity){   // TODO: 17/08/2018 descomentar al crear activity
-//            ((DescargaActivity)activity).addLog("ERROR: SIN CONEXIÓN A INTERNET");
-//            ((DescargaActivity)activity).quitar_Dialog();
-//        }
     }
 
-    private void lanzarAlert(){
+    private void lanzarAlert() {
         new AlertDialog.Builder(activity)
                 .setCancelable(false)
                 .setIcon(R.drawable.ic_descarga)

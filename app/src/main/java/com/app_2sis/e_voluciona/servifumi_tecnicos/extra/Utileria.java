@@ -17,6 +17,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.LoginActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity;
 
@@ -211,8 +212,8 @@ public class Utileria {
         if (id == R.id.nav_home) {
             intent = new Intent(context, MainActivity.class);
 
-//        } else if (id == R.id.nav_descarga) {
-//            intent = new Intent(context, SincronizarActivity.class);
+        } else if (id == R.id.nav_descarga) {
+            intent = new Intent(context, DescargaActivity.class);
 //
 //        } else if (id == R.id.nav_subida) {
 //            intent = new Intent(context, EnviarActivity.class);

@@ -1,0 +1,128 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity"
+    tools:showIn="@layout/app_bar_descargar">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_descarga_indicacion"
+                style="@style/EtiquetaInformativa"
+                android:text="@string/sincronizar_antes_de_descargar"
+                android:textColor="@color/colorNegro"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_descarga_catalogos"
+                    style="@style/ButtonMaterial"
+                    android:layout_weight="1"
+                    android:text="@string/catalogos" />
+
+                <ImageView
+                    android:id="@+id/iv_descarga_catalogos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:visibility="gone"
+                    android:contentDescription="@string/statuscatalogos" />
+
+                <ProgressBar
+                    android:id="@+id/pb_descarga_catalogos"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_descarga_programacion"
+                    style="@style/ButtonMaterial"
+                    android:layout_weight="1"
+                    android:text="@string/programacion" />
+
+                <ImageView
+                    android:id="@+id/iv_descarga_programacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:visibility="gone"
+                    android:contentDescription="@string/statusprogramacion" />
+
+                <ProgressBar
+                    android:id="@+id/pb_descarga_programacion"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_descarga_todo"
+                    style="@style/ButtonMaterial"
+                    android:layout_weight="1"
+                    android:text="@string/descargar_todo" />
+
+                <ImageView
+                    android:id="@+id/iv_descarga_todo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:visibility="gone"
+                    android:contentDescription="@string/statustodo" />
+
+                <ProgressBar
+                    android:id="@+id/pb_descarga_todo"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

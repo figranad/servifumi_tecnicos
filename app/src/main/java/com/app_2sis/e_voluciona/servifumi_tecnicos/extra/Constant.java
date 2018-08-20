@@ -26,6 +26,12 @@ public class Constant {
 
     public static final String PROMPT = "SELECCIONA...";
 
+    //Status Descarga Activity
+    public static final int STATUS_DESCARGA_DEFAULT = 0;
+    public static final int STATUS_DESCARGA_CARGANDO = 1;
+    public static final int STATUS_DESCARGA_OK = 2;
+    public static final int STATUS_DESCARGA_ERROR = 3;
+
     //Frecuencia
     public static final String FRECUENCIA_MENSUAL = "0";
     public static final String FRECUENCIA_BIMESTRAL = "1";
