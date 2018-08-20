@@ -51,17 +51,17 @@ public class CheckUpdate implements Callback<String> {
             } else {
                 flag = true;
             }
-//            if (activity instanceof SincronizarActivity){ // TODO: 17/08/2018 descomentar al crear activity
-//                ((SincronizarActivity)activity).habilitarBotones(flag);
+//            if (activity instanceof DescargaActivity){ // TODO: 17/08/2018 descomentar al crear activity
+//                ((DescargaActivity)activity).habilitarBotones(flag);
 //            }
         }
     }
 
     @Override
     public void onFailure(Call<String> call, Throwable t) {
-//        if (activity instanceof SincronizarActivity){   // TODO: 17/08/2018 descomentar al crear activity
-//            ((SincronizarActivity)activity).addLog("ERROR: SIN CONEXIÓN A INTERNET");
-//            ((SincronizarActivity)activity).quitar_Dialog();
+//        if (activity instanceof DescargaActivity){   // TODO: 17/08/2018 descomentar al crear activity
+//            ((DescargaActivity)activity).addLog("ERROR: SIN CONEXIÓN A INTERNET");
+//            ((DescargaActivity)activity).quitar_Dialog();
 //        }
     }
 

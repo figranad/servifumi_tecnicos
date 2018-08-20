@@ -51,4 +51,18 @@ public class Constant {
     public static final String CLIENTE_ACTIVIDAD_CARTERA = "2";
     public static final String CLIENTE_ACTIVIDAD_PERDIDO = "3";
     public static final String CLIENTE_ACTIVIDAD_INHABILITADO = "4";
+
+    //Tipo Servicio Constancia Fumi
+    public static final String TIPO_SERVICIO_GENERAL = "1";
+    public static final String TIPO_SERVICIO_CORRECTIVO = "2";
+    public static final String TIPO_SERVICIO_PREVENTIVO = "3";
+    public static final String TIPO_SERVICIO_SUPERVISION = "4";
+    public static final String TIPO_SERVICIO_DES_PATOGENA = "5";
+    public static final String TIPO_SERVICIO_OTRO = "0";
+    public static final String TIPO_SERVICIO_GENERAL_VALUE = "SERV. GENERAL";
+    public static final String TIPO_SERVICIO_CORRECTIVO_VALUE = "CORRECTIVO";
+    public static final String TIPO_SERVICIO_PREVENTIVO_VALUE = "PREVENTIVO";
+    public static final String TIPO_SERVICIO_SUPERVISION_VALUE = "SUPERVISION";
+    public static final String TIPO_SERVICIO_DES_PATOGENA_VALUE = "DESINFECCION PATÓGENA";
+    public static final String TIPO_SERVICIO_OTRO_VALUE = "OTRO";
 }
