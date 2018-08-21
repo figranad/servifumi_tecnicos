@@ -10,6 +10,7 @@ public class Usuario {
     public static final String USER_WS = "user";
     public static final String PASSWORD_WS = "password";
     public static final String STATUS_WS = "status";
+    public static final String TURNO_ID_WS = "turno_id";
     public static final String TECNICO_ID_WS = "tecnico_id";
 
     @SerializedName(ID_WS)
@@ -35,6 +36,10 @@ public class Usuario {
     @SerializedName(STATUS_WS)
     @DatabaseField(columnName = STATUS_WS)
     private String status = "";
+
+    @SerializedName(TURNO_ID_WS)
+    @DatabaseField(columnName = TURNO_ID_WS)
+    private String turno_id = "";
 
     @SerializedName(TECNICO_ID_WS)
     @DatabaseField(columnName = TECNICO_ID_WS)
@@ -80,8 +85,12 @@ public class Usuario {
         this.status = status;
     }
 
-    public String getUsuarioId() {
-        return usuario_id;
+    public String getTurno_id() {
+        return turno_id;
+    }
+
+    public void setTurno_id(String turno_id) {
+        this.turno_id = turno_id;
     }
 
     public String getTecnico_id() {
@@ -90,6 +99,10 @@ public class Usuario {
 
     public void setTecnico_id(String tecnico_id) {
         this.tecnico_id = tecnico_id;
+    }
+
+    public String getUsuarioId() {
+        return usuario_id;
     }
 
     public void setUsuarioId(String usuario_id) {

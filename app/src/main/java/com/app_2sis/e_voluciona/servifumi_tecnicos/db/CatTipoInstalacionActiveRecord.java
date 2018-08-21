@@ -145,18 +145,18 @@ public class CatTipoInstalacionActiveRecord extends MyActiveRecord {
     }
 
     public String getIDInlista(String nombre) {
-        List<CatTipoInstalacion> tarjetaList = getCatTipoInstalacions();
-        for (CatTipoInstalacion tarjeta : tarjetaList) {
-            if (tarjeta.getNombre().equals(nombre))
-                return tarjeta.getCat_tipo_instalacion_id();
+        List<CatTipoInstalacion> list = getCatTipoInstalacions();
+        for (CatTipoInstalacion item : list) {
+            if (item.getNombre().equals(nombre))
+                return item.getCat_tipo_instalacion_id();
         }
         return "0";
     }
 
-    public int getPositionInlista(String tarjetaID) {
-        List<CatTipoInstalacion> tarjetaList = getCatTipoInstalacions();
-        for (int i = 0; i < tarjetaList.size(); i++) {
-            if (tarjetaList.get(i).getCat_tipo_instalacion_id().equals(tarjetaID)) {
+    public int getPositionInlista(String id) {
+        List<CatTipoInstalacion> list = getCatTipoInstalacions();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getCat_tipo_instalacion_id().equals(id)) {
                 return i + 1;
             }
         }

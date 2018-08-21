@@ -14,6 +14,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Primera Clase que se descarga de los catalogos
+ */
 public class CatTipoInstalacionSincronizar implements Callback<CatTipoInstalacionResponse> {
     private DescargaActivity descargaActivity;
     private CatTipoInstalacionActiveRecord catTipoInstalacionActiveRecord;
@@ -34,7 +37,7 @@ public class CatTipoInstalacionSincronizar implements Callback<CatTipoInstalacio
                 catTipoInstalacionActiveRecord.deleteAll();
                 if (catTipoInstalacionActiveRecord.save(catTipoInstalacionArrayList)) {
                     descargaActivity.showMensaje("Tipo Instalaciones Descargados");
-                    new MetodoPagoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                    new CatTurnoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
                 }
                 else {
                     descargaActivity.showMensaje("ERROR guardando tipo instalaciones");
@@ -43,8 +46,8 @@ public class CatTipoInstalacionSincronizar implements Callback<CatTipoInstalacio
 
             } else {
                 catTipoInstalacionActiveRecord.deleteAll();
-                descargaActivity.showMensaje("Sin paquetes");
-                new MetodoPagoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                descargaActivity.showMensaje("Sin tipos de instalaciones");
+                new CatTurnoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
             }
         } else {
             descargaActivity.showMensaje("ERROR descargando tipo instalaciones");

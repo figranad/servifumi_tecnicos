@@ -11,11 +11,11 @@ public class Constant {
     public static final String SERVIFUMI = "SERVIFUMI";
     public static final String PLATAPLUS = "PLATAPLUS";
 
-    public static final String NO_VALUE = "0";
-    public static final String SI_VALUE = "1";
+    public static final String NO_VALUE = "NO";
+    public static final String SI_VALUE = "SI";
 
-    public static final String NO = "NO";
-    public static final String SI = "SI";
+    public static final String NO = "0";
+    public static final String SI = "1";
 
     public static final String STATUS_ACTIVE = "ACTIVE";
     public static final String STATUS_INACTIVE = "INACTIVE";

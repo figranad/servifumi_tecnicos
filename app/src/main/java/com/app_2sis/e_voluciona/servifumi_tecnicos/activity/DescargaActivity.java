@@ -138,7 +138,7 @@ public class DescargaActivity extends AppCompatActivity
     }
 
     private void descargarCatalogos() {
-        refreshInterfazCatalogos(Constant.STATUS_DESCARGA_CARGANDO);
+        refreshInterfazCatalogos(Constant.STATUS_DESCARGA_CARGANDO); // TODO: 21/08/2018 implementar nuevo catalogo de productos
         new CatTipoInstalacionSincronizar(this);    //Inicia con el primer catalogo y prosigue en secuencia la descarga
     }
 

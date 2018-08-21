@@ -8,6 +8,8 @@ public class ApiConstants {
     public static final String URL_GET_USUARIOS_TECNICOS = "/servifumi/web/index.php/ws-tecnicos/getusuarios";
     public static final String URL_CHECK_UPDATE_VERSION = "/servifumi/web/index.php/ws-tecnicos/need-update-servi-fumi-tecnicos";
     public static final String URL_GET_TIPO_INSTALACIONES = "/servifumi/web/index.php/ws-tecnicos/get-tipo-instalaciones";
+    public static final String URL_GET_PRODUCTOS = "/servifumi/web/index.php/ws-tecnicos/get-productos";
+    public static final String URL_GET_TURNOS = "/servifumi/web/index.php/ws-tecnicos/get-turnos-prog";
 
     public static final String URL_GET_METODOS_PAGO = "/servifumi/web/index.php/ws/metodospago";
 }

@@ -145,18 +145,18 @@ public class MetodoPagoActiveRecord extends MyActiveRecord {
     }
 
     public String getIDInlista(String nombre) {
-        List<MetodoPago> tarjetaList = getMetodoPagos();
-        for (MetodoPago tarjeta : tarjetaList) {
-            if (tarjeta.getNombre().equals(nombre))
-                return tarjeta.getMetodo_pago_id();
+        List<MetodoPago> list = getMetodoPagos();
+        for (MetodoPago item : list) {
+            if (item.getNombre().equals(nombre))
+                return item.getMetodo_pago_id();
         }
         return "0";
     }
 
-    public int getPositionInlista(String tarjetaID) {
-        List<MetodoPago> tarjetaList = getMetodoPagos();
-        for (int i = 0; i < tarjetaList.size(); i++) {
-            if (tarjetaList.get(i).getMetodo_pago_id().equals(tarjetaID)) {
+    public int getPositionInlista(String id) {
+        List<MetodoPago> list = getMetodoPagos();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getMetodo_pago_id().equals(id)) {
                 return i + 1;
             }
         }

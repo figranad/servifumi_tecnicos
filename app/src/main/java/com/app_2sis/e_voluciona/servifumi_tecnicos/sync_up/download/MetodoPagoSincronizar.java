@@ -14,6 +14,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Ultima clase de los catalogos que se descarga
+ */
 public class MetodoPagoSincronizar implements Callback<MetodoPagoResponse> {
     private DescargaActivity descargaActivity;
     private MetodoPagoActiveRecord metodoPagoActiveRecord;

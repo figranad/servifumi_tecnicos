@@ -3,7 +3,9 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatProducto;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTipoInstalacion;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTurno;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.MetodoPago;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Usuario;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -23,6 +25,8 @@ public class DB extends OrmLiteSqliteOpenHelper {
     private Dao<Usuario, Integer> usuarioDao;
     private Dao<CatTipoInstalacion, Integer> catTipoInstalacionDao;
     private Dao<MetodoPago, Integer> metodoDao;
+    private Dao<CatProducto, Integer> catProductoDao;
+    private Dao<CatTurno, Integer> catTurnoDao;
 
 
     public DB(Context context) {
@@ -35,6 +39,8 @@ public class DB extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, Usuario.class);
             TableUtils.createTableIfNotExists(connectionSource, CatTipoInstalacion.class);
             TableUtils.createTableIfNotExists(connectionSource, MetodoPago.class);
+            TableUtils.createTableIfNotExists(connectionSource, CatProducto.class);
+            TableUtils.createTableIfNotExists(connectionSource, CatTurno.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -47,6 +53,8 @@ public class DB extends OrmLiteSqliteOpenHelper {
                 TableUtils.dropTable(connectionSource, Usuario.class, true);
                 TableUtils.dropTable(connectionSource, CatTipoInstalacion.class, true);
                 TableUtils.dropTable(connectionSource, MetodoPago.class, true);
+                TableUtils.dropTable(connectionSource, CatProducto.class, true);
+                TableUtils.dropTable(connectionSource, CatTurno.class, true);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -75,11 +83,27 @@ public class DB extends OrmLiteSqliteOpenHelper {
         return metodoDao;
     }
 
+    public Dao<CatProducto, Integer> getCatProductoDao() throws SQLException {
+        if (catProductoDao == null) {
+            catProductoDao = getDao(CatProducto.class);
+        }
+        return catProductoDao;
+    }
+
+    public Dao<CatTurno, Integer> getCatTurnoDao() throws SQLException {
+        if (catTurnoDao == null) {
+            catTurnoDao = getDao(CatTurno.class);
+        }
+        return catTurnoDao;
+    }
+
     @Override
     public void close(){
         super.close();
         usuarioDao = null;
         catTipoInstalacionDao = null;
         metodoDao = null;
+        catProductoDao = null;
+        catTurnoDao = null;
     }
 }
