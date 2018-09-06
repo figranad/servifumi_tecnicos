@@ -54,6 +54,12 @@
             android:label="@string/title_activity_descargar"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ProgramacionActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_programacion"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.LoginActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ProgramacionActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -214,10 +215,10 @@ public class Utileria {
 
         } else if (id == R.id.nav_descarga) {
             intent = new Intent(context, DescargaActivity.class);
-//
-//        } else if (id == R.id.nav_subida) {
-//            intent = new Intent(context, EnviarActivity.class);
-//
+
+        } else if (id == R.id.nav_programacion) {
+            intent = new Intent(context, ProgramacionActivity.class);
+
 //        } else if (id == R.id.nav_programacion) {
 //            intent = new Intent(context, VisitasVerActivity.class);
 //

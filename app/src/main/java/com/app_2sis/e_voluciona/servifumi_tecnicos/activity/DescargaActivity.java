@@ -22,6 +22,7 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTipoInstalacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.download.CatTipoInstalacionSincronizar;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.download.ProgramacionSincronizar;
 
 public class DescargaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -138,13 +139,13 @@ public class DescargaActivity extends AppCompatActivity
     }
 
     private void descargarCatalogos() {
-        refreshInterfazCatalogos(Constant.STATUS_DESCARGA_CARGANDO); // TODO: 21/08/2018 implementar nuevo catalogo de productos
+        refreshInterfazCatalogos(Constant.STATUS_DESCARGA_CARGANDO);
         new CatTipoInstalacionSincronizar(this);    //Inicia con el primer catalogo y prosigue en secuencia la descarga
     }
 
     private void descargarProgramacion() {
-        refreshInterfazProgramacion(Constant.STATUS_DESCARGA_CARGANDO); // TODO: 20/08/2018 crear
-//        new ProgramacionSincronizar(this);
+        refreshInterfazProgramacion(Constant.STATUS_DESCARGA_CARGANDO);
+        new ProgramacionSincronizar(this);
     }
 
     private void refreshInterfaz(ProgressBar pb, ImageView iv, int status) {

@@ -96,7 +96,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         Usuario user = usuarioActiveRecord.getUsuarioLogin(usuario, password);
         if (user != null) {
-            new MisPreferencias(this).setIdUsuarioLogueado(user.getUsuarioId());
+            MisPreferencias prefs = new MisPreferencias(this);
+            prefs.setIdUsuarioLogueado(user.getUsuarioId());
+            prefs.setIdTurnoUsuarioLogueado(user.getTurno_id());
             startActivity(new Intent(this, MainActivity.class));
             return true;
         } else {

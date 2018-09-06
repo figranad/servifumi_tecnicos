@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_programacion"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/colorInfo"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:id="@+id/ll_programacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_programacion_titulo"
+            style="@style/TextoItemListAdapter" />
+
+        <TextView
+            android:id="@+id/tv_programacion_cuando"
+            style="@style/TextoItemListAdapter" />
+
+        <TextView
+            android:id="@+id/tv_programacion_lugar"
+            style="@style/TextoItemListAdapter" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

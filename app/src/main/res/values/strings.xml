@@ -42,4 +42,5 @@
     <string name="direccion_empresa">Calle Justo Sierra No, 22 entre Calle 16 y Pablo García, Col. San Román C.P. 24040 Campeche, Camp, MX</string>
     <string name="logo_servifumi">logo_servifumi</string>
     <string name="logo_plata">logo_plata</string>
+    <string name="title_activity_programacion">Programaciones</string>
 </resources>

@@ -55,4 +55,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TextoCabeceras" parent="@android:style/TextAppearance">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
 </resources>
