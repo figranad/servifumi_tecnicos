@@ -43,4 +43,12 @@
     <string name="logo_servifumi">logo_servifumi</string>
     <string name="logo_plata">logo_plata</string>
     <string name="title_activity_programacion">Programaciones</string>
+    <string name="title_activity_programacion_detalle">Detalles de Programacion</string>
+    <string name="telefonos">Telefonos:</string>
+    <string name="llamar">Llamar</string>
+    <string name="pdf">Ver Inspeccion</string>
+    <string name="croquis">Ver Croquis</string>
+    <string name="imposible_realizar">¿Imposible Realizar?</string>
+    <string name="observacion_visita">Motivos Reprogramacion</string>
+    <string name="guardar_motivos">Guardar Motivos</string>
 </resources>

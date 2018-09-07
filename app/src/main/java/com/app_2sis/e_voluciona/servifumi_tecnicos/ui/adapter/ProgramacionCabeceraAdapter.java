@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ProgramacionDetalleActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
 
@@ -130,8 +131,8 @@ public class ProgramacionCabeceraAdapter extends RecyclerView.Adapter<Programaci
 
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(v.getContext(), MainActivity.class); // TODO: 06/09/2018 cambiar por el detalle
-            i.putExtra("programacionID_bd", programacionID);
+            Intent i = new Intent(v.getContext(), ProgramacionDetalleActivity.class);
+            i.putExtra("programacionID_bd", programacionID); //Mandar ID porque objeto requiere Parcel
             v.getContext().startActivity(i);
         }
     }

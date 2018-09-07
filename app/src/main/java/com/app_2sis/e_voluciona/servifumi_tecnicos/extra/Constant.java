@@ -26,6 +26,14 @@ public class Constant {
 
     public static final String PROMPT = "SELECCIONA...";
 
+    //Status Visita
+    public static final String STATUS_VISITA_SIN_VISITAR = "1";
+    public static final String STATUS_VISITA_VISITADO = "2";
+    public static final String STATUS_VISITA_REPROGRAMAR = "3";
+    public static final String STATUS_VISITA_SIN_VISITAR_VALUE = "SIN VISITAR";
+    public static final String STATUS_VISITA_VISITADO_VALUE = "VISITADO";
+    public static final String STATUS_VISITA_REPROGRAMAR_VALUE = "REPROGRAMAR";
+
     //Status Descarga Activity
     public static final int STATUS_DESCARGA_DEFAULT = 0;
     public static final int STATUS_DESCARGA_CARGANDO = 1;

@@ -53,13 +53,30 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_descargar"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.ProgramacionActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_programacion"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ProgramacionDetalleActivity"
+            android:label="@string/title_activity_programacion_detalle"
+            android:parentActivityName=".activity.ProgramacionActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ProgramacionActivity" />
+        </activity>
     </application>
 
 </manifest>

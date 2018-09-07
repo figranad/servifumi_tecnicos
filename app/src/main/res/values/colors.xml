@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#fce303</color>
-    <color name="colorPrimaryDark">#fcd303</color>
+    <!--<color name="colorPrimaryDark">#fcd303</color>-->
+    <color name="colorPrimaryDark">#e4c100</color>
     <color name="colorAccent">#0365fc</color>
     <color name="colorSuccess">#08991c</color>
     <color name="colorSuccessLight">#a1fda1</color>
@@ -16,8 +17,4 @@
     <color name="colorGrisOscuro">#4b4b4b</color>
     <color name="colorWarningDark">#cebf04</color>
     <color name="colorCorregir">#ec971f</color>
-
-
-
-
 </resources>
