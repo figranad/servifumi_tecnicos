@@ -2,6 +2,7 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.extra;
 
 public class Constant {
     public static final String PREFIJO_CLAVE_ANDROID = "GEN";
+    public static final String SEPARADOR_TELEFONOS = "; ";
 
     public static final String CLAVE_CODE_VERSION_SERVIFUMI_TECNICOS = "1";
 

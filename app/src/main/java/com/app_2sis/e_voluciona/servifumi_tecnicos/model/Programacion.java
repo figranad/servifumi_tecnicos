@@ -53,6 +53,7 @@ public class Programacion {
     public static final String USUARIO_ID_WS = "usuario_id";
     public static final String CREATED_AT_WS = "created_at_ws";
     public static final String CRT_TIME_WS = "crt_time";
+    public static final String IMPOSIBLE_REALIZAR_WS = "imposible_realizar";
 
     @SerializedName(ID_WS)
     @DatabaseField(generatedId = true, columnName = ID_WS)
@@ -221,6 +222,10 @@ public class Programacion {
     @SerializedName(CLAVE_ANDROID_WS)
     @DatabaseField(columnName = CLAVE_ANDROID_WS)
     private String clave_android;
+
+    @SerializedName(IMPOSIBLE_REALIZAR_WS)
+    @DatabaseField(columnName = IMPOSIBLE_REALIZAR_WS)
+    private String imposible_realizar;
 
     public int getId() {
         return id;
@@ -556,5 +561,13 @@ public class Programacion {
 
     public void setClave_android(String clave_android) {
         this.clave_android = clave_android;
+    }
+
+    public String getImposible_realizar() {
+        return imposible_realizar;
+    }
+
+    public void setImposible_realizar(String imposible_realizar) {
+        this.imposible_realizar = imposible_realizar;
     }
 }

@@ -35,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_search_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_save_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -57,10 +57,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
                                       <entry key="imageAsset" value="C:\Users\acaba\Documents\PROYECTOS\SERVIFUMI\logo_2sis.png" />
-                                      <entry key="outputName" value="ic_buscar" />
+                                      <entry key="outputName" value="ic_guardar" />
                                     </map>
                                   </option>
                                 </PersistentState>

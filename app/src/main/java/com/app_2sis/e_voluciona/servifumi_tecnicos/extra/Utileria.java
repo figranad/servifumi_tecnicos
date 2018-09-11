@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -73,28 +75,9 @@ public class Utileria {
         return h.toString();
     }
 
-    public static ArrayAdapter<String> getAdapterSpinner(Context context, String data[]) {
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, data) {
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position % 2 == 1) {
-                    // Set the item background color
-                    //tv.setBackgroundColor(Color.parseColor("#408cff"));
-                } else {
-                    // Set the alternate item background color
-                    //tv.setBackgroundColor(Color.parseColor("#08991c"));
-                }
-                return view;
-            }
-        };
-        return spinnerArrayAdapter;
-    }
-
-    public static ArrayAdapter<String> getAdapterSpinnerVacio(Context context) {
-        return getAdapterSpinner(context, new String[]{Constant.PROMPT});
-    }
+//    public static ArrayAdapter<String> getAdapterSpinnerVacio(Context context) {
+//        return getAdapterSpinner(context, new String[]{Constant.PROMPT});
+//    }
 
     public static String[] getFecuencia() {
         return new String[]{
