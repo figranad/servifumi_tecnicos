@@ -5,6 +5,9 @@ public class Constant {
     public static final String SEPARADOR_TELEFONOS = "; ";
 
     public static final String CLAVE_CODE_VERSION_SERVIFUMI_TECNICOS = "1";
+    public static final String MSJ_CAMPO_OBLIGATORIO = "Campo Obligatorio";
+    public static final String MSJ_GUARDADO_EXITOSO = "Guardado Exitosamente";
+    public static final String MSJ_VERIFICAR_ERRORES = "VERIFICAR ERRORES";
 
     public static final String SERVIFUMI_VALUE = "0";
     public static final String PLATAPLUS_VALUE = "1";

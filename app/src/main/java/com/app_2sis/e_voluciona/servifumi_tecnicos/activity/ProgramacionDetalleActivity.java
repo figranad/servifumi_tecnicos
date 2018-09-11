@@ -1,18 +1,18 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -22,12 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ProgramacionActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter.ApiConstants;
 import com.rey.material.widget.CheckBox;
 
 import java.lang.reflect.Array;
@@ -51,8 +53,9 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
     private ImageButton btnLlamarCliente;
     private Button btnPdfInspPlata, btnPdfInspFumi, btnCroquisInspFumi, btnNoRealizarMotivo;
     private CheckBox chkNoRealizar;
-    private LinearLayout llInspFumiBotones, llNoRealizar;
+    private LinearLayout llInspFumiBotones, llNoRealizar, llTelefonos;
     private EditText etNoRealizarMotivo;
+    private TextInputLayout tilMotivo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,22 +143,18 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
 
         llInspFumiBotones = findViewById(R.id.ll_programacion_insp_fumi_botones);
         llNoRealizar = findViewById(R.id.ll_programacion_imposible_realizar);
+        llTelefonos = findViewById(R.id.ll_programacion_telefonos);
 
         etNoRealizarMotivo = findViewById(R.id.et_programacion_imposible_realizar_motivo);
+
+        tilMotivo = findViewById(R.id.til_programacion_imposible_realizar);
     }
 
     private void iniComponents() {
         fabConstancia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent;
-                if (programacion.getTipo_servicio_id().equals(Constant.PLATAPLUS_VALUE))
-                    intent = new Intent(view.getContext(), MainActivity.class); // TODO: 10/09/2018 implementar activity plata
-                else
-                    intent = new Intent(view.getContext(), MainActivity.class); // TODO: 10/09/2018 implementar activity fumi
-                intent.putExtra("programacionID_bd", programacionID_bd);
-                startActivity(intent);
-                finish();
+                lanzarConstancia();
             }
         });
 
@@ -174,10 +173,12 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
         chkNoRealizar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
+                if (isChecked) {    //Si es imposible realizar impide crear constancia y muestra campo de motivos
                     llNoRealizar.setVisibility(View.VISIBLE);
-                } else {
+                    fabConstancia.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorverdeDesactivado)));
+                } else {    //Si se puede realizar permite crear constancia y oculta los motivos
                     llNoRealizar.setVisibility(View.GONE);
+                    fabConstancia.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorSuccess)));
                 }
             }
         });
@@ -185,11 +186,28 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
         programacionActiveRecord = new ProgramacionActiveRecord(this);
     }
 
+    /**
+     * Lanza la constancia correspodiente al tipo de orden o en su defecto avisa que no es posible crearla si se palomeo que es imposible
+     */
+    private void lanzarConstancia() {
+        if (chkNoRealizar.isChecked()) {
+            Snackbar.make(findViewById(android.R.id.content), "Está marcado que es imposible realizar", Snackbar.LENGTH_SHORT).show();
+        } else {
+            Intent intent;
+            if (programacion.getTipo_servicio_id().equals(Constant.PLATAPLUS_VALUE))
+                intent = new Intent(getApplicationContext(), MainActivity.class); // TODO: 10/09/2018 implementar activity plata
+            else
+                intent = new Intent(getApplicationContext(), MainActivity.class); // TODO: 10/09/2018 implementar activity fumi
+            intent.putExtra("programacionID_bd", programacionID_bd);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     private void loadData() {
         programacion = programacionActiveRecord.getProgramacion(Programacion.ID_WS, programacionID_bd);
         showHideComponents();
         loadTelefonos();
-        loadButtons();
 
         String texto = "";
 
@@ -322,23 +340,26 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
         //</editor-fold>
 
         // TODO: 10/09/2018 implementar No realizado
-        //Considerar el et de motivos
+        //Considerar el et de motivos y chk
     }
 
+    /**
+     * Oculta de la interfaz componentes nulos o que no apliquen para la progamacion
+     */
     private void showHideComponents() {
         String telefonos = programacion.getTelefonos();
+        //Si no cuenta con telefonos o el dispositivo no es capaz de realizar llamadas oculta el spinner y el boton
         if (telefonos == null
                 || telefonos.isEmpty()
                 || !Utileria.isTelephonyEnabled(this)) {
-            spTelefonosCliente.setVisibility(View.GONE);
-            btnLlamarCliente.setVisibility(View.GONE);
+            llTelefonos.setVisibility(View.GONE);
         }
 
         if (programacion.getOrden_id() == null || programacion.getOrden_id().isEmpty()) {   //Sin orden
             cvOrden.setVisibility(View.GONE);
         }
 
-        if (programacion.getTipo_servicio_id() == null) {   //Si no seleccionado tipo de servicio oculta ambas inspecciones
+        if (programacion.getTipo_servicio_id() == null) {   //Si no tiene seleccionado tipo de servicio oculta ambas inspecciones
             cvInspPlata.setVisibility(View.GONE);
             btnPdfInspPlata.setVisibility(View.GONE);
             cvInspFumi.setVisibility(View.GONE);
@@ -357,26 +378,31 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
         }
 
         if (programacion.getImposible_realizar() == null
-                || programacion.getImposible_realizar().equals(Constant.NO)) {  //Si se puede realiar
+                || programacion.getImposible_realizar().equals(Constant.NO)) {  //Si es posible realizar no pide motivos
             llNoRealizar.setVisibility(View.GONE);
         } else {
             chkNoRealizar.setCheckedImmediately(true);
+            etNoRealizarMotivo.setText(programacion.getImposible_realizar());
         }
     }
 
+    /**
+     * Carga el spinner con los telefonos que tiene la programacion
+     */
     private void loadTelefonos() {
         String[] telefonosArray = getTelefonosArray();
         spTelefonosCliente.setAdapter(new ArrayAdapter<>(getApplicationContext(), R.layout.item_spinner, telefonosArray));
     }
 
+    /**
+     * Obtiene un array de los telefonos para alimentar el Spinner
+     *
+     * @return Arreglo con el PROMPT y los telefonos de la programacion
+     */
     private String[] getTelefonosArray() {
         String telefonosString = Constant.PROMPT + Constant.SEPARADOR_TELEFONOS
                 + programacion.getTelefonos();  //Para que se agregue el PROMPT a la lista
         return telefonosString.split(Constant.SEPARADOR_TELEFONOS);
-    }
-
-    private void loadButtons() {
-        // TODO: 10/09/2018 implementar
     }
 
     @Override
@@ -398,15 +424,15 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
                 break;
             case R.id.btn_programacion_pdf_plata:
                 intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.google.com"));
+                intent.setData(Uri.parse(ApiConstants.BASE_URL + ApiConstants.URL_PDF_INSP_PLATA + programacion.getInsp_plata_id()));
                 break;
             case R.id.btn_programacion_pdf_fumi:
                 intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.google.com"));
+                intent.setData(Uri.parse(ApiConstants.BASE_URL + ApiConstants.URL_PDF_INSP_FUMI + programacion.getInsp_fumi_id()));
                 break;
             case R.id.btn_programacion_croquis:
                 intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.google.com"));
+                intent.setData(Uri.parse(ApiConstants.BASE_URL + ApiConstants.URL_CROQUIS_INSP_FUMI + programacion.getInsp_fumi_croquis()));
                 break;
             case R.id.btn_programacion_imposible_realizar:
                 saveMotivos();
@@ -416,7 +442,43 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
             startActivity(intent);
     }
 
+    /**
+     * Guarda los motivos por el cual no es posible realizar la inspeccion y setea banderas
+     */
     private void saveMotivos() {
-        // TODO: 10/09/2018 implementar
+        if (validarMotivos()){
+            programacion.setImposible_realizar(etNoRealizarMotivo.getText().toString().trim());
+            programacion.setRealizado(Constant.SI);
+            programacion.setImposible_realizar_chk(Constant.SI);
+            programacionActiveRecord.update(programacion);
+            Toast.makeText(this, Constant.MSJ_GUARDADO_EXITOSO, Toast.LENGTH_SHORT).show();
+            exit();
+        }
+    }
+
+    /**
+     * Valida el motivo antes de guardar
+     * @return boleano que indica si se validó exitosamente
+     */
+    private boolean validarMotivos(){
+        boolean exito = true;
+        clearErrors();
+
+        if (etNoRealizarMotivo.getText().toString().trim().isEmpty()){
+            tilMotivo.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
+            exito = false;
+        }
+
+        if (!exito) {
+            Snackbar.make(findViewById(android.R.id.content), Constant.MSJ_VERIFICAR_ERRORES, Snackbar.LENGTH_SHORT).show();
+        }
+        return exito;
+    }
+
+    /**
+     * Limpia msjs de error
+     */
+    private void clearErrors(){
+        tilMotivo.setError(null);
     }
 }

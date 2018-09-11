@@ -52,4 +52,5 @@
     <string name="imposible_realizar">¿Imposible Realizar?</string>
     <string name="observacion_visita">Motivos Reprogramacion</string>
     <string name="guardar_motivos">Guardar Motivos</string>
+    <string name="numeros_cliente">Teléfonos Cliente:</string>
 </resources>

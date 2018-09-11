@@ -74,19 +74,36 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp">
 
-                <Spinner
-                    android:id="@+id/sp_programacion_telefonos"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/ll_programacion_tel_label_sp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="4" />
+                    android:layout_weight="4"
+                    android:clipToPadding="true"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_telefonos"
+                        style="@style/EtiquetaSpinner"
+                        android:text="@string/numeros_cliente" />
+
+                    <Spinner
+                        android:id="@+id/sp_programacion_telefonos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp" />
+                </LinearLayout>
+
 
                 <ImageButton
                     android:id="@+id/btn_programacion_llamar"
                     style="@style/ButtonMaterial"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginEnd="10dp"
@@ -94,7 +111,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/llamar"
-                android:src="@mipmap/ic_llamar" />
+                    android:src="@mipmap/ic_llamar" />
             </LinearLayout>
 
             <Space

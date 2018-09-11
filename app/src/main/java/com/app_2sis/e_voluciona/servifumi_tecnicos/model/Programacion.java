@@ -54,6 +54,7 @@ public class Programacion {
     public static final String CREATED_AT_WS = "created_at_ws";
     public static final String CRT_TIME_WS = "crt_time";
     public static final String IMPOSIBLE_REALIZAR_WS = "imposible_realizar";
+    public static final String IMPOSIBLE_REALIZAR_CHK_WS = "imposible_realizar_chk";
 
     @SerializedName(ID_WS)
     @DatabaseField(generatedId = true, columnName = ID_WS)
@@ -226,6 +227,10 @@ public class Programacion {
     @SerializedName(IMPOSIBLE_REALIZAR_WS)
     @DatabaseField(columnName = IMPOSIBLE_REALIZAR_WS)
     private String imposible_realizar;
+
+    @SerializedName(IMPOSIBLE_REALIZAR_CHK_WS)
+    @DatabaseField(columnName = IMPOSIBLE_REALIZAR_CHK_WS)
+    private String imposible_realizar_chk = "0";
 
     public int getId() {
         return id;
@@ -569,5 +574,13 @@ public class Programacion {
 
     public void setImposible_realizar(String imposible_realizar) {
         this.imposible_realizar = imposible_realizar;
+    }
+
+    public String getImposible_realizar_chk() {
+        return imposible_realizar_chk == null ? "0" : imposible_realizar_chk;
+    }
+
+    public void setImposible_realizar_chk(String imposible_realizar_chk) {
+        this.imposible_realizar_chk = imposible_realizar_chk;
     }
 }
