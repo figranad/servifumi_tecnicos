@@ -37,8 +37,7 @@ public class ProgramacionSincronizar implements Callback<ProgramacionResponse> {
                 programacionActiveRecord.deleteAll();
                 if (programacionActiveRecord.save(programacionArrayList)) {
                     descargaActivity.showMensaje("Programaciones Descargadas");
-                    descargaActivity.programacionOK = true;
-                    descargaActivity.refreshInterfazProgramacion(Constant.STATUS_DESCARGA_OK);
+                    new ProgramacionProductoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
                 } else {
                     descargaActivity.showMensaje("ERROR guardando programaciones");
                     descargaActivity.refreshInterfazProgramacion(Constant.STATUS_DESCARGA_ERROR);
@@ -46,9 +45,7 @@ public class ProgramacionSincronizar implements Callback<ProgramacionResponse> {
             } else {
                 programacionActiveRecord.deleteAll();
                 descargaActivity.showMensaje("Sin Programaciones");
-                descargaActivity.programacionOK = true;
-                descargaActivity.refreshInterfazProgramacion(Constant.STATUS_DESCARGA_OK);
-                // TODO: 05/09/2018 implementar tabla de programacionproductos
+                new MetodoPagoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
             }
         } else {
             descargaActivity.showMensaje("ERROR descargando programaciones");

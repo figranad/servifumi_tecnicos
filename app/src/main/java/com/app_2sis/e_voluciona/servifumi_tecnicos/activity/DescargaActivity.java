@@ -143,7 +143,7 @@ public class DescargaActivity extends AppCompatActivity
      * 1-CatTipoInstalacion
      * 2-CaTurno
      * 3-CatProductos
-     * NEW 4-CatTanques
+     * 4-CatTanques
      * 5-MetodoPago
      *
      */

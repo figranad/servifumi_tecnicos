@@ -128,6 +128,7 @@ public class ProgramacionActiveRecord extends MyActiveRecord {
 
     /**
      * Obtiene Completo el listado de programaciones Activas ordenadas por fechaInicio
+     *
      * @return Ya ordenado
      */
     public List<Programacion> getProgramaciones() {
@@ -171,5 +172,27 @@ public class ProgramacionActiveRecord extends MyActiveRecord {
 
     public boolean isEmpty() {
         return getProgramaciones().isEmpty();
+    }
+
+    public String getProgramacionesIDs() {
+        String result = "";
+        Dao<Programacion, Integer> dao;
+        List<Programacion> resultList;
+        try {
+            dao = getHelper().getProgramacionDao();
+            QueryBuilder<Programacion, Integer> queryBuilder = dao.queryBuilder();
+            queryBuilder.distinct()
+                    .selectColumns(Programacion.PROGRAMACION_ID_WS)
+                    .where().ge(Programacion.ID_WS, 0).and().eq(Programacion.STATUS_WS, Constant.SI);
+            resultList = queryBuilder.query();
+            for (Programacion programacion : resultList) {
+                result += programacion.getProgramacion_id() + ",";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarConexion();
+        }
+        return result;
     }
 }

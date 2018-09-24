@@ -6,6 +6,7 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTanqueRes
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTipoInstalacionResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTurnoResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.MetodoPagoResponse;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.ProgramacionProductosResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.ProgramacionResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.UsuarioResponse;
 
@@ -34,6 +35,9 @@ public interface ApiService {
 
     @POST(ApiConstants.URL_GET_PROGRAMACION)
     Call<ProgramacionResponse> getProgramacion(@Body String param);
+
+    @POST(ApiConstants.URL_GET_PROGRAMACION_PRODUCTOS)
+    Call<ProgramacionProductosResponse> getProgramacionProductos(@Body String param);
 
     @POST(ApiConstants.URL_GET_TANQUES)
     Call<CatTanqueResponse> getTanques(@Body String param);
