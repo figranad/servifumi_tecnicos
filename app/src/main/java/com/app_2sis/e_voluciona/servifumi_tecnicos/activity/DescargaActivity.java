@@ -138,6 +138,15 @@ public class DescargaActivity extends AppCompatActivity
         descargarProgramacion();
     }
 
+    /**
+     * Orden de la descarga encadenada de catalogos
+     * 1-CatTipoInstalacion
+     * 2-CaTurno
+     * 3-CatProductos
+     * NEW 4-CatTanques
+     * 5-MetodoPago
+     *
+     */
     private void descargarCatalogos() {
         refreshInterfazCatalogos(Constant.STATUS_DESCARGA_CARGANDO);
         new CatTipoInstalacionSincronizar(this);    //Inicia con el primer catalogo y prosigue en secuencia la descarga

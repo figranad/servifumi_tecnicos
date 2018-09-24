@@ -2,6 +2,7 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.DatosAplicacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatProductoResponse;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTanqueResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTipoInstalacionResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTurnoResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.MetodoPagoResponse;
@@ -33,6 +34,9 @@ public interface ApiService {
 
     @POST(ApiConstants.URL_GET_PROGRAMACION)
     Call<ProgramacionResponse> getProgramacion(@Body String param);
+
+    @POST(ApiConstants.URL_GET_TANQUES)
+    Call<CatTanqueResponse> getTanques(@Body String param);
 
     // TODO: 05/09/2018 crear funcion para hacer update a las visitas
 }

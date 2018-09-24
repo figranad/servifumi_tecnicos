@@ -34,7 +34,7 @@ public class CatProductoSincronizar implements Callback<CatProductoResponse> {
                 catProductoActiveRecord.deleteAll();
                 if (catProductoActiveRecord.save(catProductoArrayList)) {
                     descargaActivity.showMensaje("Productos Descargados");
-                    new MetodoPagoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                    new CatTanqueSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
                 } else {
                     descargaActivity.showMensaje("ERROR guardando productos");
                     descargaActivity.refreshInterfazCatalogos(Constant.STATUS_DESCARGA_ERROR);
@@ -43,7 +43,7 @@ public class CatProductoSincronizar implements Callback<CatProductoResponse> {
             } else {
                 catProductoActiveRecord.deleteAll();
                 descargaActivity.showMensaje("Sin productos");
-                new MetodoPagoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                new CatTanqueSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
             }
         } else {
             descargaActivity.showMensaje("ERROR descargando productos");

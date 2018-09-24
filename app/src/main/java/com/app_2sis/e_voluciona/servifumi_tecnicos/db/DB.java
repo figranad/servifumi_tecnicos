@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatProducto;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTanque;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTipoInstalacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTurno;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.MetodoPago;
@@ -28,6 +29,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
     private Dao<MetodoPago, Integer> metodoDao;
     private Dao<CatProducto, Integer> catProductoDao;
     private Dao<CatTurno, Integer> catTurnoDao;
+    private Dao<CatTanque, Integer> catTanqueDao;
     private Dao<Programacion, Integer> programacionDao;
 
 
@@ -44,6 +46,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, CatProducto.class);
             TableUtils.createTableIfNotExists(connectionSource, CatTurno.class);
             TableUtils.createTableIfNotExists(connectionSource, Programacion.class);
+            TableUtils.createTableIfNotExists(connectionSource, CatTanque.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -59,6 +62,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
                 TableUtils.dropTable(connectionSource, CatProducto.class, true);
                 TableUtils.dropTable(connectionSource, CatTurno.class, true);
                 TableUtils.dropTable(connectionSource, Programacion.class, true);
+                TableUtils.dropTable(connectionSource, CatTanque.class, true);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -108,6 +112,13 @@ public class DB extends OrmLiteSqliteOpenHelper {
         return programacionDao;
     }
 
+    public Dao<CatTanque, Integer> getCatTanqueDao() throws SQLException {
+        if (catTanqueDao == null) {
+            catTanqueDao = getDao(CatTanque.class);
+        }
+        return catTanqueDao;
+    }
+
     @Override
     public void close(){
         super.close();
@@ -117,5 +128,6 @@ public class DB extends OrmLiteSqliteOpenHelper {
         catProductoDao = null;
         catTurnoDao = null;
         programacionDao = null;
+        catTanqueDao = null;
     }
 }

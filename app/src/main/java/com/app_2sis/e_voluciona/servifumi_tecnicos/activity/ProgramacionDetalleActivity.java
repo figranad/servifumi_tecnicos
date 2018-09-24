@@ -36,6 +36,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ProgramacionDetalleActivity extends AppCompatActivity implements View.OnClickListener {
     private String programacionID_bd;
@@ -66,7 +67,7 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         findViewById();
         iniComponents();
@@ -208,8 +209,7 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
         programacion = programacionActiveRecord.getProgramacion(Programacion.ID_WS, programacionID_bd);
         showHideComponents();
         loadTelefonos();
-
-        String texto = "";
+        String texto;
 
         //<editor-fold desc="Card Programacion">
         texto = programacion.getTitulo();
@@ -338,13 +338,10 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
         else
             tvInspFumiLugares.setText("Lugares: " + texto);
         //</editor-fold>
-
-        // TODO: 10/09/2018 implementar No realizado
-        //Considerar el et de motivos y chk
     }
 
     /**
-     * Oculta de la interfaz componentes nulos o que no apliquen para la progamacion
+     * Oculta de la interfaz componentes nulos o que no apliquen para la progamacion, tambien setea la info de ImposibleRealizar
      */
     private void showHideComponents() {
         String telefonos = programacion.getTelefonos();
@@ -446,7 +443,7 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
      * Guarda los motivos por el cual no es posible realizar la inspeccion y setea banderas
      */
     private void saveMotivos() {
-        if (validarMotivos()){
+        if (validarMotivos()) {
             programacion.setImposible_realizar(etNoRealizarMotivo.getText().toString().trim());
             programacion.setRealizado(Constant.SI);
             programacion.setImposible_realizar_chk(Constant.SI);
@@ -458,13 +455,14 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
 
     /**
      * Valida el motivo antes de guardar
+     *
      * @return boleano que indica si se validó exitosamente
      */
-    private boolean validarMotivos(){
+    private boolean validarMotivos() {
         boolean exito = true;
         clearErrors();
 
-        if (etNoRealizarMotivo.getText().toString().trim().isEmpty()){
+        if (etNoRealizarMotivo.getText().toString().trim().isEmpty()) {
             tilMotivo.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
             exito = false;
         }
@@ -478,7 +476,7 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
     /**
      * Limpia msjs de error
      */
-    private void clearErrors(){
+    private void clearErrors() {
         tilMotivo.setError(null);
     }
 }
