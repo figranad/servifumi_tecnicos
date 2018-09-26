@@ -53,4 +53,9 @@
     <string name="observacion_visita">Motivos Reprogramacion</string>
     <string name="guardar_motivos">Guardar Motivos</string>
     <string name="numeros_cliente">Teléfonos Cliente:</string>
+    <string name="sin_realizar">Sin Realizar</string>
+    <string name="realizada">Realizada</string>
+    <string name="title_activity_constancia_plata">Constancias PlataPlus</string>
+    <string name="sin_enviar">Sin Enviar</string>
+    <string name="enviados">Enviados</string>
 </resources>

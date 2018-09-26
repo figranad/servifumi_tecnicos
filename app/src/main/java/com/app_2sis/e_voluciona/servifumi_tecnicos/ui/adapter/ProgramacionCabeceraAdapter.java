@@ -118,7 +118,7 @@ public class ProgramacionCabeceraAdapter extends RecyclerView.Adapter<Programaci
         }
 
         private void setColorNoRealizado(){
-            this.cvProgramacion.setCardBackgroundColor(context.getResources().getColor(R.color.colorGrisOscuro));
+            this.cvProgramacion.setCardBackgroundColor(context.getResources().getColor(R.color.colorInfo));
         }
 
         public void setColorRealizado(String realizado){

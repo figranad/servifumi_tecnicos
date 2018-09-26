@@ -17,4 +17,9 @@
     <color name="colorGrisOscuro">#4b4b4b</color>
     <color name="colorWarningDark">#cebf04</color>
     <color name="colorCorregir">#ec971f</color>
+
+    <color name="colorFondoEnviado">#edeaebec</color>
+    <color name="colorTextoEnviado">#5e5c5c</color>
+    <color name="colorFondoNoEnviado">#0365fc</color>
+    <color name="colorTextoNoEnviado">#FFFFFF</color>
 </resources>

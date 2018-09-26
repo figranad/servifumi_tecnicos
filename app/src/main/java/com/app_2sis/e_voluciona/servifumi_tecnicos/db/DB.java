@@ -7,6 +7,8 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatProducto;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTanque;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTipoInstalacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTurno;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlata;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlataTanques;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.MetodoPago;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ProgramacionProductos;
@@ -33,6 +35,8 @@ public class DB extends OrmLiteSqliteOpenHelper {
     private Dao<CatTanque, Integer> catTanqueDao;
     private Dao<Programacion, Integer> programacionDao;
     private Dao<ProgramacionProductos, Integer> programacionProductosDao;
+    private Dao<ConstanciaPlata, Integer> constanciaPlataDao;
+    private Dao<ConstanciaPlataTanques, Integer> constanciaPlataTanquesDao;
 
 
     public DB(Context context) {
@@ -50,6 +54,8 @@ public class DB extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, Programacion.class);
             TableUtils.createTableIfNotExists(connectionSource, ProgramacionProductos.class);
             TableUtils.createTableIfNotExists(connectionSource, CatTanque.class);
+            TableUtils.createTableIfNotExists(connectionSource, ConstanciaPlata.class);
+            TableUtils.createTableIfNotExists(connectionSource, ConstanciaPlataTanques.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -67,6 +73,8 @@ public class DB extends OrmLiteSqliteOpenHelper {
                 TableUtils.dropTable(connectionSource, Programacion.class, true);
                 TableUtils.dropTable(connectionSource, ProgramacionProductos.class, true);
                 TableUtils.dropTable(connectionSource, CatTanque.class, true);
+                TableUtils.dropTable(connectionSource, ConstanciaPlata.class, true);
+                TableUtils.dropTable(connectionSource, ConstanciaPlataTanques.class, true);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -130,6 +138,20 @@ public class DB extends OrmLiteSqliteOpenHelper {
         return catTanqueDao;
     }
 
+    public Dao<ConstanciaPlata, Integer> getConstanciaPlataDao() throws SQLException {
+        if (constanciaPlataDao == null) {
+            constanciaPlataDao = getDao(ConstanciaPlata.class);
+        }
+        return constanciaPlataDao;
+    }
+
+    public Dao<ConstanciaPlataTanques, Integer> getConstanciaPlataTanquesDao() throws SQLException {
+        if (constanciaPlataTanquesDao == null) {
+            constanciaPlataTanquesDao = getDao(ConstanciaPlataTanques.class);
+        }
+        return constanciaPlataTanquesDao;
+    }
+
     @Override
     public void close(){
         super.close();
@@ -141,5 +163,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
         programacionDao = null;
         programacionProductosDao = null;
         catTanqueDao = null;
+        constanciaPlataDao = null;
+        constanciaPlataTanquesDao = null;
     }
 }

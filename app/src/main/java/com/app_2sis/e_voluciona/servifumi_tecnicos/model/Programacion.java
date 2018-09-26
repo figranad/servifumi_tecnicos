@@ -11,6 +11,7 @@ public class Programacion {
     public static final String CUANDO_WS = "cuando";
     public static final String FECHA_INICIO_WS = "fecha_inicio";
     public static final String FECHA_FIN_WS = "fecha_fin";
+    public static final String DOMICILIO_ID_WS = "domicilio_id";
 
     public static final String LUGAR_WS = "lugar";
     public static final String REFERENCIA_WS = "referencia";
@@ -63,6 +64,10 @@ public class Programacion {
     @SerializedName(CLIENTE_ID_WS)
     @DatabaseField(columnName = CLIENTE_ID_WS)
     private String cliente_id;
+
+    @SerializedName(DOMICILIO_ID_WS)
+    @DatabaseField(columnName = DOMICILIO_ID_WS)
+    private String domicilio_id;
 
     @SerializedName(TITULO_WS)
     @DatabaseField(columnName = TITULO_WS)
@@ -246,6 +251,14 @@ public class Programacion {
 
     public void setCliente_id(String cliente_id) {
         this.cliente_id = cliente_id;
+    }
+
+    public String getDomicilio_id() {
+        return domicilio_id;
+    }
+
+    public void setDomicilio_id(String domicilio_id) {
+        this.domicilio_id = domicilio_id;
     }
 
     public String getTitulo() {

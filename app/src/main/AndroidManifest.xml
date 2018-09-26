@@ -71,12 +71,25 @@
         </activity>
         <activity
             android:name=".activity.ProgramacionDetalleActivity"
+            android:configChanges="orientation"
             android:label="@string/title_activity_programacion_detalle"
             android:parentActivityName=".activity.ProgramacionActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ProgramacionActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ConstanciaPlataActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_constancia_plata"
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity" />
         </activity>
     </application>
 

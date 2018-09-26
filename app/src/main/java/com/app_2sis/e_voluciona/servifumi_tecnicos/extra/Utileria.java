@@ -19,6 +19,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaPlataActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.LoginActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity;
@@ -202,8 +203,8 @@ public class Utileria {
         } else if (id == R.id.nav_programacion) {
             intent = new Intent(context, ProgramacionActivity.class);
 
-//        } else if (id == R.id.nav_programacion) {
-//            intent = new Intent(context, VisitasVerActivity.class);
+        } else if (id == R.id.nav_constancia_pp) {
+            intent = new Intent(context, ConstanciaPlataActivity.class);
 //
 //        } else if (id == R.id.nav_constancia_sf) {
 //            intent = new Intent(context, InspeccionesSFActivity.class);
@@ -353,6 +354,10 @@ public class Utileria {
             result = costo - anticipo;
             return result + "";
         }
+    }
+
+    public static boolean deleteFile(String path) {
+        return new File(path).delete();
     }
 
     public static boolean deleteFirma(String path) {
