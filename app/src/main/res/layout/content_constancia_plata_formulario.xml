@@ -8,4 +8,298 @@
     tools:context=".activity.ConstanciaPlataFormularioActivity"
     tools:showIn="@layout/activity_constancia_plata_formulario">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_constancia_plata_form_fecha"
+                style="@style/TIL">
+
+                <EditText
+                    android:id="@+id/et_constancia_plata_form_fecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="@string/fecha"
+                    android:inputType="date" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_constancia_plata_form_fecha"
+                style="@style/ButtonMaterial"
+                android:layout_marginBottom="12dp"
+                android:text="@string/modificar_fecha" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_constancia_plata_form_cliente"
+                style="@style/TIL">
+
+                <EditText
+                    android:id="@+id/et_constancia_plata_form_cliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="@string/cliente"
+                    android:inputType="textCapCharacters" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_constancia_plata_form_contacto"
+                style="@style/TIL">
+
+                <EditText
+                    android:id="@+id/et_constancia_plata_form_contacto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/contacto"
+                    android:inputType="textCapCharacters" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_constancia_plata_form_utiliza"
+                style="@style/EtiquetaSpinner"
+                android:text="@string/constancia_pp_utiliza" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_utiliza_plata_coloidal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/plata_coloidal" />
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_utiliza_hipoclorito"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/hipoclorito" />
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_utiliza_desincrustante"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/desincrustante" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_constancia_plata_form_aplica"
+                style="@style/EtiquetaSpinner"
+                android:text="@string/constancia_pp_aplica" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_aplica_asperjado"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/asperjado" />
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_aplica_rodillo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/rodillo" />
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_aplica_directo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/directo" />
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_constancia_plata_form_hora_entrada"
+                style="@style/TIL">
+
+                <EditText
+                    android:id="@+id/et_constancia_plata_form_hora_entrada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="@string/hora_entrada"
+                    android:inputType="time" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_constancia_plata_form_hora_entrada"
+                style="@style/ButtonMaterial"
+                android:layout_marginBottom="12dp"
+                android:text="@string/modificar_hora" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_constancia_plata_form_hora_salida"
+                style="@style/TIL">
+
+                <EditText
+                    android:id="@+id/et_constancia_plata_form_hora_salida"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:hint="@string/hora_salida"
+                    android:inputType="time" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_constancia_plata_form_hora_salida"
+                style="@style/ButtonMaterial"
+                android:layout_marginBottom="12dp"
+                android:text="@string/modificar_hora" />
+
+            <TextView
+                android:id="@+id/tv_constancia_plata_form_material"
+                style="@style/EtiquetaSpinner"
+                android:text="@string/constancia_pp_material" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_material_pvc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:text="@string/pvc" />
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_material_fibrocemento"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:text="@string/fibrocemento" />
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/chk_constancia_plata_form_material_otro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:text="@string/otro" />
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_constancia_plata_form_material_otro"
+                style="@style/TIL">
+
+                <EditText
+                    android:id="@+id/et_constancia_plata_form_material_otro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/material_otro"
+                    android:inputType="textCapCharacters" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!--Agregar lista de tinacos seleccionados-->
+            <TextView
+                android:id="@+id/tv_constancia_plata_form_tanques"
+                style="@style/EtiquetaSpinner"
+                android:text="@string/constancia_pp_tanques" />
+
+            <ListView
+                android:id="@+id/lv_constancia_plata_form_tanques"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+
+            <Button
+                android:id="@+id/btn_constancia_plata_form_tanques"
+                style="@style/ButtonMaterial"
+                android:layout_marginBottom="12dp"
+                android:text="@string/seleccionar_tanques" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_constancia_plata_form_observaciones"
+                style="@style/TIL">
+
+                <EditText
+                    android:id="@+id/et_constancia_plata_form_observaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/observaciones"
+                    android:inputType="textCapCharacters" />
+            </android.support.design.widget.TextInputLayout>
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/chk_constancia_plata_form_liquidado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:text="@string/liquidado" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_constancia_plata_form_dinero_recibido"
+                style="@style/TIL">
+
+                <EditText
+                    android:id="@+id/et_constancia_plata_form_dinero_recibido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/dinero_recibido"
+                    android:inputType="numberDecimal" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_constancia_plata_form_firma"
+                style="@style/EtiquetaSpinner"
+                android:text="@string/firma" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_constancia_plata_form_firmar"
+                    style="@style/ButtonMaterial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/firma"
+                    android:src="@mipmap/ic_firma" />
+
+                <ImageView
+                    android:id="@+id/iv_constancia_plata_form_firma"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="10"
+                    android:contentDescription="@string/firma" />
+            </LinearLayout>
+            
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
