@@ -32,10 +32,6 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter.ApiConstants;
 import com.rey.material.widget.CheckBox;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class ProgramacionDetalleActivity extends AppCompatActivity implements View.OnClickListener {
@@ -196,7 +192,7 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
         } else {
             Intent intent;
             if (programacion.getTipo_servicio_id().equals(Constant.PLATAPLUS_VALUE))
-                intent = new Intent(getApplicationContext(), MainActivity.class); // TODO: 10/09/2018 implementar activity plata
+                intent = new Intent(getApplicationContext(), ConstanciaPlataFormularioActivity.class);
             else
                 intent = new Intent(getApplicationContext(), MainActivity.class); // TODO: 10/09/2018 implementar activity fumi
             intent.putExtra("programacionID_bd", programacionID_bd);

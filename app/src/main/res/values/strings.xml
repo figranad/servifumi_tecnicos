@@ -58,4 +58,5 @@
     <string name="title_activity_constancia_plata">Constancias PlataPlus</string>
     <string name="sin_enviar">Sin Enviar</string>
     <string name="enviados">Enviados</string>
+    <string name="title_activity_constancia_plata_formulario">Nueva Constancia PlataPlus</string>
 </resources>

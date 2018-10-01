@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaPlataActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
@@ -202,15 +203,13 @@ public class Utileria {
 
         } else if (id == R.id.nav_programacion) {
             intent = new Intent(context, ProgramacionActivity.class);
-
-        } else if (id == R.id.nav_constancia_pp) {
-            intent = new Intent(context, ConstanciaPlataActivity.class);
-//
 //        } else if (id == R.id.nav_constancia_sf) {
 //            intent = new Intent(context, InspeccionesSFActivity.class);
-//        } else if (id == R.id.nav_constancia_pp) {
-//            intent = new Intent(context, InspeccionesPPActivity.class);
-        }else if (id == R.id.nav_acerca) {
+        } else if (id == R.id.nav_constancia_pp) {
+            intent = new Intent(context, ConstanciaPlataActivity.class);
+//        } else if (id == R.id.nav_enviar) {
+//            intent = new Intent(context, EnviarActivity.class);
+        } else if (id == R.id.nav_acerca) {
             View view = ((Activity) context).getLayoutInflater().inflate(R.layout.acercade, null);
             try {
                 TextView tv;

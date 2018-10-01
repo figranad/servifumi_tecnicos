@@ -29,7 +29,7 @@ import java.util.List;
 public class ConstanciaPlataActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FloatingActionButton fabNuevo;
+
     private RecyclerView rvConstanciaPlata;
     private ConstanciaPlataActiveRecord constanciaPlataActiveRecord;
     private ConstanciaPlataAdapter constanciaPlataAdapter;
@@ -64,24 +64,6 @@ public class ConstanciaPlataActivity extends AppCompatActivity
         constanciaPlataAdapter = new ConstanciaPlataAdapter(this);
         misPreferencias = new MisPreferencias(this);
 
-        rvConstanciaPlata.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0 && fabNuevo.getVisibility() == View.VISIBLE) {
-                    fabNuevo.hide();
-                } else if (dy < 0 && fabNuevo.getVisibility() != View.VISIBLE) {
-                    fabNuevo.show();
-                }
-            }
-        });
-        fabNuevo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                crearNuevaConstancia();
-            }
-        });
-
         LinearLayoutManager lm = new LinearLayoutManager(this);
         DividerItemDecoration mDivider = new DividerItemDecoration(rvConstanciaPlata.getContext(), LinearLayoutManager.VERTICAL);
         mDivider.setDrawable(getResources().getDrawable(R.drawable.line_divider));
@@ -95,15 +77,7 @@ public class ConstanciaPlataActivity extends AppCompatActivity
     }
 
     private void findViewById() {
-        fabNuevo = findViewById(R.id.fab_constancia_plata_nuevo);
         rvConstanciaPlata = findViewById(R.id.rv_constancia_plata);
-    }
-
-    private void crearNuevaConstancia() {
-        // TODO: 25/09/2018 Implementar activity
-//        Intent i = new Intent(this, ConstanciaPlataFormularioActivity.class);
-//        startActivity(i);
-//        finish();
     }
 
     @Override
