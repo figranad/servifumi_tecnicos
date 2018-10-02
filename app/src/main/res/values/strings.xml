@@ -85,4 +85,10 @@
     <string name="firma">FIRMA DEL CLIENTE*</string>
     <string name="constancia_pp_tanques">TANQUES TRABAJADOS*</string>
     <string name="seleccionar_tanques">SELECCIONAR TANQUES</string>
+
+    <string name="firma_hint_sign">Capturar Firma</string>
+    <string name="firma_dialog_title">FIRMA AQUÍ</string>
+    <string name="firma_hint_cancel">Cancelar</string>
+    <string name="firma_hint_clear">Limpiar</string>
+    <string name="firma_hint_save">Guardar</string>
 </resources>

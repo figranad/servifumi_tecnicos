@@ -221,7 +221,6 @@
                     android:inputType="textCapCharacters" />
             </android.support.design.widget.TextInputLayout>
 
-            <!--Agregar lista de tinacos seleccionados-->
             <TextView
                 android:id="@+id/tv_constancia_plata_form_tanques"
                 style="@style/EtiquetaSpinner"
@@ -284,7 +283,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btn_constancia_plata_form_firmar"
+                    android:id="@+id/btn_constancia_plata_form_firma"
                     style="@style/ButtonMaterial"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
@@ -299,7 +298,6 @@
                     android:layout_weight="10"
                     android:contentDescription="@string/firma" />
             </LinearLayout>
-            
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

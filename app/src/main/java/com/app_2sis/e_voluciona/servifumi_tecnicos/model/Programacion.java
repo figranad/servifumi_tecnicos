@@ -534,7 +534,7 @@ public class Programacion {
     }
 
     public String getSincronizado() {
-        return sincronizado;
+        return sincronizado == null ? Constant.NO : sincronizado;
     }
 
     public void setSincronizado(String sincronizado) {
