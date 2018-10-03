@@ -184,7 +184,7 @@ public class ConstanciaPlataActiveRecord extends MyActiveRecord {
     }
 
     public List<ConstanciaPlataBeanAdapter> getConstanciaPlataBeanAdapter(String usuarioID) {
-        String textTanques = "";
+        String textTanques = "IMPLEMENTAR TANQUES";
         List<ConstanciaPlataBeanAdapter> constanciaPlataBAList = new ArrayList<>();
         List<ConstanciaPlata> constanciaPlataList = getConstanciasPlatas(ConstanciaPlata.USUARIO_ID_WS, usuarioID);
 

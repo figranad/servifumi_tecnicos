@@ -83,4 +83,8 @@ public class Constant {
     public static final String TIPO_SERVICIO_SUPERVISION_VALUE = "SUPERVISION";
     public static final String TIPO_SERVICIO_DES_PATOGENA_VALUE = "DESINFECCION PATÓGENA";
     public static final String TIPO_SERVICIO_OTRO_VALUE = "OTRO";
+
+    public static final int COMPORTAMIENTO_ACTIVITY_NEW = 0;
+    public static final int COMPORTAMIENTO_ACTIVITY_VIEW = 1;
+    public static final int COMPORTAMIENTO_ACTIVITY_UPDATE = 2;
 }

@@ -2,6 +2,7 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaPlataFormularioActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaPlataActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ConstanciaPlataBeanAdapter;
@@ -58,8 +60,22 @@ public class ConstanciaPlataAdapter extends RecyclerView.Adapter<ConstanciaPlata
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ConstanciaPlataHolder holder, int position) {
-        // TODO: 26/09/2018 implementar
+    public void onBindViewHolder(@NonNull final ConstanciaPlataHolder holder, int position) {
+        final ConstanciaPlataBeanAdapter currentConstancia = constanciaPlataArrayList.get(position);
+        holder.setTitulo(currentConstancia.getCliente());
+        holder.setDineroRecibido(currentConstancia.getDineroRecibido());
+        holder.setTanques(currentConstancia.getTanques());
+        holder.setColorSincronizado(currentConstancia.getSincronizado());
+        holder.setConstanciaPlataID(currentConstancia.getConstanciaPlataID());
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setPosition(holder.getAdapterPosition());
+                setSincronizado(currentConstancia.getSincronizado().equals(Constant.SI));
+                return false;
+            }
+        });
     }
 
     @Override
@@ -97,7 +113,7 @@ public class ConstanciaPlataAdapter extends RecyclerView.Adapter<ConstanciaPlata
         }
 
         public void setDineroRecibido(String dineroRecibido) {
-            this.dineroRecibido.setText(dineroRecibido);
+            this.dineroRecibido.setText("Dinero Recibido: $" + (dineroRecibido.isEmpty() ? "0" : dineroRecibido));
         }
 
         public void setTanques(String tanques) {
@@ -148,10 +164,9 @@ public class ConstanciaPlataAdapter extends RecyclerView.Adapter<ConstanciaPlata
 
         @Override
         public void onClick(View v) {
-            // TODO: 25/09/2018 Implementar activity
-//            Intent i = new Intent(v.getContext(), ConstanciaPlataFormularioActivity.class);
-//            i.putExtra("constanciaPlataID_bd", constanciaPlataID);
-//            v.getContext().startActivity(i);
+            Intent i = new Intent(v.getContext(), ConstanciaPlataFormularioActivity.class);
+            i.putExtra("constanciaPlataID_bd", constanciaPlataID);
+            v.getContext().startActivity(i);
         }
 
         @Override
@@ -193,5 +208,4 @@ public class ConstanciaPlataAdapter extends RecyclerView.Adapter<ConstanciaPlata
             notifyDataSetChanged();
         }
     }
-    
 }

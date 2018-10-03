@@ -349,7 +349,7 @@ public class ConstanciaPlata {
         this.observaciones = observaciones;
     }
 
-    public String getRecibe_dinero() {
+    public String getRecibe_dinero() {  //Servicio Liaquidado
         return recibe_dinero;
     }
 
