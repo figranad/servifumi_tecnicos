@@ -1,7 +1,14 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.model;
 
+import android.content.Context;
+
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatTanqueActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaPlataTanquesActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.TanqueBeanAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
+
+import java.util.List;
 
 public class ConstanciaPlata {
     public static final String ID_WS = "id";
@@ -456,9 +463,47 @@ public class ConstanciaPlata {
         this.titulo_programacion = titulo_programacion;
     }
 
-    public void upperCase(){
+    public String getTanquesString(Context context) {
+        ConstanciaPlataTanquesActiveRecord constanciaPlataTanquesActiveRecord = new ConstanciaPlataTanquesActiveRecord(context);
+        CatTanqueActiveRecord tanqueActiveRecord = new CatTanqueActiveRecord(context);
+        String result = "";
+
+        List<ConstanciaPlataTanques> constanciaPlataTanquesList = constanciaPlataTanquesActiveRecord
+                .getConstanciaPlataTanques(ConstanciaPlataTanques.CONSTANCIA_PLATA_ID_WS, id + "");
+
+        for (ConstanciaPlataTanques constanciaPlataTanque : constanciaPlataTanquesList) {
+            result += constanciaPlataTanque.getCantidad() + ": " + tanqueActiveRecord.getCatTanques(
+                    CatTanque.CAT_TANQUE_ID_WS, constanciaPlataTanque.getCat_tanque_id()).getNombre() + ". ";
+        }
+
+        return result;
+    }
+
+    public List<TanqueBeanAdapter> getTanqueBeanAdapter(Context context) {
+        ConstanciaPlataTanquesActiveRecord constanciaPlataTanquesActiveRecord = new ConstanciaPlataTanquesActiveRecord(context);
+        CatTanqueActiveRecord tanqueActiveRecord = new CatTanqueActiveRecord(context);
+
+        List<TanqueBeanAdapter> tanqueBeanAdapterList = tanqueActiveRecord.getTanqueBeanAdapter();
+        List<ConstanciaPlataTanques> constanciaPlataTanquesList = constanciaPlataTanquesActiveRecord
+                .getConstanciaPlataTanques(ConstanciaPlataTanques.CONSTANCIA_PLATA_ID_WS, id + "");
+
+        for (ConstanciaPlataTanques constanciaPlataTanque : constanciaPlataTanquesList) {
+            for (TanqueBeanAdapter tanqueBeanAdapter : tanqueBeanAdapterList) {
+                if (constanciaPlataTanque.getCat_tanque_id().equals(tanqueBeanAdapter.getTanqueID())) {
+                    tanqueBeanAdapter.setCheck(true);
+                    tanqueBeanAdapter.setCantidad(constanciaPlataTanque.getCantidad());
+                    break;
+                }
+            }
+        }
+        return tanqueBeanAdapterList;
+    }
+
+    public void upperCase() {
         setContacto(getContacto().toUpperCase());
         setTip_material_observacion(getTip_material_observacion().toUpperCase());
         setObservaciones(getObservaciones().toUpperCase());
     }
+
+
 }

@@ -8,6 +8,9 @@ public class Constant {
     public static final String MSJ_CAMPO_OBLIGATORIO = "Campo Obligatorio";
     public static final String MSJ_GUARDADO_EXITOSO = "Guardado Exitosamente";
     public static final String MSJ_VERIFICAR_ERRORES = "VERIFICAR ERRORES";
+    public static final String MSJ_NO_MENOR_1 = "Los tanques seleccionados necesitan al menos 1";
+    public static final String MSJ_CAMPO_NUMERICO = "La cantidad debe ser número";
+    public static final String MSJ_MINIMO_1 = "Seleccione al menos 1 tanque";
 
     public static final String SERVIFUMI_VALUE = "0";
     public static final String PLATAPLUS_VALUE = "1";

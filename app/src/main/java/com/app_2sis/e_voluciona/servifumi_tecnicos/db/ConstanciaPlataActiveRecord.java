@@ -184,7 +184,6 @@ public class ConstanciaPlataActiveRecord extends MyActiveRecord {
     }
 
     public List<ConstanciaPlataBeanAdapter> getConstanciaPlataBeanAdapter(String usuarioID) {
-        String textTanques = "IMPLEMENTAR TANQUES";
         List<ConstanciaPlataBeanAdapter> constanciaPlataBAList = new ArrayList<>();
         List<ConstanciaPlata> constanciaPlataList = getConstanciasPlatas(ConstanciaPlata.USUARIO_ID_WS, usuarioID);
 
@@ -193,7 +192,7 @@ public class ConstanciaPlataActiveRecord extends MyActiveRecord {
                 constanciaPlataBAList.add(new ConstanciaPlataBeanAdapter(
                         constanciaPlata.getTitulo_programacion(),
                         constanciaPlata.getDinero_recibido(),
-                        textTanques, // TODO: 26/09/2018 implementarlo en el ActiveRecord de ConstanciaTanques
+                        constanciaPlata.getTanquesString(context),
                         constanciaPlata.getSincronizado(),
                         constanciaPlata.getId() + ""
                 ));

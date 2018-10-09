@@ -1,9 +1,11 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.db;
 
 import android.content.Context;
+import android.widget.ListView;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTanque;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.TanqueBeanAdapter;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -119,8 +121,7 @@ public class CatTanqueActiveRecord extends MyActiveRecord {
             return null;
 
         int i = 0;
-        String[] results = new String[catTanquesList.size() + 1];
-        results[i++] = Constant.PROMPT;
+        String[] results = new String[catTanquesList.size()];
 
         for (CatTanque catTanques : catTanquesList) {
             results[i++] = catTanques.getNombre();
@@ -160,5 +161,18 @@ public class CatTanqueActiveRecord extends MyActiveRecord {
             }
         }
         return 0;
+    }
+
+    public List<TanqueBeanAdapter> getTanqueBeanAdapter() {
+        List<TanqueBeanAdapter> tanqueBAList = new ArrayList<>();
+        List<CatTanque> catTanqueList = getCatTanques();
+
+        for (CatTanque tanque : catTanqueList) {
+            tanqueBAList.add(new TanqueBeanAdapter(
+                    tanque.getNombre(),
+                    tanque.getCat_tanque_id()
+            ));
+        }
+        return tanqueBAList;
     }
 }

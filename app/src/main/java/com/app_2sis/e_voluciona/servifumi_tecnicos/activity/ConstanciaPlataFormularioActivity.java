@@ -20,6 +20,9 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -28,6 +31,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -50,30 +54,39 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.MisPreferencias;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlata;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlataTanques;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Usuario;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.TanqueBeanAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.TanqueAdapter;
 import com.rey.material.widget.CheckBox;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class ConstanciaPlataFormularioActivity extends AppCompatActivity implements View.OnClickListener {
     private TextInputLayout tilFecha, tilCliente, tilContacto, tilHoraEntrada, tilHoraSalida,
             tilMatOtro, tilObservaciones, tilDineroRecibido;
     private EditText etFecha, etCliente, etContacto, etHoraEntrada, etHoraSalida, etMatOtro,
             etObservaciones, etDineroRecibido;
-    private Button btnFecha, btnHoraEntrada, btnHoraSalida, btnTanques;
-    private TextView tvUtiliza, tvAplica, tvMaterial, tvTanques, tvFirma;
+    private Button btnFecha, btnHoraEntrada, btnHoraSalida;
+    private TextView tvUtiliza, tvAplica, tvMaterial, tvTanques, tvFirma, tvErrorTanques;
     private CheckBox chkUtilPlataColoidal, chkUtilHipoclorito, chkUtilDesincrustante,
             chkApliAsperjado, chkApliRodillo, chkApliDirecto, chkMatPvc, chkMatFibrocemento,
             chkMatOtro, chkLiquidado;
-    private ListView lvTanques;
     private ImageButton btnFirma;
     private ImageView ivFirma;
     private FloatingActionButton fabGuardar;
+
+    // Recycler view para los tanques trabajados
+    private RecyclerView rvTanque;
+    private TanqueAdapter tanqueAdapter;
+    private List<TanqueBeanAdapter> tanqueBeanAdapterList;
 
     private String programacionID_bd; //Si es view no lo envia
     private String constanciaPlataID_bd; //Si es new no lo envia
@@ -124,7 +137,15 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         iniComponents();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!catTanqueActiveRecord.isEmpty())
+            cargarTanques();
+    }
+
     private void iniComponents() {
+        tanqueAdapter = new TanqueAdapter(this);
         misPreferencias = new MisPreferencias(this);
         usuarioActiveRecord = new UsuarioActiveRecord(this);
         programacionActiveRecord = new ProgramacionActiveRecord(this);
@@ -135,6 +156,15 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         programacion = programacionActiveRecord.getProgramacion(Programacion.ID_WS, programacionID_bd);
         if (hayInfoCatalogos()) {
             setFechayHoras();
+
+            LinearLayoutManager lm = new LinearLayoutManager(this);
+            DividerItemDecoration mDivider = new DividerItemDecoration(rvTanque.getContext(), LinearLayoutManager.VERTICAL);
+            mDivider.setDrawable(getResources().getDrawable(R.drawable.line_divider_black));
+            rvTanque.setLayoutManager(lm);
+            rvTanque.addItemDecoration(mDivider);
+            rvTanque.setAdapter(tanqueAdapter);
+            if (!catTanqueActiveRecord.isEmpty())
+                cargarTanques();
 
             if (programacion != null)
                 etCliente.setText(programacion.getTitulo());
@@ -175,6 +205,8 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         fabGuardar = findViewById(R.id.fab_save);
         fabGuardar.setOnClickListener(this);
 
+        rvTanque = findViewById(R.id.rv_constancia_plata_form_tanques);
+
         tilFecha = findViewById(R.id.til_constancia_plata_form_fecha);
         tilCliente = findViewById(R.id.til_constancia_plata_form_cliente);
         tilContacto = findViewById(R.id.til_constancia_plata_form_contacto);
@@ -199,13 +231,12 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         btnHoraEntrada.setOnClickListener(this);
         btnHoraSalida = findViewById(R.id.btn_constancia_plata_form_hora_salida);
         btnHoraSalida.setOnClickListener(this);
-        btnTanques = findViewById(R.id.btn_constancia_plata_form_tanques);
-        btnTanques.setOnClickListener(this);
 
         tvUtiliza = findViewById(R.id.tv_constancia_plata_form_utiliza);
         tvAplica = findViewById(R.id.tv_constancia_plata_form_aplica);
         tvMaterial = findViewById(R.id.tv_constancia_plata_form_material);
         tvTanques = findViewById(R.id.tv_constancia_plata_form_tanques);
+        tvErrorTanques = findViewById(R.id.tv_constancia_plata_form_tanques_error);
         tvFirma = findViewById(R.id.tv_constancia_plata_form_firma);
 
         chkUtilPlataColoidal = findViewById(R.id.chk_constancia_plata_form_utiliza_plata_coloidal);
@@ -219,10 +250,26 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         chkMatOtro = findViewById(R.id.chk_constancia_plata_form_material_otro);
         chkLiquidado = findViewById(R.id.chk_constancia_plata_form_liquidado);
 
-        lvTanques = findViewById(R.id.lv_constancia_plata_form_tanques);
         ivFirma = findViewById(R.id.iv_constancia_plata_form_firma);
         btnFirma = findViewById(R.id.btn_constancia_plata_form_firma);
         btnFirma.setOnClickListener(this);
+    }
+
+    private void cargarTanques() {
+        //Si el comportamiento es de View en el adapter se bloquean los componentes de tanques
+        tanqueAdapter.setComportamientoAdapter(COMPORTAMIENTO_THIS_ACTIVITY);
+
+
+        if (COMPORTAMIENTO_THIS_ACTIVITY != Constant.COMPORTAMIENTO_ACTIVITY_NEW) {
+            //Cargar la informacion de la constancia para que se muestre en los componentes
+            tanqueBeanAdapterList = constanciaPlata.getTanqueBeanAdapter(context);
+        } else
+            tanqueBeanAdapterList = catTanqueActiveRecord.getTanqueBeanAdapter();
+
+        tanqueAdapter.deleteAll();
+        if (tanqueBeanAdapterList != null && !tanqueBeanAdapterList.isEmpty()) {
+            tanqueAdapter.addAll(tanqueBeanAdapterList);
+        }
     }
 
     private boolean hayInfoCatalogos() {
@@ -271,7 +318,6 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         btnFecha.setEnabled(false);
         btnHoraEntrada.setEnabled(false);
         btnHoraSalida.setEnabled(false);
-        btnTanques.setEnabled(false);
         btnFirma.setEnabled(false);
 
         etContacto.setEnabled(false);
@@ -400,9 +446,6 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
             case R.id.btn_constancia_plata_form_hora_salida:
                 tpdHoraSalida.show();
                 break;
-            case R.id.btn_constancia_plata_form_tanques:
-                // TODO: 03/10/2018 implementar listado de tanques con cantidades
-                break;
             case R.id.btn_constancia_plata_form_firma:
                 firmar();
                 break;
@@ -482,8 +525,21 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
                     programacionActiveRecord.update(programacion);
                 }
             }
+            String constanciaPlataID = constanciaPlata.getId() + "";
 
-            // TODO: 03/10/2018 crear info sobre los tanques
+            //<editor-fold desc="ConstanciaPlataTanques">
+            ConstanciaPlataTanques constanciaPlataTanques;
+            for (TanqueBeanAdapter tanqueTrabajado : tanqueBeanAdapterList) {
+                if (tanqueTrabajado.isCheck()) { //Si se marca como que se trabajo el tanque
+                    constanciaPlataTanques = new ConstanciaPlataTanques();
+                    constanciaPlataTanques.setConstancia_plata_id(constanciaPlataID);
+                    constanciaPlataTanques.setCat_tanque_id(tanqueTrabajado.getTanqueID());
+                    constanciaPlataTanques.setCantidad(tanqueTrabajado.getCantidad());
+                    constanciaPlataTanquesActiveRecord.save(constanciaPlataTanques);
+                }
+            }
+            //</editor-fold>
+
             Toast.makeText(this, "Guardado Exitosamente", Toast.LENGTH_LONG).show();
             exit();
         }
@@ -518,7 +574,35 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
             exito = false;
         }
 
-        // TODO: 03/10/2018 implementar validacion de al menos un tanque seleccionado
+        int cantidad;
+        boolean hayTanque = false;
+        for (TanqueBeanAdapter tanqueTrabajado : tanqueBeanAdapterList) {
+            if (tanqueTrabajado.isCheck()) { //Si se marca como que se trabajo el tanque
+                hayTanque = true;
+                try {
+                    cantidad = Integer.parseInt(tanqueTrabajado.getCantidad());
+                    if (cantidad < 1) {  //Si se ingresó menos de 0 en un tanque seleccionado
+                        tvTanques.setError(Constant.MSJ_NO_MENOR_1);
+                        tvErrorTanques.setText(Constant.MSJ_NO_MENOR_1);
+                        tvErrorTanques.setVisibility(View.VISIBLE);
+                        exito = false;
+                        break;
+                    }
+                } catch (NumberFormatException ex) { //Si se ingresa texto en el campo de cantidad
+                    tvTanques.setError(Constant.MSJ_CAMPO_NUMERICO);
+                    tvErrorTanques.setText(Constant.MSJ_CAMPO_NUMERICO);
+                    tvErrorTanques.setVisibility(View.VISIBLE);
+                    exito = false;
+                    break;
+                }
+            }
+        }
+        if (!hayTanque) {
+            tvTanques.setError(Constant.MSJ_MINIMO_1);
+            tvErrorTanques.setText(Constant.MSJ_MINIMO_1);
+            tvErrorTanques.setVisibility(View.VISIBLE);
+            exito = false;
+        }
 
         if (!exito)
             Snackbar.make(findViewById(android.R.id.content), Constant.MSJ_VERIFICAR_ERRORES, Snackbar.LENGTH_SHORT).show();
@@ -531,6 +615,7 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         tilHoraSalida.setError(null);
         tilMatOtro.setError(null);
         tvTanques.setError(null);
+        tvErrorTanques.setVisibility(View.GONE);
         tvFirma.setError(null);
     }
 

@@ -91,4 +91,5 @@
     <string name="firma_hint_cancel">Cancelar</string>
     <string name="firma_hint_clear">Limpiar</string>
     <string name="firma_hint_save">Guardar</string>
+    <string name="cantidad">Cantidad</string>
 </resources>
