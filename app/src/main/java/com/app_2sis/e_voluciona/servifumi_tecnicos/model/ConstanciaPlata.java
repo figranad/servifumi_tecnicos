@@ -34,7 +34,7 @@ public class ConstanciaPlata {
     public static final String OBSERVACIONES_WS = "observaciones";
     public static final String RECIBE_DINERO_WS = "recibe_dinero";
     public static final String DINERO_RECIBIDO_WS = "dinero_recibido";
-    public static final String FIRMA_WS = "firma";
+    public static final String FIRMA_WS = "firma_pic";
     public static final String FOLIO_CERTIFICADO_WS = "folio_certificado";
     public static final String TITULO_PROGRAMACION_WS = "titulo_programacion";
 

@@ -17,5 +17,6 @@ public class ApiConstants {
     public static final String URL_GET_PROGRAMACION = "/servifumi/web/index.php/ws-tecnicos/get-programacion";
     public static final String URL_GET_PROGRAMACION_PRODUCTOS = "/servifumi/web/index.php/ws-tecnicos/get-programacion-productos";
     public static final String URL_GET_METODOS_PAGO = "/servifumi/web/index.php/ws/metodospago";
+    public static final String URL_GET_CAT_PLAGAS = "/servifumi/web/index.php/ws/catplagas";
     public static final String URL_GET_TANQUES = "/servifumi/web/index.php/ws-tecnicos/get-tanques";
 }

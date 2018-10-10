@@ -3,10 +3,15 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatPlaga;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatProducto;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTanque;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTipoInstalacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTurno;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlata;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlataTanques;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.MetodoPago;
@@ -37,6 +42,11 @@ public class DB extends OrmLiteSqliteOpenHelper {
     private Dao<ProgramacionProductos, Integer> programacionProductosDao;
     private Dao<ConstanciaPlata, Integer> constanciaPlataDao;
     private Dao<ConstanciaPlataTanques, Integer> constanciaPlataTanquesDao;
+    private Dao<ConstanciaFumi, Integer> constanciaFumiDao;
+    private Dao<CatPlaga, Integer> catPlagaDao;
+    private Dao<ConstanciaFumiPlagas, Integer> constanciaFumiPlagasDao;
+    private Dao<ConstanciaFumiProductos, Integer> constanciaFumiProductosDao;
+    private Dao<ConstanciaFumiVehiculos, Integer> constanciaFumiVehiculosDao;
 
 
     public DB(Context context) {
@@ -56,6 +66,11 @@ public class DB extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, CatTanque.class);
             TableUtils.createTableIfNotExists(connectionSource, ConstanciaPlata.class);
             TableUtils.createTableIfNotExists(connectionSource, ConstanciaPlataTanques.class);
+            TableUtils.createTableIfNotExists(connectionSource, ConstanciaFumi.class);
+            TableUtils.createTableIfNotExists(connectionSource, ConstanciaFumiPlagas.class);
+            TableUtils.createTableIfNotExists(connectionSource, ConstanciaFumiProductos.class);
+            TableUtils.createTableIfNotExists(connectionSource, ConstanciaFumiVehiculos.class);
+            TableUtils.createTableIfNotExists(connectionSource, CatPlaga.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -75,6 +90,11 @@ public class DB extends OrmLiteSqliteOpenHelper {
                 TableUtils.dropTable(connectionSource, CatTanque.class, true);
                 TableUtils.dropTable(connectionSource, ConstanciaPlata.class, true);
                 TableUtils.dropTable(connectionSource, ConstanciaPlataTanques.class, true);
+                TableUtils.dropTable(connectionSource, ConstanciaFumi.class, true);
+                TableUtils.dropTable(connectionSource, ConstanciaFumiPlagas.class, true);
+                TableUtils.dropTable(connectionSource, ConstanciaFumiProductos.class, true);
+                TableUtils.dropTable(connectionSource, ConstanciaFumiVehiculos.class, true);
+                TableUtils.dropTable(connectionSource, CatPlaga.class, true);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -152,8 +172,43 @@ public class DB extends OrmLiteSqliteOpenHelper {
         return constanciaPlataTanquesDao;
     }
 
+    public Dao<ConstanciaFumi, Integer> getConstanciaFumiDao() throws SQLException {
+        if (constanciaFumiDao == null) {
+            constanciaFumiDao = getDao(ConstanciaFumi.class);
+        }
+        return constanciaFumiDao;
+    }
+
+    public Dao<ConstanciaFumiPlagas, Integer> getConstanciaFumiPlagasDao() throws SQLException {
+        if (constanciaFumiPlagasDao == null) {
+            constanciaFumiPlagasDao = getDao(ConstanciaFumiPlagas.class);
+        }
+        return constanciaFumiPlagasDao;
+    }
+
+    public Dao<ConstanciaFumiProductos, Integer> getConstanciaFumiProductosDao() throws SQLException {
+        if (constanciaFumiProductosDao == null) {
+            constanciaFumiProductosDao = getDao(ConstanciaFumiProductos.class);
+        }
+        return constanciaFumiProductosDao;
+    }
+
+    public Dao<ConstanciaFumiVehiculos, Integer> getConstanciaFumiVehiculosDao() throws SQLException {
+        if (constanciaFumiVehiculosDao == null) {
+            constanciaFumiVehiculosDao = getDao(ConstanciaFumiVehiculos.class);
+        }
+        return constanciaFumiVehiculosDao;
+    }
+
+    public Dao<CatPlaga, Integer> getCatPlagaDao() throws SQLException {
+        if (catPlagaDao == null) {
+            catPlagaDao = getDao(CatPlaga.class);
+        }
+        return catPlagaDao;
+    }
+
     @Override
-    public void close(){
+    public void close() {
         super.close();
         usuarioDao = null;
         catTipoInstalacionDao = null;
@@ -165,5 +220,10 @@ public class DB extends OrmLiteSqliteOpenHelper {
         catTanqueDao = null;
         constanciaPlataDao = null;
         constanciaPlataTanquesDao = null;
+        constanciaFumiDao = null;
+        constanciaFumiPlagasDao = null;
+        constanciaFumiProductosDao = null;
+        constanciaFumiVehiculosDao = null;
+        catPlagaDao = null;
     }
 }

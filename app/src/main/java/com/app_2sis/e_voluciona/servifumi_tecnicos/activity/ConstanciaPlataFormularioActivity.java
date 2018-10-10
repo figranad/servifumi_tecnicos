@@ -504,6 +504,7 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
             constanciaPlata.setUsuario_id(usuario.getUsuarioId());
 
             if (COMPORTAMIENTO_THIS_ACTIVITY == Constant.COMPORTAMIENTO_ACTIVITY_UPDATE) {   //Si es un update
+                constanciaPlata.upperCase();
                 constanciaPlataActiveRecord.update(constanciaPlata);
                 constanciaPlataActiveRecord.deleteTablasDependientes(constanciaPlataID_bd);//se volverán a crear abajo
             } else {    //Si es nuevo
@@ -520,6 +521,7 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
                     constanciaPlata.setProgramacion_id(programacion.getProgramacion_id());
                     constanciaPlata.setTitulo_programacion(programacion.getTitulo());
                 }
+                constanciaPlata.upperCase();
                 constanciaPlataActiveRecord.save(constanciaPlata);
 
                 if (programacion != null) {  //Actualiza que la programacion se realizó

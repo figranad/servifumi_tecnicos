@@ -141,10 +141,11 @@ public class DescargaActivity extends AppCompatActivity
     /**
      * Orden de la descarga encadenada de catalogos
      * 1-CatTipoInstalacion
-     * 2-CaTurno
-     * 3-CatProductos
-     * 4-CatTanques
-     * 5-MetodoPago
+     * 2-CatPlaga
+     * 3-CaTurno
+     * 4-CatProductos
+     * 5-CatTanques
+     * 6-MetodoPago
      *
      */
     private void descargarCatalogos() {

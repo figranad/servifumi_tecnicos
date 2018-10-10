@@ -37,7 +37,7 @@ public class CatTipoInstalacionSincronizar implements Callback<CatTipoInstalacio
                 catTipoInstalacionActiveRecord.deleteAll();
                 if (catTipoInstalacionActiveRecord.save(catTipoInstalacionArrayList)) {
                     descargaActivity.showMensaje("Tipo Instalaciones Descargados");
-                    new CatTurnoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                    new CatPlagaSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
                 }
                 else {
                     descargaActivity.showMensaje("ERROR guardando tipo instalaciones");
@@ -47,7 +47,7 @@ public class CatTipoInstalacionSincronizar implements Callback<CatTipoInstalacio
             } else {
                 catTipoInstalacionActiveRecord.deleteAll();
                 descargaActivity.showMensaje("Sin tipos de instalaciones");
-                new CatTurnoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                new CatPlagaSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
             }
         } else {
             descargaActivity.showMensaje("ERROR descargando tipo instalaciones");

@@ -1,6 +1,7 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.DatosAplicacion;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatPlagasResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatProductoResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTanqueResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTipoInstalacionResponse;
@@ -32,6 +33,9 @@ public interface ApiService {
 
     @POST(ApiConstants.URL_GET_TURNOS)
     Call<CatTurnoResponse> getTurnos(@Body String param);
+
+    @POST(ApiConstants.URL_GET_CAT_PLAGAS)
+    Call<CatPlagasResponse> getCatPlagas(@Body String param);
 
     @POST(ApiConstants.URL_GET_PROGRAMACION)
     Call<ProgramacionResponse> getProgramacion(@Body String param);
