@@ -479,6 +479,11 @@ public class ConstanciaPlata {
         return result;
     }
 
+    /**
+     * Entrega la relación de los tanques y cantidades que se trabajaron en esta constancia
+     * @param context
+     * @return BeanAdapter requerido por el RecyclerView para seleccionar tanques trabajados en la constancia plata
+     */
     public List<TanqueBeanAdapter> getTanqueBeanAdapter(Context context) {
         ConstanciaPlataTanquesActiveRecord constanciaPlataTanquesActiveRecord = new ConstanciaPlataTanquesActiveRecord(context);
         CatTanqueActiveRecord tanqueActiveRecord = new CatTanqueActiveRecord(context);

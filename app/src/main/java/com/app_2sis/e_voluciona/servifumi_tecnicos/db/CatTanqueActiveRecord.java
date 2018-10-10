@@ -163,6 +163,10 @@ public class CatTanqueActiveRecord extends MyActiveRecord {
         return 0;
     }
 
+    /**
+     * Listado que requiere el recyclerview de los tanques trabajados, viene con informacion default para un nuevo registro
+     * @return
+     */
     public List<TanqueBeanAdapter> getTanqueBeanAdapter() {
         List<TanqueBeanAdapter> tanqueBAList = new ArrayList<>();
         List<CatTanque> catTanqueList = getCatTanques();

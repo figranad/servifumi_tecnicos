@@ -255,8 +255,11 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         btnFirma.setOnClickListener(this);
     }
 
+    /**
+     * Crea la interfaz para los tanques y la inicializa con datos si ya existía la constancia
+     */
     private void cargarTanques() {
-        //Si el comportamiento es de View en el adapter se bloquean los componentes de tanques
+        //Si el comportamiento es de View; en el adapter se bloquean los componentes de tanques
         tanqueAdapter.setComportamientoAdapter(COMPORTAMIENTO_THIS_ACTIVITY);
 
 
@@ -299,7 +302,6 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
             chkMatFibrocemento.setCheckedImmediately(constanciaPlata.getTip_material_fibrocemento().equals(Constant.SI));
             chkMatOtro.setCheckedImmediately(constanciaPlata.getTip_material_otro().equals(Constant.SI));
             etMatOtro.setText(constanciaPlata.getTip_material_observacion());
-            // TODO: 03/10/2018 implementar listview de tanques
             etObservaciones.setText(constanciaPlata.getObservaciones());
             chkLiquidado.setCheckedImmediately(constanciaPlata.getRecibe_dinero().equals(Constant.SI));
             etDineroRecibido.setText(constanciaPlata.getDinero_recibido());
