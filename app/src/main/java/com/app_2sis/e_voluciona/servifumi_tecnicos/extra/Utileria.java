@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaFumiActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaPlataActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.LoginActivity;
@@ -205,8 +206,8 @@ public class Utileria {
 
         } else if (id == R.id.nav_programacion) {
             intent = new Intent(context, ProgramacionActivity.class);
-//        } else if (id == R.id.nav_constancia_sf) {
-//            intent = new Intent(context, InspeccionesSFActivity.class);
+        } else if (id == R.id.nav_constancia_sf) {
+            intent = new Intent(context, ConstanciaFumiActivity.class);
         } else if (id == R.id.nav_constancia_pp) {
             intent = new Intent(context, ConstanciaPlataActivity.class);
 //        } else if (id == R.id.nav_enviar) {

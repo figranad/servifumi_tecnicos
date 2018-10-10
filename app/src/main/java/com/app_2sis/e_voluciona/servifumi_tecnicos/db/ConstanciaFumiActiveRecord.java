@@ -6,6 +6,9 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ConstanciaFumiBeanAdapter;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -176,28 +179,31 @@ public class ConstanciaFumiActiveRecord extends MyActiveRecord {
     }
 
     public void deleteTablasDependientes(String constanciaFumiID) {
-        // TODO: 10/10/2018 implementar con todas las tablas relacionadas
-//        new ConstanciaFumiPlagasActiveRecord(context).delete(
-//                ConstanciaFumiPlagas.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
+        new ConstanciaFumiPlagasActiveRecord(context).delete(
+                ConstanciaFumiPlagas.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
+        new ConstanciaFumiProductosActiveRecord(context).delete(
+                ConstanciaFumiProductos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
+        new ConstanciaFumiVehiculosActiveRecord(context).delete(
+                ConstanciaFumiVehiculos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
     }
 
-//    public List<ConstanciaFumiBeanAdapter> getConstanciaFumiBeanAdapter(String usuarioID) {
-//        List<ConstanciaFumiBeanAdapter> constanciaFumiBAList = new ArrayList<>();
-//        List<ConstanciaFumi> constanciaFumiList = getConstanciasFumis(ConstanciaFumi.USUARIO_ID_WS, usuarioID);
-//
-//        if (constanciaFumiList != null) {
-//            for (ConstanciaFumi constanciaFumi : constanciaFumiList) {
-//                constanciaFumiBAList.add(new ConstanciaFumiBeanAdapter(
-//                        constanciaFumi.getTitulo_programacion(),
-//                        constanciaFumi.getDinero_recibido(),
-//                        constanciaFumi.getObservaciones(),
-//                        constanciaFumi.getSincronizado(),
-//                        constanciaFumi.getId() + ""
-//                ));
-//            }
-//        }
-//        return constanciaFumiBAList;
-//    }
+    public List<ConstanciaFumiBeanAdapter> getConstanciaFumiBeanAdapter(String usuarioID) {
+        List<ConstanciaFumiBeanAdapter> constanciaFumiBAList = new ArrayList<>();
+        List<ConstanciaFumi> constanciaFumiList = getConstanciasFumis(ConstanciaFumi.USUARIO_ID_WS, usuarioID);
+
+        if (constanciaFumiList != null) {
+            for (ConstanciaFumi constanciaFumi : constanciaFumiList) {
+                constanciaFumiBAList.add(new ConstanciaFumiBeanAdapter(
+                        constanciaFumi.getTitulo_programacion(),
+                        constanciaFumi.getDinero_recibido(),
+                        constanciaFumi.getObservaciones(),
+                        constanciaFumi.getSincronizado(),
+                        constanciaFumi.getId() + ""
+                ));
+            }
+        }
+        return constanciaFumiBAList;
+    }
 
     // TODO: 25/09/2018 implementar cuando trabaje en el envío de la información
     //<editor-fold desc="IMPLEMENTACION DEL ENVIO EMPAQUETADO VIA WS">

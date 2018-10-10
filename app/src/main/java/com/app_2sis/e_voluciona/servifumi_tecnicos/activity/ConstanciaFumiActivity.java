@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,28 +19,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
-import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaPlataActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.MisPreferencias;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
-import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ConstanciaPlataBeanAdapter;
-import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.ConstanciaPlataAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ConstanciaFumiBeanAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.ConstanciaFumiAdapter;
 
 import java.util.List;
 
-public class ConstanciaPlataActivity extends AppCompatActivity
+public class ConstanciaFumiActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RecyclerView rvConstanciaPlata;
-    private ConstanciaPlataActiveRecord constanciaPlataActiveRecord;
-    private ConstanciaPlataAdapter constanciaPlataAdapter;
-    private List<ConstanciaPlataBeanAdapter> constanciaPlataList;
+    private RecyclerView rvConstanciaFumi;
+    private ConstanciaFumiActiveRecord constanciaFumiActiveRecord;
+    private ConstanciaFumiAdapter constanciaFumiAdapter;
+    private List<ConstanciaFumiBeanAdapter> constanciaFumiList;
 
     private MisPreferencias misPreferencias;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_constancia_plata);
+        setContentView(R.layout.activity_constancia_fumi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,44 +54,44 @@ public class ConstanciaPlataActivity extends AppCompatActivity
 
         findViewById();
 
-        constanciaPlataActiveRecord = new ConstanciaPlataActiveRecord(this);
+        constanciaFumiActiveRecord = new ConstanciaFumiActiveRecord(this);
 
         iniComponents();
     }
 
     private void iniComponents() {
-        constanciaPlataAdapter = new ConstanciaPlataAdapter(this);
+        constanciaFumiAdapter = new ConstanciaFumiAdapter(this);
         misPreferencias = new MisPreferencias(this);
 
         LinearLayoutManager lm = new LinearLayoutManager(this);
-        DividerItemDecoration mDivider = new DividerItemDecoration(rvConstanciaPlata.getContext(), LinearLayoutManager.VERTICAL);
+        DividerItemDecoration mDivider = new DividerItemDecoration(rvConstanciaFumi.getContext(), LinearLayoutManager.VERTICAL);
         mDivider.setDrawable(getResources().getDrawable(R.drawable.line_divider));
-        rvConstanciaPlata.setLayoutManager(lm);
-        rvConstanciaPlata.addItemDecoration(mDivider);
-        rvConstanciaPlata.setAdapter(constanciaPlataAdapter);
+        rvConstanciaFumi.setLayoutManager(lm);
+        rvConstanciaFumi.addItemDecoration(mDivider);
+        rvConstanciaFumi.setAdapter(constanciaFumiAdapter);
 
-        if (!constanciaPlataActiveRecord.isEmpty()) {
-            cargarConstanciasPlatas();
+        if (!constanciaFumiActiveRecord.isEmpty()) {
+            cargarConstanciasFumis();
         }
     }
 
     private void findViewById() {
-        rvConstanciaPlata = findViewById(R.id.rv_constancia_plata);
+        rvConstanciaFumi = findViewById(R.id.rv_constancia_fumi);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (!constanciaPlataActiveRecord.isEmpty()) {
-            cargarConstanciasPlatas();
+        if (!constanciaFumiActiveRecord.isEmpty()) {
+            cargarConstanciasFumis();
         }
     }
 
-    private void cargarConstanciasPlatas() { //Muestra todos los constanciasPlatas
-        constanciaPlataList = constanciaPlataActiveRecord.getConstanciaPlataBeanAdapter(misPreferencias.getIdUsuarioLogueado());
-        constanciaPlataAdapter.deleteAll();
-        if (constanciaPlataList != null && !constanciaPlataList.isEmpty()) {
-            constanciaPlataAdapter.addAll(constanciaPlataList);
+    private void cargarConstanciasFumis() { //Muestra todos los constanciasFumis
+        constanciaFumiList = constanciaFumiActiveRecord.getConstanciaFumiBeanAdapter(misPreferencias.getIdUsuarioLogueado());
+        constanciaFumiAdapter.deleteAll();
+        if (constanciaFumiList != null && !constanciaFumiList.isEmpty()) {
+            constanciaFumiAdapter.addAll(constanciaFumiList);
         }
     }
 
