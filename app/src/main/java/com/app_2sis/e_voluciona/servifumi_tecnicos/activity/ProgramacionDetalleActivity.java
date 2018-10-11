@@ -194,7 +194,7 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
             if (programacion.getTipo_servicio_id().equals(Constant.PLATAPLUS_VALUE))
                 intent = new Intent(getApplicationContext(), ConstanciaPlataFormularioActivity.class);
             else
-                intent = new Intent(getApplicationContext(), MainActivity.class); // TODO: 10/09/2018 implementar activity fumi
+                intent = new Intent(getApplicationContext(), ConstanciaFumiFormularioActivity.class);
             intent.putExtra("programacionID_bd", programacionID_bd);
             startActivity(intent);
             finish();

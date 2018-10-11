@@ -93,4 +93,24 @@
     <string name="firma_hint_save">Guardar</string>
     <string name="cantidad">Cantidad</string>
     <string name="title_activity_constancia_fumi">Constancias Fumi</string>
+    <string name="title_activity_constancia_fumi_formulario">Nueva Constancia Fumi</string>
+    <string name="constancia_sf_plagas">PLAGAS TRABAJADAS*</string>
+    <string name="constancia_sf_productos">PRODUCTOS USADOS*</string>
+    <string name="tipo_instalacion">TIPO INSTALACION*</string>
+    <string name="constancia_sf_areas">¿Qué áreas trabajó?</string>
+    <string name="area_interior">Interior</string>
+    <string name="area_exterior">Exterior</string>
+    <string name="area_vehiculo">Vehículo</string>
+    <string name="tipo_servicio">TIPO DE SERVICIO*</string>
+    <string name="tipo_servicio_otro">OTRO SERVICIO*</string>
+    <string name="constancia_sf_aplicacion">¿Qué aplicó?</string>
+    <string name="aspersion">Aspersión</string>
+    <string name="micronizacion">Microniz.</string>
+    <string name="termoneb">Termone.</string>
+    <string name="inyeccion">Inyección</string>
+    <string name="constancia_sf_colocacion">¿Qué colocó?</string>
+    <string name="cebo_roden">Cebo rodent</string>
+    <string name="cebo_gel">Cebo gel</string>
+    <string name="trampas">Trampas</string>
+    <string name="modo_pago">FORMA DE PAGO</string>
 </resources>

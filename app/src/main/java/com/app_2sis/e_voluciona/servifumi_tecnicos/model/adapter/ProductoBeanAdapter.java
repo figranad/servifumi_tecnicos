@@ -1,21 +1,18 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter;
 
-/**
- * Se usa en la ConstanciaPlata para seleccionar los tanques trabajados y la cantidad de cada uno
- */
-public class TanqueBeanAdapter {
+public class ProductoBeanAdapter {
     private boolean isCheck;
     private String text;
     private String cantidad;
-    private String tanqueID;
+    private String productoID;
 
-    public TanqueBeanAdapter() {
+    public ProductoBeanAdapter() {
     }
 
-    public TanqueBeanAdapter(String text, String tanqueID) {
+    public ProductoBeanAdapter(String text, String productoID) {
         this.isCheck = false;
         this.text = text;
-        this.tanqueID = tanqueID;
+        this.productoID = productoID;
         this.cantidad = "";
     }
 
@@ -47,11 +44,11 @@ public class TanqueBeanAdapter {
         this.cantidad = cantidad;
     }
 
-    public String getTanqueID() {
-        return tanqueID;
+    public String getProductoID() {
+        return productoID;
     }
 
-    public void setTanqueID(String tanqueID) {
-        this.tanqueID = tanqueID;
+    public void setProductoID(String productoID) {
+        this.productoID = productoID;
     }
 }

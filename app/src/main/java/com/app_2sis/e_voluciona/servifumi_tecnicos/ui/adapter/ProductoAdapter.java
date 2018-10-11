@@ -14,21 +14,21 @@ import android.widget.TextView;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
-import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.TanqueBeanAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ProductoBeanAdapter;
 import com.rey.material.widget.CheckBox;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TanqueAdapter extends RecyclerView.Adapter<TanqueAdapter.TanqueHolder> {
+public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoHolder> {
     private int position;
-    private ArrayList<TanqueBeanAdapter> tanqueBeanAdapterArrayList;
+    private ArrayList<ProductoBeanAdapter> productoBeanAdapterArrayList;
     private Context context;
     private int comportamientoAdapter;
 
-    public TanqueAdapter(Context context) {
+    public ProductoAdapter(Context context) {
         this.context = context;
-        tanqueBeanAdapterArrayList = new ArrayList<>();
+        productoBeanAdapterArrayList = new ArrayList<>();
     }
 
     public int getPosition() {
@@ -45,24 +45,24 @@ public class TanqueAdapter extends RecyclerView.Adapter<TanqueAdapter.TanqueHold
 
     @NonNull
     @Override
-    public TanqueHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(
-                R.layout.item_list_tanques_cantidad, parent, false);
-        return new TanqueHolder(itemView);
+                R.layout.item_list_producto_cantidad, parent, false);
+        return new ProductoHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final TanqueHolder holder, int position) {
-        final TanqueBeanAdapter currentTanque = tanqueBeanAdapterArrayList.get(position);
-        holder.setChecked(currentTanque.isCheck());
-        holder.setDescripcion(currentTanque.getText());
-        holder.setCantidad(currentTanque.getCantidad());
-        holder.setTanqueID(currentTanque.getTanqueID());
+    public void onBindViewHolder(@NonNull final ProductoHolder holder, int position) {
+        final ProductoBeanAdapter currentProducto = productoBeanAdapterArrayList.get(position);
+        holder.setChecked(currentProducto.isCheck());
+        holder.setDescripcion(currentProducto.getText());
+        holder.setCantidad(currentProducto.getCantidad());
+        holder.setProductoID(currentProducto.getProductoID());
 
         holder.chkIsCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                currentTanque.setCheck(isChecked);
+                currentProducto.setCheck(isChecked);
                 if (isChecked)
                     holder.setCantidad("1");
                 else
@@ -74,7 +74,7 @@ public class TanqueAdapter extends RecyclerView.Adapter<TanqueAdapter.TanqueHold
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                currentTanque.setCantidad(arg0.toString());
+                currentProducto.setCantidad(arg0.toString());
             }
 
             @Override
@@ -95,29 +95,29 @@ public class TanqueAdapter extends RecyclerView.Adapter<TanqueAdapter.TanqueHold
 
     @Override
     public int getItemCount() {
-        return tanqueBeanAdapterArrayList != null ? tanqueBeanAdapterArrayList.size() : 0;
+        return productoBeanAdapterArrayList != null ? productoBeanAdapterArrayList.size() : 0;
     }
 
-    public void addAll(@NonNull List<TanqueBeanAdapter> tanqueList) {
-        this.tanqueBeanAdapterArrayList.addAll(tanqueList);
+    public void addAll(@NonNull List<ProductoBeanAdapter> productoList) {
+        this.productoBeanAdapterArrayList.addAll(productoList);
         notifyDataSetChanged();
     }
 
     public void deleteAll() {
-        tanqueBeanAdapterArrayList.clear();
+        productoBeanAdapterArrayList.clear();
     }
 
     /**
-     * Clase Tanque Holder
+     * Clase Producto Holder
      */
-    public class TanqueHolder extends RecyclerView.ViewHolder {
-        private String tanqueID;
+    public class ProductoHolder extends RecyclerView.ViewHolder {
+        private String productoID;
         private CheckBox chkIsCheck;
         private TextView tvDescripcion;
         private EditText etCantidad;
 
-        public void setTanqueID(String tanqueID) {
-            this.tanqueID = tanqueID;
+        public void setProductoID(String productoID) {
+            this.productoID = productoID;
         }
 
         public void setDescripcion(String descripcion) {
@@ -133,11 +133,11 @@ public class TanqueAdapter extends RecyclerView.Adapter<TanqueAdapter.TanqueHold
         }
 
 
-        public TanqueHolder(View itemView) {
+        public ProductoHolder(View itemView) {
             super(itemView);
-            chkIsCheck = itemView.findViewById(R.id.chk_list_tanque);
-            tvDescripcion = itemView.findViewById(R.id.tv_list_tanque_descripcion);
-            etCantidad = itemView.findViewById(R.id.et_list_tanque_cantidad);
+            chkIsCheck = itemView.findViewById(R.id.chk_list_producto);
+            tvDescripcion = itemView.findViewById(R.id.tv_list_producto_descripcion);
+            etCantidad = itemView.findViewById(R.id.et_list_producto_cantidad);
         }
     }
 }

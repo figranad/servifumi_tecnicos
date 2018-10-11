@@ -115,6 +115,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.ConstanciaFumiFormularioActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_constancia_fumi_formulario"
+            android:parentActivityName=".activity.ConstanciaFumiActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaFumiActivity" />
+        </activity>
     </application>
 
 </manifest>

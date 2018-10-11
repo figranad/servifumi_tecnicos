@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaFumiFormularioActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
@@ -164,9 +165,7 @@ public class ConstanciaFumiAdapter extends RecyclerView.Adapter<ConstanciaFumiAd
 
         @Override
         public void onClick(View v) {
-            // TODO: 10/10/2018 implementar
-//            Intent i = new Intent(v.getContext(), ConstanciaFumiFormularioActivity.class);
-            Intent i = new Intent(v.getContext(), MainActivity.class);
+            Intent i = new Intent(v.getContext(), ConstanciaFumiFormularioActivity.class);
             i.putExtra("constanciaFumiID_bd", constanciaFumiID);
             v.getContext().startActivity(i);
         }
