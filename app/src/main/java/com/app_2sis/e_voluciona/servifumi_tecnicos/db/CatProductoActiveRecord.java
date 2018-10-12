@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatProducto;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ProductoBeanAdapter;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -161,5 +162,22 @@ public class CatProductoActiveRecord extends MyActiveRecord {
             }
         }
         return 0;
+    }
+
+    /**
+     * Listado que requiere el recyclerview de las productos trabajadas, viene con informacion default para un nuevo registro
+     * @return
+     */
+    public List<ProductoBeanAdapter> getProductoBeanAdapter() {
+        List<ProductoBeanAdapter> productoBAList = new ArrayList<>();
+        List<CatProducto> catProductoList = getCatProductos();
+
+        for (CatProducto producto : catProductoList) {
+            productoBAList.add(new ProductoBeanAdapter(
+                    producto.getNombre(),
+                    producto.getCat_productos_id()
+            ));
+        }
+        return productoBAList;
     }
 }

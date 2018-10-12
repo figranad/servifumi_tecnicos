@@ -341,7 +341,7 @@ public class ConstanciaPlata {
     }
 
     public String getTip_material_observacion() {
-        return tip_material_observacion;
+        return tip_material_observacion == null ? "" : tip_material_observacion;
     }
 
     public void setTip_material_observacion(String tip_material_observacion) {

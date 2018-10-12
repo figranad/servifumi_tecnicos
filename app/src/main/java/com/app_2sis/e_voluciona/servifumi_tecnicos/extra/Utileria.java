@@ -80,21 +80,6 @@ public class Utileria {
         return h.toString();
     }
 
-//    public static ArrayAdapter<String> getAdapterSpinnerVacio(Context context) {
-//        return getAdapterSpinner(context, new String[]{Constant.PROMPT});
-//    }
-
-    public static String[] getFecuencia() {
-        return new String[]{
-                Constant.PROMPT,
-                Constant.FRECUENCIA_MENSUAL_VALUE,
-                Constant.FRECUENCIA_BIMESTRAL_VALUE,
-                Constant.FRECUENCIA_TRIMESTRAL_VALUE,
-                Constant.FRECUENCIA_SEMESTRAL_VALUE,
-                Constant.FRECUENCIA_ANUAL_VALUE
-        };
-    }
-
     public static int getPositionSpinner(String data[], String index) {
         int position = 0;
         for (int i = 0; i < data.length; i++) {
@@ -129,6 +114,17 @@ public class Utileria {
 
     public static String getFechaYHora() {
         return (DateFormat.format("yyyy-MM-dd HH:mm:ss", new java.util.Date()).toString());
+    }
+
+    public static String[] getFecuencia() {
+        return new String[]{
+                Constant.PROMPT,
+                Constant.FRECUENCIA_MENSUAL_VALUE,
+                Constant.FRECUENCIA_BIMESTRAL_VALUE,
+                Constant.FRECUENCIA_TRIMESTRAL_VALUE,
+                Constant.FRECUENCIA_SEMESTRAL_VALUE,
+                Constant.FRECUENCIA_ANUAL_VALUE
+        };
     }
 
     public static String getFrecuenciaID(String value) {
@@ -170,6 +166,56 @@ public class Utileria {
             nombre = Constant.FRECUENCIA_ANUAL_VALUE;
         }
         return nombre;
+    }
+
+    public static String[] getTipoServicio() {
+        return new String[]{
+                Constant.PROMPT,
+                Constant.TIPO_SERVICIO_GENERAL_VALUE,
+                Constant.TIPO_SERVICIO_CORRECTIVO_VALUE,
+                Constant.TIPO_SERVICIO_PREVENTIVO_VALUE,
+                Constant.TIPO_SERVICIO_SUPERVISION_VALUE,
+                Constant.TIPO_SERVICIO_DES_PATOGENA_VALUE,
+                Constant.TIPO_SERVICIO_OTRO_VALUE
+        };
+    }
+
+    public static String getTipoServicioID(String value) {
+        switch (value) {
+            case Constant.TIPO_SERVICIO_GENERAL_VALUE:
+                return Constant.TIPO_SERVICIO_GENERAL;
+            case Constant.TIPO_SERVICIO_CORRECTIVO_VALUE:
+                return Constant.TIPO_SERVICIO_CORRECTIVO;
+            case Constant.TIPO_SERVICIO_PREVENTIVO_VALUE:
+                return Constant.TIPO_SERVICIO_PREVENTIVO;
+            case Constant.TIPO_SERVICIO_SUPERVISION_VALUE:
+                return Constant.TIPO_SERVICIO_SUPERVISION;
+            case Constant.TIPO_SERVICIO_DES_PATOGENA_VALUE:
+                return Constant.TIPO_SERVICIO_DES_PATOGENA;
+            case Constant.TIPO_SERVICIO_OTRO_VALUE:
+                return Constant.TIPO_SERVICIO_OTRO;
+            default:
+                return "";
+        }
+    }
+
+    public static String getTipoServicioNombre(String tipoServicioID) {
+        switch (tipoServicioID) {
+            case Constant.TIPO_SERVICIO_GENERAL:
+                return Constant.TIPO_SERVICIO_GENERAL_VALUE;
+            case Constant.TIPO_SERVICIO_CORRECTIVO:
+                return Constant.TIPO_SERVICIO_CORRECTIVO_VALUE;
+            case Constant.TIPO_SERVICIO_PREVENTIVO:
+                return Constant.TIPO_SERVICIO_PREVENTIVO_VALUE;
+            case Constant.TIPO_SERVICIO_SUPERVISION:
+                return Constant.TIPO_SERVICIO_SUPERVISION_VALUE;
+            case Constant.TIPO_SERVICIO_DES_PATOGENA:
+                return Constant.TIPO_SERVICIO_DES_PATOGENA_VALUE;
+            case Constant.TIPO_SERVICIO_OTRO:
+                return Constant.TIPO_SERVICIO_OTRO_VALUE;
+            default:
+                return "";
+        }
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
@@ -53,6 +54,13 @@ public class PlagaAdapter extends RecyclerView.Adapter<PlagaAdapter.PlagaHolder>
         holder.setChecked(currentPlaga.isCheck());
         holder.setDescripcion(currentPlaga.getText());
         holder.setPlagaID(currentPlaga.getPlagaID());
+
+        holder.chkIsCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                currentPlaga.setCheck(isChecked);
+            }
+        });
 
         if (comportamientoAdapter == Constant.COMPORTAMIENTO_ACTIVITY_VIEW) {
             holder.chkIsCheck.setEnabled(false);

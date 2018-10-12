@@ -667,8 +667,6 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
             }
         });
         dialogFirma.show();
-
-
     }
 
     public class Signature extends View {

@@ -8,7 +8,7 @@
     tools:context=".activity.ConstanciaFumiFormularioActivity"
     tools:showIn="@layout/activity_constancia_fumi_formulario">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
@@ -151,8 +151,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp" />
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_constancia_fumi_form_tipo_servicio_otro"
@@ -251,13 +251,14 @@
                 android:id="@+id/tv_constancia_fumi_form_plagas_error"
                 style="@style/EtiquetaSpinner"
                 android:textColor="@color/colorNegro"
-                android:visibility="gone"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_constancia_fumi_form_plagas"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="200dp"
+                android:scrollbars="vertical" />
 
             <TextView
                 android:id="@+id/tv_constancia_fumi_form_productos"
@@ -269,13 +270,14 @@
                 android:id="@+id/tv_constancia_fumi_form_productos_error"
                 style="@style/EtiquetaSpinner"
                 android:textColor="@color/colorNegro"
-                android:visibility="gone"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_constancia_fumi_form_productos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="200dp"
+                android:scrollbars="vertical" />
 
             <!--TODO implementar area para los vehiculos, tipo MiPaguito-->
 
@@ -309,8 +311,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp" />
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_constancia_fumi_form_dinero_recibido"
@@ -353,6 +355,6 @@
                     android:contentDescription="@string/firma" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
-    
+    </android.support.v4.widget.NestedScrollView>
+
 </android.support.constraint.ConstraintLayout>

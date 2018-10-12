@@ -1,7 +1,17 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.model;
 
+import android.content.Context;
+
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatPlagaActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatProductoActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiPlagasActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiProductosActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.PlagaBeanAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ProductoBeanAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
+
+import java.util.List;
 
 public class ConstanciaFumi {
     public static final String ID_WS = "id";
@@ -511,5 +521,54 @@ public class ConstanciaFumi {
         setContacto(getContacto().toUpperCase());
         setTipo_servicio_otro(getTipo_servicio_otro().toUpperCase());
         setObservaciones(getObservaciones().toUpperCase());
+    }
+
+    /**
+     * Entrega la relación de las plagas que se trabajaron en esta constancia
+     * @param context
+     * @return BeanAdapter requerido por el RecyclerView para seleccionar plagas trabajadas en la constancia
+     */
+    public List<PlagaBeanAdapter> getPlagaBeanAdapter(Context context) {
+        ConstanciaFumiPlagasActiveRecord constanciaFumiPlagasActiveRecord = new ConstanciaFumiPlagasActiveRecord(context);
+        CatPlagaActiveRecord plagaActiveRecord = new CatPlagaActiveRecord(context);
+
+        List<PlagaBeanAdapter> plagaBeanAdapterList = plagaActiveRecord.getPlagaBeanAdapter();
+        List<ConstanciaFumiPlagas> constanciaFumiPlagasList = constanciaFumiPlagasActiveRecord
+                .getConstanciaFumiPlagas(ConstanciaFumiPlagas.CONSTANCIA_FUMI_ID_WS, id + "");
+
+        for (ConstanciaFumiPlagas constanciaFumiPlaga : constanciaFumiPlagasList) {
+            for (PlagaBeanAdapter plagaBeanAdapter : plagaBeanAdapterList) {
+                if (constanciaFumiPlaga.getCat_plaga_id().equals(plagaBeanAdapter.getPlagaID())) {
+                    plagaBeanAdapter.setCheck(true);
+                    break;
+                }
+            }
+        }
+        return plagaBeanAdapterList;
+    }
+
+    /**
+     * Entrega la relación de los productos y cantidades que se trabajaron en esta constancia
+     * @param context
+     * @return BeanAdapter requerido por el RecyclerView para seleccionar productos trabajados en la constancia
+     */
+    public List<ProductoBeanAdapter> getProductoBeanAdapter(Context context) {
+        ConstanciaFumiProductosActiveRecord constanciaFumiProductosActiveRecord = new ConstanciaFumiProductosActiveRecord(context);
+        CatProductoActiveRecord productoActiveRecord = new CatProductoActiveRecord(context);
+
+        List<ProductoBeanAdapter> productoBeanAdapterList = productoActiveRecord.getProductoBeanAdapter();
+        List<ConstanciaFumiProductos> constanciaFumiProductosList = constanciaFumiProductosActiveRecord
+                .getConstanciaFumiProductos(ConstanciaFumiProductos.CONSTANCIA_FUMI_ID_WS, id + "");
+
+        for (ConstanciaFumiProductos constanciaFumiProducto : constanciaFumiProductosList) {
+            for (ProductoBeanAdapter productoBeanAdapter : productoBeanAdapterList) {
+                if (constanciaFumiProducto.getCat_producto_id().equals(productoBeanAdapter.getProductoID())) {
+                    productoBeanAdapter.setCheck(true);
+                    productoBeanAdapter.setCantidad(constanciaFumiProducto.getCantidad());
+                    break;
+                }
+            }
+        }
+        return productoBeanAdapterList;
     }
 }

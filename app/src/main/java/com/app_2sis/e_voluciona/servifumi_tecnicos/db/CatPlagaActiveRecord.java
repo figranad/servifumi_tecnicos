@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatPlaga;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.PlagaBeanAdapter;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -160,5 +161,22 @@ public class CatPlagaActiveRecord extends MyActiveRecord {
             }
         }
         return 0;
+    }
+
+    /**
+     * Listado que requiere el recyclerview de las plagas trabajadas, viene con informacion default para un nuevo registro
+     * @return
+     */
+    public List<PlagaBeanAdapter> getPlagaBeanAdapter() {
+        List<PlagaBeanAdapter> plagaBAList = new ArrayList<>();
+        List<CatPlaga> catPlagaList = getCatPlagas();
+
+        for (CatPlaga plaga : catPlagaList) {
+            plagaBAList.add(new PlagaBeanAdapter(
+                    plaga.getNombre(),
+                    plaga.getCat_plaga_id()
+            ));
+        }
+        return plagaBAList;
     }
 }

@@ -16,6 +16,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -48,10 +53,12 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiActiveRecord
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiPlagasActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiProductosActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiVehiculosActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.MetodoPagoActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ProgramacionActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.UsuarioActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.MisPreferencias;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlata;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
@@ -71,14 +78,14 @@ import java.util.List;
 public class ConstanciaFumiFormularioActivity extends AppCompatActivity implements View.OnClickListener {
     private FloatingActionButton fabGuardar;
     private TextInputLayout tilFecha, tilCliente, tilContacto, tilHoraEntrada, tilHoraSalida,
-    tilTipoServOtro, tilObservaciones, tilDineroRecibido;
+            tilTipoServOtro, tilObservaciones, tilDineroRecibido;
     private EditText etFecha, etCliente, etContacto, etHoraEntrada, etHoraSalida, etTipoServOtro,
-    etObservaciones, etDineroRecibido;
+            etObservaciones, etDineroRecibido;
     private Button btnFecha, btnHoraEntrada, btnHoraSalida;
     private TextView tvAreas, tvTipoServ, tvAplicacion, tvColocacion, tvPlagas, tvPlagasError,
-    tvProductos, tvProductosError, tvModoPago, tvFirma;
+            tvProductos, tvProductosError, tvModoPago, tvFirma, tvErrorSpTipoServ;
     private CheckBox chkAreaInterior, chkAreaExterior, chkAreaVehiculo, chkAspersion, chkMicroniz,
-    chkTermoneb, chkInyeccion, chkCeboRoden, chkCeboGel, chkTrampas, chkLiquidado;
+            chkTermoneb, chkInyeccion, chkCeboRoden, chkCeboGel, chkTrampas, chkLiquidado;
     private Spinner spTipoServ, spModoPago;
     private ImageButton btnFirma;
     private ImageView ivFirma;
@@ -89,7 +96,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private List<PlagaBeanAdapter> plagaBeanAdapterList;
     private ProductoAdapter productoAdapter;
     private List<ProductoBeanAdapter> productoBeanAdapterList;
-    
+
     private String programacionID_bd; //Si es view no lo envia
     private String constanciaFumiID_bd; //Si es new no lo envia
 
@@ -102,6 +109,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private CatPlagaActiveRecord catPlagaActiveRecord;
     private CatProductoActiveRecord catProductoActiveRecord;
     private CatTipoInstalacionActiveRecord catTipoInstalacionActiveRecord;
+    private MetodoPagoActiveRecord metodoPagoActiveRecord;
     private ConstanciaFumiPlagasActiveRecord constanciaFumiPlagasActiveRecord;
     private ConstanciaFumiProductosActiveRecord constanciaFumiProductosActiveRecord;
     private ConstanciaFumiVehiculosActiveRecord constanciaFumiVehiculosActiveRecord;
@@ -214,27 +222,27 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         programacionActiveRecord = new ProgramacionActiveRecord(this);
         constanciaFumiActiveRecord = new ConstanciaFumiActiveRecord(this);
         catTipoInstalacionActiveRecord = new CatTipoInstalacionActiveRecord(this);
+        metodoPagoActiveRecord = new MetodoPagoActiveRecord(this);
         catPlagaActiveRecord = new CatPlagaActiveRecord(this);
         catProductoActiveRecord = new CatProductoActiveRecord(this);
         constanciaFumiPlagasActiveRecord = new ConstanciaFumiPlagasActiveRecord(this);
         constanciaFumiProductosActiveRecord = new ConstanciaFumiProductosActiveRecord(this);
+        constanciaFumiVehiculosActiveRecord = new ConstanciaFumiVehiculosActiveRecord(this);
         context = getApplicationContext();
         programacion = programacionActiveRecord.getProgramacion(Programacion.ID_WS, programacionID_bd);
         if (hayInfoCatalogos()) {
             setFechayHoras();
+            iniSpinners();
             iniRecyclerViews();
+
             if (!catPlagaActiveRecord.isEmpty())
                 cargarPlagas();
             if (!catProductoActiveRecord.isEmpty())
                 cargarProductos();
-
             if (programacion != null)
                 etCliente.setText(programacion.getTitulo());
 
             COMPORTAMIENTO_THIS_ACTIVITY = determinarNewUpdateView();
-            tilTipoServOtro.setVisibility(View.GONE);
-            // TODO: 11/10/2018 implementar spinner que muestre el tilTipoServOtro solo cuando la seleccion es "otro" 
-//            spTipoServ
 
             switch (COMPORTAMIENTO_THIS_ACTIVITY) {
                 case Constant.COMPORTAMIENTO_ACTIVITY_NEW:
@@ -298,7 +306,30 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         return !(programacionActiveRecord.isEmpty()
                 || catPlagaActiveRecord.isEmpty()
                 || catProductoActiveRecord.isEmpty()
-                || catTipoInstalacionActiveRecord.isEmpty());
+                || catTipoInstalacionActiveRecord.isEmpty()
+                || metodoPagoActiveRecord.isEmpty());
+    }
+
+    private void iniSpinners() {
+        spTipoServ.setAdapter(new ArrayAdapter<>(
+                getApplicationContext(), R.layout.item_spinner, Utileria.getTipoServicio()));
+        spTipoServ.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                if (spTipoServ.getSelectedItem().toString().equals(Constant.TIPO_SERVICIO_OTRO_VALUE))
+                    tilTipoServOtro.setVisibility(View.VISIBLE);
+                else
+                    tilTipoServOtro.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        spModoPago.setAdapter(new ArrayAdapter<>(
+                getApplicationContext(), R.layout.item_spinner, metodoPagoActiveRecord.getMetodoPagosNombres()));
     }
 
     private void iniRecyclerViews() {
@@ -393,17 +424,218 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             cargarProductos();
     }
 
+    /**
+     * Crea la interfaz para las plagas y la inicializa con datos si ya existía la constancia
+     */
     private void cargarPlagas() {
-        // TODO: 11/10/2018 implementar
+        //Si el comportamiento es de View; en el adapter se bloquean los componentes de plagas
+        plagaAdapter.setComportamientoAdapter(COMPORTAMIENTO_THIS_ACTIVITY);
+
+
+        if (COMPORTAMIENTO_THIS_ACTIVITY != Constant.COMPORTAMIENTO_ACTIVITY_NEW) {
+            //Cargar la informacion de la constancia para que se muestre en los componentes
+            plagaBeanAdapterList = constanciaFumi.getPlagaBeanAdapter(context);
+        } else
+            plagaBeanAdapterList = catPlagaActiveRecord.getPlagaBeanAdapter();
+
+        plagaAdapter.deleteAll();
+        if (plagaBeanAdapterList != null && !plagaBeanAdapterList.isEmpty()) {
+            plagaAdapter.addAll(plagaBeanAdapterList);
+        }
     }
 
+    /**
+     * Crea la interfaz para los productos y la inicializa con datos si ya existía la constancia
+     */
     private void cargarProductos() {
-        // TODO: 11/10/2018 implementar
+        //Si el comportamiento es de View; en el adapter se bloquean los componentes de productos
+        productoAdapter.setComportamientoAdapter(COMPORTAMIENTO_THIS_ACTIVITY);
+
+
+        if (COMPORTAMIENTO_THIS_ACTIVITY != Constant.COMPORTAMIENTO_ACTIVITY_NEW) {
+            //Cargar la informacion de la constancia para que se muestre en los componentes
+            productoBeanAdapterList = constanciaFumi.getProductoBeanAdapter(context);
+        } else
+            productoBeanAdapterList = catProductoActiveRecord.getProductoBeanAdapter();
+
+        productoAdapter.deleteAll();
+        if (productoBeanAdapterList != null && !productoBeanAdapterList.isEmpty()) {
+            productoAdapter.addAll(productoBeanAdapterList);
+        }
     }
 
     @Override
-    public void onClick(View view) {
-        // TODO: 11/10/2018 implementar
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab_save:
+                saveOrUpdate();
+                break;
+            case R.id.btn_constancia_fumi_form_fecha:
+                dpdFecha.show();
+                break;
+            case R.id.btn_constancia_fumi_form_hora_entrada:
+                tpdHoraEntrada.show();
+                break;
+            case R.id.btn_constancia_fumi_form_hora_salida:
+                tpdHoraSalida.show();
+                break;
+            case R.id.btn_constancia_fumi_form_firma:
+                firmar();
+                break;
+        }
+    }
+
+    private void saveOrUpdate() {
+        // TODO: 12/10/2018 implementar
+        if (validar()) {
+
+        }
+    }
+
+    private boolean validar() {
+        clearErrors();
+        boolean exito = true;
+
+        if (etFecha.getText().toString().isEmpty()) {
+            tilFecha.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
+            exito = false;
+        }
+
+        if (etHoraEntrada.getText().toString().isEmpty()) {
+            tilHoraEntrada.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
+            exito = false;
+        }
+        if (etHoraSalida.getText().toString().isEmpty()) {
+            tilHoraSalida.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
+            exito = false;
+        }
+        if (spTipoServ.getSelectedItem().toString().equals(Constant.PROMPT)) {
+            exito = false;
+            tvErrorSpTipoServ = (TextView) spTipoServ.getSelectedView();
+            tvErrorSpTipoServ.setError("anything here, just to add the icon");
+            tvErrorSpTipoServ.setTextColor(Color.RED);//just to highlight that this is an error
+            tvErrorSpTipoServ.setText(Constant.MSJ_CAMPO_OBLIGATORIO);
+        }
+        if (spTipoServ.getSelectedItem().toString().equals(Constant.TIPO_SERVICIO_OTRO_VALUE)) {
+            if (etTipoServOtro.getText().toString().trim().isEmpty()) {
+                tilTipoServOtro.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
+                exito = false;
+            }
+        }
+        if (firmaPath == null) {
+            tvFirma.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
+            exito = false;
+        }
+
+        int cantidad;
+        boolean haySeleccionado = false;
+        //<editor-fold desc="Validacion RV de plagas">
+        for (PlagaBeanAdapter plagaTrabajado : plagaBeanAdapterList) {
+            if (plagaTrabajado.isCheck()) { //Si se marca como que se trabajo el plaga
+                haySeleccionado = true;
+                break;
+            }
+        }
+        if (!haySeleccionado) {
+            tvPlagas.setError(Constant.MSJ_MINIMO_1);
+            tvPlagasError.setText(Constant.MSJ_MINIMO_1);
+            tvPlagasError.setVisibility(View.VISIBLE);
+            exito = false;
+        }
+        //</editor-fold>
+
+        //<editor-fold desc="Validacion RV de productos">
+        haySeleccionado = false;
+        for (ProductoBeanAdapter productoTrabajado : productoBeanAdapterList) {
+            if (productoTrabajado.isCheck()) { //Si se marca como que se trabajo el producto
+                haySeleccionado = true;
+                try {
+                    cantidad = Integer.parseInt(productoTrabajado.getCantidad());
+                    if (cantidad < 1) {  //Si se ingresó menos de 0 en un producto seleccionado
+                        tvProductos.setError(Constant.MSJ_NO_MENOR_1);
+                        tvProductosError.setText(Constant.MSJ_NO_MENOR_1);
+                        tvProductosError.setVisibility(View.VISIBLE);
+                        exito = false;
+                        break;
+                    }
+                } catch (NumberFormatException ex) { //Si se ingresa texto en el campo de cantidad
+                    tvProductos.setError(Constant.MSJ_CAMPO_NUMERICO);
+                    tvProductosError.setText(Constant.MSJ_CAMPO_NUMERICO);
+                    tvProductosError.setVisibility(View.VISIBLE);
+                    exito = false;
+                    break;
+                }
+            }
+        }
+        if (!haySeleccionado) {
+            tvProductos.setError(Constant.MSJ_MINIMO_1);
+            tvProductosError.setText(Constant.MSJ_MINIMO_1);
+            tvProductosError.setVisibility(View.VISIBLE);
+            exito = false;
+        }
+        //</editor-fold>
+
+        if (!exito)
+            Snackbar.make(findViewById(android.R.id.content), Constant.MSJ_VERIFICAR_ERRORES, Snackbar.LENGTH_SHORT).show();
+        return exito;
+    }
+
+    private void clearErrors() {
+        tilFecha.setError(null);
+        tilHoraEntrada.setError(null);
+        tilHoraSalida.setError(null);
+        tilTipoServOtro.setError(null);
+        tvPlagas.setError(null);
+        tvPlagasError.setVisibility(View.GONE);
+        tvProductos.setError(null);
+        tvProductosError.setVisibility(View.GONE);
+        tvFirma.setError(null);
+    }
+
+    private void firmar() {
+        dialogFirma = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        // Removing the features of Normal Dialogs
+        dialogFirma.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogFirma.setContentView(R.layout.dialog_firma);
+        dialogFirma.setCancelable(true);
+        dialogAction();
+    }
+
+    private void dialogAction() {
+        mContent = (LinearLayout) dialogFirma.findViewById(R.id.linearLayout_sf);
+        mSignature = new Signature(getApplicationContext(), null);
+        mSignature.setBackgroundColor(Color.WHITE);
+        // Dynamically generating Layout through java code
+        mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mClear = (Button) dialogFirma.findViewById(R.id.clear);
+        mGetSign = (Button) dialogFirma.findViewById(R.id.getsign);
+        mGetSign.setEnabled(false);
+        mCancel = (Button) dialogFirma.findViewById(R.id.cancel);
+        view = mContent;
+
+        mClear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.v("tag", "Panel Cleared");
+                mSignature.clear();
+                mGetSign.setEnabled(false);
+            }
+        });
+        mGetSign.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Log.v("tag", "Panel Saved");
+                view.setDrawingCacheEnabled(true);
+                mSignature.save(view);
+                dialogFirma.dismiss();
+            }
+        });
+        mCancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.v("tag", "Panel Cancelled");
+                dialogFirma.dismiss();
+            }
+        });
+        dialogFirma.show();
     }
 
     public class Signature extends View {

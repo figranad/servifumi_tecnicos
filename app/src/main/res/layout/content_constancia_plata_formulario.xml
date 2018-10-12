@@ -8,7 +8,7 @@
     tools:context=".activity.ConstanciaPlataFormularioActivity"
     tools:showIn="@layout/activity_constancia_plata_formulario">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
@@ -238,7 +238,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_constancia_plata_form_tanques"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="200dp"
+                android:scrollbars="vertical" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_observaciones"
@@ -301,5 +302,5 @@
                     android:contentDescription="@string/firma" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

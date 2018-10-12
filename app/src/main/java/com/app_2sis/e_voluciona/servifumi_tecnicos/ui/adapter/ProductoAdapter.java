@@ -71,7 +71,6 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         });
 
         holder.etCantidad.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
                 currentProducto.setCantidad(arg0.toString());
