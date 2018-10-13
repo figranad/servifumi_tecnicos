@@ -279,7 +279,96 @@
                 android:layout_height="200dp"
                 android:scrollbars="vertical" />
 
-            <!--TODO implementar area para los vehiculos, tipo MiPaguito-->
+            <LinearLayout
+                android:id="@+id/ll_constancia_fumi_form_vehiculos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_constancia_fumi_form_vehiculos"
+                    style="@style/EtiquetaSpinner"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/constancia_sf_vehiculos" />
+
+                <TextView
+                    android:id="@+id/tv_constancia_fumi_form_vehiculos_error"
+                    style="@style/EtiquetaSpinner"
+                    android:textColor="@color/colorNegro"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_constancia_fumi_form_marca"
+                    style="@style/TIL">
+
+                    <EditText
+                        android:id="@+id/et_constancia_fumi_form_marca"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/hint_marca"
+                        android:inputType="textCapSentences" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_constancia_fumi_form_matricula"
+                    style="@style/TIL">
+
+                    <EditText
+                        android:id="@+id/et_constancia_fumi_form_matricula"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/hint_matricula"
+                        android:inputType="textCapCharacters" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_constancia_fumi_form_num_economico"
+                    style="@style/TIL">
+
+                    <EditText
+                        android:id="@+id/et_constancia_fumi_form_num_economico"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/hint_num_economico"
+                        android:inputType="textCapCharacters" />
+                </android.support.design.widget.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_constancia_fumi_form_guardar_vehiculo"
+                        style="@style/ButtonMaterial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="@string/guardar" />
+
+                    <Button
+                        android:id="@+id/btn_constancia_fumi_form_limpiar_vehiculo"
+                        style="@style/ButtonMaterial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="@string/limpiar" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_constancia_fumi_form_list_vehiculos"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/colorDisable"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_constancia_fumi_form_observaciones"

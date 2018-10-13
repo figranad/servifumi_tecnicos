@@ -113,4 +113,10 @@
     <string name="cebo_gel">Cebo gel</string>
     <string name="trampas">Trampas</string>
     <string name="modo_pago">FORMA DE PAGO</string>
+    <string name="constancia_sf_vehiculos">VEHICULOS TRABAJADOS*</string>
+    <string name="hint_marca">MARCA*</string>
+    <string name="hint_matricula">MATRICULA*</string>
+    <string name="hint_num_economico">NUM ECONOMICO</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="limpiar">LIMPIAR</string>
 </resources>
