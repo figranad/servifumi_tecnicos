@@ -180,6 +180,18 @@ public class Utileria {
         };
     }
 
+    public static String[] getTipoServicioID() {
+        return new String[]{
+                Constant.PROMPT,
+                Constant.TIPO_SERVICIO_GENERAL,
+                Constant.TIPO_SERVICIO_CORRECTIVO,
+                Constant.TIPO_SERVICIO_PREVENTIVO,
+                Constant.TIPO_SERVICIO_SUPERVISION,
+                Constant.TIPO_SERVICIO_DES_PATOGENA,
+                Constant.TIPO_SERVICIO_OTRO
+        };
+    }
+
     public static String getTipoServicioID(String value) {
         switch (value) {
             case Constant.TIPO_SERVICIO_GENERAL_VALUE:

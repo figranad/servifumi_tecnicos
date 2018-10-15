@@ -54,6 +54,7 @@ public class PlagaAdapter extends RecyclerView.Adapter<PlagaAdapter.PlagaHolder>
         holder.setChecked(currentPlaga.isCheck());
         holder.setDescripcion(currentPlaga.getText());
         holder.setPlagaID(currentPlaga.getPlagaID());
+        holder.setIsRecyclable(false);  //Para que no se limpien las selecciones
 
         holder.chkIsCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

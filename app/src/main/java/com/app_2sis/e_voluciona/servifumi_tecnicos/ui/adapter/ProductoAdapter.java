@@ -58,6 +58,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         holder.setDescripcion(currentProducto.getText());
         holder.setCantidad(currentProducto.getCantidad());
         holder.setProductoID(currentProducto.getProductoID());
+        holder.setIsRecyclable(false);  //Para que no se limpien las selecciones
 
         holder.chkIsCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

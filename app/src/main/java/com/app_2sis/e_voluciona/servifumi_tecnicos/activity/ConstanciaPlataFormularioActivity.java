@@ -373,19 +373,22 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setIcon(R.mipmap.ic_advertencia)
-                .setTitle("Abandonar Constancia")
-                .setMessage("Al salir se perderán los datos sin guardar" +
-                        "\n\n¿Salir?")
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        exit();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
+        if (COMPORTAMIENTO_THIS_ACTIVITY != Constant.COMPORTAMIENTO_ACTIVITY_VIEW) {
+            new AlertDialog.Builder(this)
+                    .setIcon(R.mipmap.ic_advertencia)
+                    .setTitle("Abandonar Constancia")
+                    .setMessage("Al salir se perderán los datos sin guardar" +
+                            "\n\n¿Salir?")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            exit();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        } else
+            exit();
     }
 
     private void exit() {
@@ -459,7 +462,6 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
      * Si es nueva marcara la programacion como realizada
      */
     private void saveOrUpdate() {
-        //Tambien guardará la informacion de los tanques seleccionados
         //Cuando el servidor guarde la constancia actualizará los datos de la programacion con lo de la constancia
         if (validar()) {
             Usuario usuario = usuarioActiveRecord.getUsuario(Usuario.USER_ID_WS, misPreferencias.getIdUsuarioLogueado());

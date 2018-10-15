@@ -60,7 +60,11 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.MisPreferencias;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Usuario;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.PlagaBeanAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ProductoBeanAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.VehiculoBeanAdapter;
@@ -424,8 +428,93 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
      * @param lock determina si bloquea y evita guardar o no la informacion
      */
     private void loadInfo(boolean lock) {
-        // TODO: 11/10/2018 implementar
-        // TODO: 13/10/2018 implemenar los vehiculos como las referencias de mipaguito
+        if (constanciaFumi != null) {
+            etFecha.setText(constanciaFumi.getFecha());
+            etCliente.setText(constanciaFumi.getTitulo_programacion());
+            etContacto.setText(constanciaFumi.getContacto());
+            etHoraEntrada.setText(constanciaFumi.getHora_entrada());
+            etHoraSalida.setText(constanciaFumi.getHora_salida());
+
+            chkAreaInterior.setCheckedImmediately(constanciaFumi.getAreas_tratadas_interior().equals(Constant.SI));
+            chkAreaExterior.setCheckedImmediately(constanciaFumi.getAreas_tratadas_exterior().equals(Constant.SI));
+            chkAreaVehiculo.setCheckedImmediately(constanciaFumi.getAreas_tratadas_vehiculo().equals(Constant.SI));
+
+            spTipoServ.setSelection(Utileria.getPositionSpinner(
+                    Utileria.getTipoServicioID(), constanciaFumi.getTipo_servicio()));
+            etTipoServOtro.setText(constanciaFumi.getTipo_servicio_otro());
+
+            chkAspersion.setCheckedImmediately(constanciaFumi.getTip_aplica_aspersion().equals(Constant.SI));
+            chkMicroniz.setCheckedImmediately(constanciaFumi.getTip_aplica_micronizacion().equals(Constant.SI));
+            chkTermoneb.setCheckedImmediately(constanciaFumi.getTip_aplica_termoneb().equals(Constant.SI));
+            chkInyeccion.setCheckedImmediately(constanciaFumi.getTip_aplica_inyeccion().equals(Constant.SI));
+            chkCeboRoden.setCheckedImmediately(constanciaFumi.getTip_aplica_cebo_rodent().equals(Constant.SI));
+            chkCeboGel.setCheckedImmediately(constanciaFumi.getTip_aplica_cebo_gel().equals(Constant.SI));
+            chkTrampas.setCheckedImmediately(constanciaFumi.getTip_aplica_trampas().equals(Constant.SI));
+
+            //<editor-fold desc="Cargar Vehiculos en UI">
+            List<ConstanciaFumiVehiculos> constanciaFumiVehiculos = constanciaFumiVehiculosActiveRecord
+                    .getConstanciaFumiVehiculos(ConstanciaFumiVehiculos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID_bd);
+            VehiculoBeanAdapter vehiculoBeanAdapter;
+
+            for (ConstanciaFumiVehiculos vehiculo : constanciaFumiVehiculos) {
+                vehiculoBeanAdapter = new VehiculoBeanAdapter(
+                        vehiculo.getMarca(),
+                        vehiculo.getMatricula(),
+                        vehiculo.getNum_economico()
+                );
+                String text = vehiculo.getMarca() + ": " + vehiculo.getMatricula();
+                vehiculoBeanAdapterList.add(vehiculoBeanAdapter);
+                vehiculosBean.add(text);
+                vehiculoAdapter.add(text);
+            }
+            //</editor-fold>
+
+            etObservaciones.setText(constanciaFumi.getObservaciones());
+            chkLiquidado.setCheckedImmediately(constanciaFumi.getServicio_liquidado().equals(Constant.SI));
+            spModoPago.setSelection(metodoPagoActiveRecord.getPositionInlista(
+                    constanciaFumi.getModo_pago_id()));
+            etDineroRecibido.setText(constanciaFumi.getDinero_recibido());
+            firmaPath = constanciaFumi.getFirma();
+            showFirmaEnImageView(firmaPath);
+        }
+        if (lock)
+            lockInfo();
+    }
+
+    /**
+     * Bloquea los componentes para que la info no se pueda modificar y evita guardar cambios
+     */
+    private void lockInfo() {
+        fabGuardar.hide();
+        btnFecha.setEnabled(false);
+        btnHoraEntrada.setEnabled(false);
+        btnHoraSalida.setEnabled(false);
+        btnFirma.setEnabled(false);
+        btnVehiculoGuardar.setEnabled(false);
+
+        etContacto.setEnabled(false);
+        chkAreaInterior.setEnabled(false);
+        chkAreaExterior.setEnabled(false);
+        chkAreaVehiculo.setEnabled(false);
+        spTipoServ.setEnabled(false);
+        etTipoServOtro.setEnabled(false);
+        chkAspersion.setEnabled(false);
+        chkMicroniz.setEnabled(false);
+        chkTermoneb.setEnabled(false);
+        chkInyeccion.setEnabled(false);
+        chkCeboRoden.setEnabled(false);
+        chkCeboGel.setEnabled(false);
+        chkTrampas.setEnabled(false);
+
+        etObservaciones.setEnabled(false);
+        chkLiquidado.setEnabled(false);
+        spModoPago.setEnabled(false);
+        etDineroRecibido.setEnabled(false);
+
+        vehiculoAdapter.hideDelete(true);
+        etVehiculoMarca.setEnabled(false);
+        etVehiculoMatricula.setEnabled(false);
+        etVehiculoNumEco.setEnabled(false);
     }
 
     @Override
@@ -440,19 +529,22 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setIcon(R.mipmap.ic_advertencia)
-                .setTitle("Abandonar Constancia")
-                .setMessage("Al salir se perderán los datos sin guardar" +
-                        "\n\n¿Salir?")
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        exit();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
+        if (COMPORTAMIENTO_THIS_ACTIVITY != Constant.COMPORTAMIENTO_ACTIVITY_VIEW) {
+            new AlertDialog.Builder(this)
+                    .setIcon(R.mipmap.ic_advertencia)
+                    .setTitle("Abandonar Constancia")
+                    .setMessage("Al salir se perderán los datos sin guardar" +
+                            "\n\n¿Salir?")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            exit();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        } else
+            exit();
     }
 
     private void exit() {
@@ -580,9 +672,124 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     }
 
     private void saveOrUpdate() {
-        // TODO: 12/10/2018 implementar
         if (validar()) {
+            Usuario usuario = usuarioActiveRecord.getUsuario(Usuario.USER_ID_WS, misPreferencias.getIdUsuarioLogueado());
+            if (constanciaFumi == null)
+                constanciaFumi = new ConstanciaFumi();
 
+            constanciaFumi.setTecnico_id(usuario.getTecnico_id());
+            constanciaFumi.setFecha(etFecha.getText().toString().trim());
+            constanciaFumi.setHora_entrada(etHoraEntrada.getText().toString().trim());
+            constanciaFumi.setHora_salida(etHoraSalida.getText().toString().trim());
+            constanciaFumi.setContacto(etContacto.getText().toString().trim());
+
+            constanciaFumi.setAreas_tratadas_interior(
+                    chkAreaInterior.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setAreas_tratadas_exterior(
+                    chkAreaExterior.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setAreas_tratadas_vehiculo(
+                    chkAreaVehiculo.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setTip_aplica_aspersion(
+                    chkAspersion.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setTip_aplica_micronizacion(
+                    chkMicroniz.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setTip_aplica_termoneb(
+                    chkTermoneb.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setTip_aplica_inyeccion(
+                    chkInyeccion.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setTip_aplica_cebo_rodent(
+                    chkCeboRoden.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setTip_aplica_cebo_gel(
+                    chkCeboGel.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setTip_aplica_trampas(
+                    chkTrampas.isChecked() ? Constant.SI : Constant.NO);
+
+            constanciaFumi.setTipo_servicio(Utileria.getTipoServicioID(
+                    spTipoServ.getSelectedItem().toString()));
+            if (constanciaFumi.getTipo_servicio().equals(Constant.TIPO_SERVICIO_OTRO))
+                constanciaFumi.setTipo_servicio_otro(etTipoServOtro.getText().toString().trim());
+            else
+                constanciaFumi.setTipo_servicio_otro("");
+
+            constanciaFumi.setObservaciones(etObservaciones.getText().toString().trim());
+            constanciaFumi.setServicio_liquidado(
+                    chkLiquidado.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setModo_pago_id(metodoPagoActiveRecord.getIDInlista(
+                    spModoPago.getSelectedItem().toString()));
+            constanciaFumi.setDinero_recibido(etDineroRecibido.getText().toString().trim());
+            constanciaFumi.setFirma(firmaPath);
+            constanciaFumi.setSincronizado(Constant.NO);
+            constanciaFumi.setUsuario_id(usuario.getUsuarioId());
+
+            if (COMPORTAMIENTO_THIS_ACTIVITY == Constant.COMPORTAMIENTO_ACTIVITY_UPDATE) {   //Si es un update
+                constanciaFumi.upperCase();
+                constanciaFumiActiveRecord.update(constanciaFumi);
+                constanciaFumiActiveRecord.deleteTablasDependientes(constanciaFumiID_bd);//se volverán a crear abajo
+            } else {    //Si es nuevo
+                constanciaFumi.setClave_android(Utileria.generarClaveAndroid());
+                constanciaFumi.setCreated_at(Utileria.getFecha());
+                constanciaFumi.setCrt_time(Utileria.getFechaYHora());
+                constanciaFumi.setConstancia_fumi_id("");
+                if (programacion != null) {
+                    //Insertar campos de la programacion en la constancia
+                    constanciaFumi.setOrden_id(programacion.getOrden_id());
+                    constanciaFumi.setInspec_fumi_id(programacion.getInsp_fumi_id());
+                    constanciaFumi.setCliente_id(programacion.getCliente_id());
+                    constanciaFumi.setDomicilio_id(programacion.getDomicilio_id());
+                    constanciaFumi.setProgramacion_id(programacion.getProgramacion_id());
+                    constanciaFumi.setTitulo_programacion(programacion.getTitulo());
+                }
+                constanciaFumi.upperCase();
+                constanciaFumiActiveRecord.save(constanciaFumi);
+
+                if (programacion != null) {  //Actualiza que la programacion se realizó
+                    programacion.setRealizado(Constant.SI);
+                    programacionActiveRecord.update(programacion);
+                }
+            }
+            String constanciaFumiID = constanciaFumi.getId() + "";
+
+            //<editor-fold desc="ConstanciaFumiPlagas">
+            ConstanciaFumiPlagas constanciaFumiPlagas;
+            for (PlagaBeanAdapter plagaBeanAdapter : plagaBeanAdapterList) {
+                if (plagaBeanAdapter.isCheck()) {
+                    constanciaFumiPlagas = new ConstanciaFumiPlagas();
+                    constanciaFumiPlagas.setConstancia_fumi_id(constanciaFumiID);
+                    constanciaFumiPlagas.setCat_plaga_id(plagaBeanAdapter.getPlagaID());
+                    constanciaFumiPlagasActiveRecord.save(constanciaFumiPlagas);
+                }
+            }
+            //</editor-fold>
+
+            //<editor-fold desc="ConstanciaFumiProductos">
+            ConstanciaFumiProductos constanciaFumiProductos;
+            for (ProductoBeanAdapter productoBeanAdapter : productoBeanAdapterList) {
+                if (productoBeanAdapter.isCheck()) {
+                    constanciaFumiProductos = new ConstanciaFumiProductos();
+                    constanciaFumiProductos.setConstancia_fumi_id(constanciaFumiID);
+                    constanciaFumiProductos.setCat_producto_id(productoBeanAdapter.getProductoID());
+                    constanciaFumiProductos.setCantidad(productoBeanAdapter.getCantidad());
+                    constanciaFumiProductosActiveRecord.save(constanciaFumiProductos);
+                }
+            }
+            //</editor-fold>
+
+            //<editor-fold desc="ConstanciaFumiVehiculos">
+            if (chkAreaVehiculo.isChecked()) {
+                ConstanciaFumiVehiculos constanciaFumiVehiculos;
+                for (VehiculoBeanAdapter vehiculoBeanAdapter : vehiculoBeanAdapterList) {
+                    constanciaFumiVehiculos = new ConstanciaFumiVehiculos();
+                    constanciaFumiVehiculos.setConstancia_fumi_id(constanciaFumiID);
+                    constanciaFumiVehiculos.setMarca(vehiculoBeanAdapter.getMarca());
+                    constanciaFumiVehiculos.setMatricula(vehiculoBeanAdapter.getMatricula());
+                    constanciaFumiVehiculos.setNum_economico(vehiculoBeanAdapter.getNumEconomico());
+                    constanciaFumiVehiculosActiveRecord.save(constanciaFumiVehiculos);
+                }
+            }
+            //</editor-fold>
+
+            Toast.makeText(this, "Guardado Exitosamente", Toast.LENGTH_LONG).show();
+            exit();
         }
     }
 
