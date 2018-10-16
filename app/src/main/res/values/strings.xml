@@ -119,4 +119,6 @@
     <string name="hint_num_economico">NUM ECONOMICO</string>
     <string name="guardar">GUARDAR</string>
     <string name="limpiar">LIMPIAR</string>
+    <string name="title_activity_enviar">Enviar Datos</string>
+    <string name="enviar">ENVIAR TODO</string>
 </resources>

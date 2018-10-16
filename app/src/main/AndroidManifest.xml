@@ -126,6 +126,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaFumiActivity" />
         </activity>
+        <activity
+            android:name=".activity.EnviarActivity"
+            android:label="@string/title_activity_enviar"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

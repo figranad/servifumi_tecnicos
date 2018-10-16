@@ -19,4 +19,6 @@ public class ApiConstants {
     public static final String URL_GET_METODOS_PAGO = "/servifumi/web/index.php/ws/metodospago";
     public static final String URL_GET_CAT_PLAGAS = "/servifumi/web/index.php/ws/catplagas";
     public static final String URL_GET_TANQUES = "/servifumi/web/index.php/ws-tecnicos/get-tanques";
+    public static final String URL_CREATE_CONSTANCIA_PLATA = "/servifumi/web/index.php/ws-tecnicos/create-constancia-plata";
+    public static final String URL_CREATE_CONSTANCIA_FUMI = "/servifumi/web/index.php/ws-tecnicos/create-constancia-fumi";
 }

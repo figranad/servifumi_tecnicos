@@ -25,7 +25,7 @@
             android:icon="@drawable/ic_constancia_pp"
             android:title="@string/constancia_pp" />
         <item
-            android:id="@+id/nav_subida"
+            android:id="@+id/nav_enviar"
             android:icon="@drawable/ic_subida"
             android:title="@string/subir_informacion" />
     </group>

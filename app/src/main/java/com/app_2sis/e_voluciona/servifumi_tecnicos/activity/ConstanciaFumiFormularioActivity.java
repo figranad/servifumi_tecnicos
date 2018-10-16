@@ -92,10 +92,10 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private Button btnFecha, btnHoraEntrada, btnHoraSalida, btnVehiculoGuardar, btnVehiculoLimpiar;
     private TextView tvAreas, tvTipoServ, tvAplicacion, tvColocacion, tvPlagas, tvPlagasError,
             tvProductos, tvProductosError, tvModoPago, tvFirma, tvErrorSpTipoServ, tvVehiculos,
-            tvVehiculosError;
+            tvVehiculosError, tvTipoInstalacion, tvErrorSpTipoInstalacion;
     private CheckBox chkAreaInterior, chkAreaExterior, chkAreaVehiculo, chkAspersion, chkMicroniz,
             chkTermoneb, chkInyeccion, chkCeboRoden, chkCeboGel, chkTrampas, chkLiquidado;
-    private Spinner spTipoServ, spModoPago;
+    private Spinner spTipoServ, spModoPago, spTipoInstalacion; // TODO: 16/10/2018 implementar tipo instalacion como con servicio 
     private ImageButton btnFirma;
     private ImageView ivFirma;
     private LinearLayout llVehiculo;
@@ -203,6 +203,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
 
         tvAreas = findViewById(R.id.tv_constancia_fumi_form_areas);
         tvTipoServ = findViewById(R.id.tv_constancia_fumi_form_tipo_servicio);
+        tvTipoInstalacion = findViewById(R.id.tv_constancia_fumi_form_tipo_instalacion);
         tvAplicacion = findViewById(R.id.tv_constancia_fumi_form_aplicacion);
         tvColocacion = findViewById(R.id.tv_constancia_fumi_form_colocacion);
         tvPlagas = findViewById(R.id.tv_constancia_fumi_form_plagas);
@@ -228,6 +229,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
 
         spTipoServ = findViewById(R.id.sp_constancia_fumi_form_tipo_servicio);
         spModoPago = findViewById(R.id.sp_constancia_fumi_form_modo_pago);
+        spTipoInstalacion = findViewById(R.id.sp_constancia_fumi_form_tipo_instalacion);
 
         btnFirma = findViewById(R.id.btn_constancia_fumi_form_firma);
         btnFirma.setOnClickListener(this);
@@ -370,7 +372,12 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         });
 
         spModoPago.setAdapter(new ArrayAdapter<>(
-                getApplicationContext(), R.layout.item_spinner, metodoPagoActiveRecord.getMetodoPagosNombres()));
+                getApplicationContext(), R.layout.item_spinner, 
+                metodoPagoActiveRecord.getMetodoPagosNombres()));
+
+        spTipoInstalacion.setAdapter(new ArrayAdapter<>(
+                getApplicationContext(), R.layout.item_spinner, 
+                catTipoInstalacionActiveRecord.getCatTipoInstalacionsNombres()));
     }
 
     private void iniRecyclerViews() {
@@ -442,6 +449,8 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             spTipoServ.setSelection(Utileria.getPositionSpinner(
                     Utileria.getTipoServicioID(), constanciaFumi.getTipo_servicio()));
             etTipoServOtro.setText(constanciaFumi.getTipo_servicio_otro());
+            spTipoInstalacion.setSelection(catTipoInstalacionActiveRecord.getPositionInlista(
+                    constanciaFumi.getTipo_instalacion_id()));
 
             chkAspersion.setCheckedImmediately(constanciaFumi.getTip_aplica_aspersion().equals(Constant.SI));
             chkMicroniz.setCheckedImmediately(constanciaFumi.getTip_aplica_micronizacion().equals(Constant.SI));
@@ -497,6 +506,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         chkAreaExterior.setEnabled(false);
         chkAreaVehiculo.setEnabled(false);
         spTipoServ.setEnabled(false);
+        spTipoInstalacion.setEnabled(false);
         etTipoServOtro.setEnabled(false);
         chkAspersion.setEnabled(false);
         chkMicroniz.setEnabled(false);
@@ -704,6 +714,8 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             constanciaFumi.setTip_aplica_trampas(
                     chkTrampas.isChecked() ? Constant.SI : Constant.NO);
 
+            constanciaFumi.setTipo_instalacion_id(catTipoInstalacionActiveRecord.getIDInlista(
+                    spTipoInstalacion.getSelectedItem().toString()));
             constanciaFumi.setTipo_servicio(Utileria.getTipoServicioID(
                     spTipoServ.getSelectedItem().toString()));
             if (constanciaFumi.getTipo_servicio().equals(Constant.TIPO_SERVICIO_OTRO))
@@ -825,6 +837,13 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         if (etHoraSalida.getText().toString().isEmpty()) {
             tilHoraSalida.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
             exito = false;
+        }
+        if (spTipoInstalacion.getSelectedItem().toString().equals(Constant.PROMPT)) {
+            exito = false;
+            tvErrorSpTipoInstalacion = (TextView) spTipoInstalacion.getSelectedView();
+            tvErrorSpTipoInstalacion.setError("anything here, just to add the icon");
+            tvErrorSpTipoInstalacion.setTextColor(Color.RED);//just to highlight that this is an error
+            tvErrorSpTipoInstalacion.setText(Constant.MSJ_CAMPO_OBLIGATORIO);
         }
         if (spTipoServ.getSelectedItem().toString().equals(Constant.PROMPT)) {
             exito = false;

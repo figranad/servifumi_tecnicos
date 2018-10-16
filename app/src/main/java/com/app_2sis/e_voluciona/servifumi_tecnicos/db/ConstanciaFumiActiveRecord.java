@@ -9,6 +9,7 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ConstanciaFumiBeanAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.ConstanciaFumiWS;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -207,45 +208,40 @@ public class ConstanciaFumiActiveRecord extends MyActiveRecord {
 
     // TODO: 25/09/2018 implementar cuando trabaje en el envío de la información
     //<editor-fold desc="IMPLEMENTACION DEL ENVIO EMPAQUETADO VIA WS">
-//    public List<ConstanciaFumiWS> getConstanciasFumisWsSincronizar() {
-//        List<ConstanciaFumiWS> results = new ArrayList<>();
-//        List<ConstanciaFumi> constanciaFumiList = getConstanciasFumis(ConstanciaFumi.SINCRONIZADO_WS, Constant.NO);
-//        for (ConstanciaFumi constanciaFumi : constanciaFumiList) {
-//            results.add(getConstanciaFumiWS(Integer.toString(constanciaFumi.getId())));
-//        }
-//        return results;
-//    }
-//
-//    /**
-//     * @param constanciaFumiID ID real de la BD local
-//     * @return
-//     */
-//    private ConstanciaFumiWS getConstanciaFumiWS(String constanciaFumiID) {
-//        ConstanciaFumiWS constanciaFumiWS = new ConstanciaFumiWS();
-//
-//        constanciaFumiWS.setConstanciaFumi(getConstanciaFumi(ConstanciaFumi.ID_WS, constanciaFumiID));
-//
-//        constanciaFumiWS.setConstanciaFumiPaqueteList(
-//                new ConstanciaFumiPaquetePlazoActiveRecord(context)
-//                        .getConstanciaFumiPaquetePlazo(ConstanciaFumiPaquetePlazo.ConstanciaFumi_ID_WS, constanciaFumiID)
-//        );
-//
-//        constanciaFumiWS.setConstanciaFumiObservacionList(
-//                new ConstanciaFumiObservacionActiveRecord(context)
-//                        .getConstanciaFumiObservaciones(ConstanciaFumiObservacion.ConstanciaFumi_ID_WS, constanciaFumiID)
-//        );
-//
-//        constanciaFumiWS.setConstanciaFumiDocumentoList(
-//                new ConstanciaFumiDocumentoActiveRecord(context)
-//                        .getConstanciaFumiDocumentos(ConstanciaFumiDocumento.ConstanciaFumi_ID_WS, constanciaFumiID)
-//        );
-//
-//        constanciaFumiWS.setConstanciaFumiReferenciaList(
-//                new ReferenciaActiveRecord(context)
-//                        .getReferencias(Referencia.ConstanciaFumi_ID_WS, constanciaFumiID)
-//        );
-//
-//        return constanciaFumiWS;
-//    }
+    public List<ConstanciaFumiWS> getConstanciasFumisWsSincronizar() {
+        List<ConstanciaFumiWS> results = new ArrayList<>();
+        List<ConstanciaFumi> constanciaFumiList = getConstanciasFumis(ConstanciaFumi.SINCRONIZADO_WS, Constant.NO);
+        for (ConstanciaFumi constanciaFumi : constanciaFumiList) {
+            results.add(getConstanciaFumiWS(Integer.toString(constanciaFumi.getId())));
+        }
+        return results;
+    }
+
+    /**
+     * @param constanciaFumiID ID real de la BD local
+     * @return
+     */
+    private ConstanciaFumiWS getConstanciaFumiWS(String constanciaFumiID) {
+        ConstanciaFumiWS constanciaFumiWS = new ConstanciaFumiWS();
+
+        constanciaFumiWS.setConstanciaFumi(getConstanciaFumi(ConstanciaFumi.ID_WS, constanciaFumiID));
+
+        constanciaFumiWS.setConstanciaFumiPlagasList(
+                new ConstanciaFumiPlagasActiveRecord(context)
+                        .getConstanciaFumiPlagas(ConstanciaFumiPlagas.CONSTANCIA_FUMI_ID_WS, constanciaFumiID)
+        );
+
+        constanciaFumiWS.setConstanciaFumiProductosList(
+                new ConstanciaFumiProductosActiveRecord(context)
+                        .getConstanciaFumiProductos(ConstanciaFumiProductos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID)
+        );
+
+        constanciaFumiWS.setConstanciaFumiVehiculosList(
+                new ConstanciaFumiVehiculosActiveRecord(context)
+                        .getConstanciaFumiVehiculos(ConstanciaFumiVehiculos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID)
+        );
+
+        return constanciaFumiWS;
+    }
     //</editor-fold>
 }

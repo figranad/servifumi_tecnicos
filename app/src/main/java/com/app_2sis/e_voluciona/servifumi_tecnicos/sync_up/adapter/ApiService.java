@@ -1,6 +1,8 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.DatosAplicacion;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.ConstanciaFumiWS;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.ConstanciaPlataWS;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatPlagasResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatProductoResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTanqueResponse;
@@ -46,5 +48,11 @@ public interface ApiService {
     @POST(ApiConstants.URL_GET_TANQUES)
     Call<CatTanqueResponse> getTanques(@Body String param);
 
+    @POST(ApiConstants.URL_CREATE_CONSTANCIA_PLATA)
+    Call<String> createConstanciaPlata(@Body ConstanciaPlataWS constanciaPlataWS);
+
+    @POST(ApiConstants.URL_CREATE_CONSTANCIA_FUMI)
+    Call<String> createConstanciaFumi(@Body ConstanciaFumiWS constanciaFumiWS);
+    
     // TODO: 05/09/2018 crear funcion para hacer update a las visitas
 }

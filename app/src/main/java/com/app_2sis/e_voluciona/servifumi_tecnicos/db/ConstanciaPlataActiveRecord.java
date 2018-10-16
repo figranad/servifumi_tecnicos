@@ -8,6 +8,7 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlata;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaPlataTanques;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ConstanciaPlataBeanAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.ConstanciaPlataWS;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -201,47 +202,31 @@ public class ConstanciaPlataActiveRecord extends MyActiveRecord {
         return constanciaPlataBAList;
     }
 
-    // TODO: 25/09/2018 implementar cuando trabaje en el envío de la información
-    //<editor-fold desc="IMPLEMENTACION DEL ENVIO EMPAQUETADO VIA WS">
-//    public List<ConstanciaPlataWS> getConstanciasPlatasWsSincronizar() {
-//        List<ConstanciaPlataWS> results = new ArrayList<>();
-//        List<ConstanciaPlata> constanciaPlataList = getConstanciasPlatas(ConstanciaPlata.SINCRONIZADO_WS, Constant.NO);
-//        for (ConstanciaPlata constanciaPlata : constanciaPlataList) {
-//            results.add(getConstanciaPlataWS(Integer.toString(constanciaPlata.getId())));
-//        }
-//        return results;
-//    }
-//
-//    /**
-//     * @param constanciaPlataID ID real de la BD local
-//     * @return
-//     */
-//    private ConstanciaPlataWS getConstanciaPlataWS(String constanciaPlataID) {
-//        ConstanciaPlataWS constanciaPlataWS = new ConstanciaPlataWS();
-//
-//        constanciaPlataWS.setConstanciaPlata(getConstanciaPlata(ConstanciaPlata.ID_WS, constanciaPlataID));
-//
-//        constanciaPlataWS.setConstanciaPlataPaqueteList(
-//                new ConstanciaPlataPaquetePlazoActiveRecord(context)
-//                        .getConstanciaPlataPaquetePlazo(ConstanciaPlataPaquetePlazo.ConstanciaPlata_ID_WS, constanciaPlataID)
-//        );
-//
-//        constanciaPlataWS.setConstanciaPlataObservacionList(
-//                new ConstanciaPlataObservacionActiveRecord(context)
-//                        .getConstanciaPlataObservaciones(ConstanciaPlataObservacion.ConstanciaPlata_ID_WS, constanciaPlataID)
-//        );
-//
-//        constanciaPlataWS.setConstanciaPlataDocumentoList(
-//                new ConstanciaPlataDocumentoActiveRecord(context)
-//                        .getConstanciaPlataDocumentos(ConstanciaPlataDocumento.ConstanciaPlata_ID_WS, constanciaPlataID)
-//        );
-//
-//        constanciaPlataWS.setConstanciaPlataReferenciaList(
-//                new ReferenciaActiveRecord(context)
-//                        .getReferencias(Referencia.ConstanciaPlata_ID_WS, constanciaPlataID)
-//        );
-//
-//        return constanciaPlataWS;
-//    }
-    //</editor-fold>
+//    <editor-fold desc="IMPLEMENTACION DEL ENVIO EMPAQUETADO VIA WS">
+    public List<ConstanciaPlataWS> getConstanciasPlatasWsSincronizar() {
+        List<ConstanciaPlataWS> results = new ArrayList<>();
+        List<ConstanciaPlata> constanciaPlataList = getConstanciasPlatas(ConstanciaPlata.SINCRONIZADO_WS, Constant.NO);
+        for (ConstanciaPlata constanciaPlata : constanciaPlataList) {
+            results.add(getConstanciaPlataWS(Integer.toString(constanciaPlata.getId())));
+        }
+        return results;
+    }
+
+    /**
+     * @param constanciaPlataID ID real de la BD local
+     * @return
+     */
+    private ConstanciaPlataWS getConstanciaPlataWS(String constanciaPlataID) {
+        ConstanciaPlataWS constanciaPlataWS = new ConstanciaPlataWS();
+
+        constanciaPlataWS.setConstanciaPlata(getConstanciaPlata(ConstanciaPlata.ID_WS, constanciaPlataID));
+
+        constanciaPlataWS.setConstanciaPlataTanquesList(
+                new ConstanciaPlataTanquesActiveRecord(context)
+                        .getConstanciaPlataTanques(ConstanciaPlataTanques.CONSTANCIA_PLATA_ID_WS, constanciaPlataID)
+        );
+
+        return constanciaPlataWS;
+    }
+//    </editor-fold>
 }

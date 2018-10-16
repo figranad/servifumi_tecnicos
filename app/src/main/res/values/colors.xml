@@ -18,6 +18,7 @@
     <color name="colorGrisOscuro">#4b4b4b</color>
     <color name="colorWarningDark">#cebf04</color>
     <color name="colorCorregir">#ec971f</color>
+    <color name="colorGrisClaro">#ececec</color>
 
 
     <color name="colorFondoEnviado">#edeaebec</color>

@@ -108,6 +108,19 @@
                 android:text="@string/modificar_hora" />
 
             <TextView
+                android:id="@+id/tv_constancia_fumi_form_tipo_instalacion"
+                style="@style/EtiquetaSpinner"
+                android:text="@string/tipo_instalacion" />
+
+            <Spinner
+                android:id="@+id/sp_constancia_fumi_form_tipo_instalacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
                 android:id="@+id/tv_constancia_fumi_form_areas"
                 style="@style/EtiquetaSpinner"
                 android:text="@string/constancia_sf_areas" />

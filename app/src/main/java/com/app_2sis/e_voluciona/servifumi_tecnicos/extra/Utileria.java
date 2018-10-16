@@ -25,6 +25,7 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaFumiActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ConstanciaPlataActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.EnviarActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.LoginActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.MainActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.ProgramacionActivity;
@@ -268,8 +269,8 @@ public class Utileria {
             intent = new Intent(context, ConstanciaFumiActivity.class);
         } else if (id == R.id.nav_constancia_pp) {
             intent = new Intent(context, ConstanciaPlataActivity.class);
-//        } else if (id == R.id.nav_enviar) {
-//            intent = new Intent(context, EnviarActivity.class);
+        } else if (id == R.id.nav_enviar) {
+            intent = new Intent(context, EnviarActivity.class);
         } else if (id == R.id.nav_acerca) {
             View view = ((Activity) context).getLayoutInflater().inflate(R.layout.acercade, null);
             try {
