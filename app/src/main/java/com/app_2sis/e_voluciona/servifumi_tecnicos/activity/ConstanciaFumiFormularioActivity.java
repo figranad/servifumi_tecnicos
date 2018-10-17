@@ -95,7 +95,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             tvVehiculosError, tvTipoInstalacion, tvErrorSpTipoInstalacion;
     private CheckBox chkAreaInterior, chkAreaExterior, chkAreaVehiculo, chkAspersion, chkMicroniz,
             chkTermoneb, chkInyeccion, chkCeboRoden, chkCeboGel, chkTrampas, chkLiquidado;
-    private Spinner spTipoServ, spModoPago, spTipoInstalacion; // TODO: 16/10/2018 implementar tipo instalacion como con servicio 
+    private Spinner spTipoServ, spModoPago, spTipoInstalacion;
     private ImageButton btnFirma;
     private ImageView ivFirma;
     private LinearLayout llVehiculo;

@@ -206,7 +206,6 @@ public class ConstanciaFumiActiveRecord extends MyActiveRecord {
         return constanciaFumiBAList;
     }
 
-    // TODO: 25/09/2018 implementar cuando trabaje en el envío de la información
     //<editor-fold desc="IMPLEMENTACION DEL ENVIO EMPAQUETADO VIA WS">
     public List<ConstanciaFumiWS> getConstanciasFumisWsSincronizar() {
         List<ConstanciaFumiWS> results = new ArrayList<>();
