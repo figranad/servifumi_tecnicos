@@ -207,7 +207,7 @@ public class Programacion {
 
     @SerializedName(SINCRONIZADO_WS)
     @DatabaseField(columnName = SINCRONIZADO_WS)
-    private String sincronizado;
+    private String sincronizado = "0";
 
     @SerializedName(REALIZADO_WS)
     @DatabaseField(columnName = REALIZADO_WS)

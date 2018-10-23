@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.BeanProgramacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.ProgramacionWS;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
@@ -148,20 +149,32 @@ public class ProgramacionActiveRecord extends MyActiveRecord {
         return resultList;
     }
 
-    private List<Programacion> getProgramacionesSincronizar() {
+    private List<BeanProgramacion> getProgramacionesSincronizar() {
         Dao<Programacion, Integer> dao;
-        List<Programacion> resultList = new ArrayList<>();
+        List<Programacion> programacionList = new ArrayList<>();
+        List<BeanProgramacion> beanProgramacionList = new ArrayList<>();
         try {
             dao = getHelper().getProgramacionDao();
             QueryBuilder<Programacion, Integer> queryBuilder = dao.queryBuilder();
-            queryBuilder.where().eq(Programacion.SINCRONIZADO_WS, Constant.NO);
-            resultList = queryBuilder.query();
+            queryBuilder.where()
+                    .eq(Programacion.IMPOSIBLE_REALIZAR_CHK_WS, Constant.SI)
+                    .and().eq(Programacion.SINCRONIZADO_WS, Constant.NO);
+            programacionList = queryBuilder.query();
+
+            for (Programacion programacion : programacionList) {
+                beanProgramacionList.add(new BeanProgramacion(
+                        programacion.getId() + "",
+                        programacion.getProgramacion_id(),
+                        programacion.getImposible_realizar(),
+                        programacion.getTitulo()
+                ));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cerrarConexion();
         }
-        return resultList;
+        return beanProgramacionList;
     }
 
     public ProgramacionWS getProgramacionesWsSincronzar() {

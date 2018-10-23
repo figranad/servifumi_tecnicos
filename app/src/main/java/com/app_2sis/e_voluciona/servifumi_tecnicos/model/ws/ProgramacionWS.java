@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramacionWS {
-    List<Programacion> programacionList = new ArrayList<>();
+    List<BeanProgramacion> programacionList = new ArrayList<>();
 
-    public List<Programacion> getProgramacionList() {
+    public List<BeanProgramacion> getProgramacionList() {
         return programacionList;
     }
 
-    public void setProgramacionList(List<Programacion> programacionList) {
+    public void setProgramacionList(List<BeanProgramacion> programacionList) {
         this.programacionList = programacionList;
     }
 

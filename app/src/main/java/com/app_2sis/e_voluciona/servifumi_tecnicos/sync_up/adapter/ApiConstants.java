@@ -21,4 +21,5 @@ public class ApiConstants {
     public static final String URL_GET_TANQUES = "/servifumi/web/index.php/ws-tecnicos/get-tanques";
     public static final String URL_CREATE_CONSTANCIA_PLATA = "/servifumi/web/index.php/ws-tecnicos/create-constancia-plata";
     public static final String URL_CREATE_CONSTANCIA_FUMI = "/servifumi/web/index.php/ws-tecnicos/create-constancia-fumi";
+    public static final String URL_UPDATE_PROGRAMACIONES = "/servifumi/web/index.php/ws-tecnicos/update-programaciones";
 }

@@ -2,7 +2,6 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,7 +19,7 @@ import android.widget.ProgressBar;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
-import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.upload.ConstanciaPlataEnviar;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.upload.ProgramacionEnviar;
 
 public class EnviarActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -104,9 +103,10 @@ public class EnviarActivity extends AppCompatActivity
         }
     }
 
+
     private void enviarTodo() {
         refreshInterfazTodo(Constant.STATUS_DESCARGA_CARGANDO);
-        new ConstanciaPlataEnviar(this);
+        new ProgramacionEnviar(this);
     }
 
     private void refreshInterfaz(ProgressBar pb, ImageView iv, int status) {

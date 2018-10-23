@@ -372,11 +372,11 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         });
 
         spModoPago.setAdapter(new ArrayAdapter<>(
-                getApplicationContext(), R.layout.item_spinner, 
+                getApplicationContext(), R.layout.item_spinner,
                 metodoPagoActiveRecord.getMetodoPagosNombres()));
 
         spTipoInstalacion.setAdapter(new ArrayAdapter<>(
-                getApplicationContext(), R.layout.item_spinner, 
+                getApplicationContext(), R.layout.item_spinner,
                 catTipoInstalacionActiveRecord.getCatTipoInstalacionsNombres()));
     }
 

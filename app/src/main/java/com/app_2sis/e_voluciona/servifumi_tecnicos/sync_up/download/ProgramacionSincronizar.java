@@ -45,7 +45,7 @@ public class ProgramacionSincronizar implements Callback<ProgramacionResponse> {
             } else {
                 programacionActiveRecord.deleteAll();
                 descargaActivity.showMensaje("Sin Programaciones");
-                new MetodoPagoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                new ProgramacionProductoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
             }
         } else {
             descargaActivity.showMensaje("ERROR descargando programaciones");

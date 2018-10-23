@@ -3,11 +3,13 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.DatosAplicacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.ConstanciaFumiWS;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.ConstanciaPlataWS;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws.ProgramacionWS;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatPlagasResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatProductoResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTanqueResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTipoInstalacionResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.CatTurnoResponse;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.IdsResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.MetodoPagoResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.ProgramacionProductosResponse;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.response.ProgramacionResponse;
@@ -53,6 +55,7 @@ public interface ApiService {
 
     @POST(ApiConstants.URL_CREATE_CONSTANCIA_FUMI)
     Call<String> createConstanciaFumi(@Body ConstanciaFumiWS constanciaFumiWS);
-    
-    // TODO: 05/09/2018 crear funcion para hacer update a las visitas
+
+    @POST(ApiConstants.URL_UPDATE_PROGRAMACIONES)
+    Call<IdsResponse> updateProgramaciones(@Body ProgramacionWS programacionWS);
 }
