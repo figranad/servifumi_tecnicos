@@ -18,6 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaPlataActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatTipoInstalacion;
@@ -62,14 +64,14 @@ public class DescargaActivity extends AppCompatActivity
     /**
      * Si existen datos de constancia pendiente de enviar, bloquea la descarga de programación hasta que estos datos se envíen
      */
-    private void deshabiitarBotones() { // TODO: 20/08/2018 crear
-//        if (!new ConstanciaPlata(this).getClientesWsSincronzar().isEmpty()
-//                || !new ConstanciaFumi(this).getSolicitudesWsSincronizar().isEmpty()) {
-//            programacionOK = true;
-//            btnProgramacion.setEnabled(false);
-//            btnDesTodo.setEnabled(false);
-//            tvIndicacion.setVisibility(View.VISIBLE);
-//        }
+    private void deshabiitarBotones() {
+        if (!new ConstanciaPlataActiveRecord(this).getConstanciasPlatasWsSincronizar().isEmpty()
+                || !new ConstanciaFumiActiveRecord(this).getConstanciasFumisWsSincronizar().isEmpty()) {
+            programacionOK = true;
+            btnProgramacion.setEnabled(false);
+            btnDesTodo.setEnabled(false);
+            tvIndicacion.setVisibility(View.VISIBLE);
+        }
     }
 
     private void findViewById() {
@@ -142,17 +144,23 @@ public class DescargaActivity extends AppCompatActivity
      * Orden de la descarga encadenada de catalogos
      * 1-CatTipoInstalacion
      * 2-CatPlaga
-     * 3-CaTurno
-     * 4-CatProductos
-     * 5-CatTanques
-     * 6-MetodoPago
-     *
+     * 3-CatAccesorio
+     * 4-CaTurno
+     * 5-CatProductos
+     * 6-CatTanques
+     * 7-MetodoPago
      */
     private void descargarCatalogos() {
         refreshInterfazCatalogos(Constant.STATUS_DESCARGA_CARGANDO);
         new CatTipoInstalacionSincronizar(this);    //Inicia con el primer catalogo y prosigue en secuencia la descarga
     }
 
+    /**
+     * Orden de la descarga encadenada de programacion
+     * 1-Programacion
+     * 2-ProgramacionAccesorios
+     * 3-ProgramacionProductos
+     */
     private void descargarProgramacion() {
         refreshInterfazProgramacion(Constant.STATUS_DESCARGA_CARGANDO);
         new ProgramacionSincronizar(this);
@@ -200,9 +208,9 @@ public class DescargaActivity extends AppCompatActivity
         Snackbar.make(findViewById(android.R.id.content), msj, Snackbar.LENGTH_SHORT).show();
     }
 
-    private void eliminarNoSincronizados() { // TODO: 20/08/2018 crear
-//        new ConstanciaPlata(this).deleteAllNoSincronizados();
-//        new ConstanciaFumi(this).deleteAllNoSincronizados();
+    private void eliminarNoSincronizados() {
+        new ConstanciaPlataActiveRecord(this).deleteAllNoSincronizados();
+        new ConstanciaFumiActiveRecord(this).deleteAllNoSincronizados();
     }
 
     /**

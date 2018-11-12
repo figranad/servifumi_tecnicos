@@ -165,8 +165,8 @@ public class CatProductoActiveRecord extends MyActiveRecord {
     }
 
     /**
-     * Listado que requiere el recyclerview de las productos trabajadas, viene con informacion default para un nuevo registro
-     * @return
+     * Listado que requiere el recyclerview de las productos trabajadas
+     * @return List viene con informacion default para un nuevo registro
      */
     public List<ProductoBeanAdapter> getProductoBeanAdapter() {
         List<ProductoBeanAdapter> productoBAList = new ArrayList<>();

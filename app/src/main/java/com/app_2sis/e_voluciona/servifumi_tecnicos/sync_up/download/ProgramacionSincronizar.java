@@ -37,7 +37,7 @@ public class ProgramacionSincronizar implements Callback<ProgramacionResponse> {
                 programacionActiveRecord.deleteAll();
                 if (programacionActiveRecord.save(programacionArrayList)) {
                     descargaActivity.showMensaje("Programaciones Descargadas");
-                    new ProgramacionProductoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                    new ProgramacionAccesoriosSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
                 } else {
                     descargaActivity.showMensaje("ERROR guardando programaciones");
                     descargaActivity.refreshInterfazProgramacion(Constant.STATUS_DESCARGA_ERROR);
@@ -45,7 +45,7 @@ public class ProgramacionSincronizar implements Callback<ProgramacionResponse> {
             } else {
                 programacionActiveRecord.deleteAll();
                 descargaActivity.showMensaje("Sin Programaciones");
-                new ProgramacionProductoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                new ProgramacionAccesoriosSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
             }
         } else {
             descargaActivity.showMensaje("ERROR descargando programaciones");

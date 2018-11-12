@@ -34,17 +34,16 @@ public class CatPlagaSincronizar implements Callback<CatPlagasResponse> {
                 catPlagaActiveRecord.deleteAll();
                 if (catPlagaActiveRecord.save(catPlagaArrayList)) {
                     descargaActivity.showMensaje("Plagas Descargadas");
-                    new CatTurnoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                    new CatAccesorioSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
                 }
                 else {
                     descargaActivity.showMensaje("ERROR guardando plagas");
                     descargaActivity.refreshInterfazCatalogos(Constant.STATUS_DESCARGA_ERROR);
                 }
-
             } else {
                 catPlagaActiveRecord.deleteAll();
                 descargaActivity.showMensaje("Sin plagas");
-                new CatTurnoSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
+                new CatAccesorioSincronizar(descargaActivity);    //Se lanza la descarga del siguiente catalogo
             }
         } else {
             descargaActivity.showMensaje("ERROR descargando plagas");

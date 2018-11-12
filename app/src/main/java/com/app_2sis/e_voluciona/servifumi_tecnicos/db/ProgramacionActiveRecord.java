@@ -208,4 +208,26 @@ public class ProgramacionActiveRecord extends MyActiveRecord {
         }
         return result;
     }
+
+    public String getDomiciliosIDs() {
+        String result = "";
+        Dao<Programacion, Integer> dao;
+        List<Programacion> resultList;
+        try {
+            dao = getHelper().getProgramacionDao();
+            QueryBuilder<Programacion, Integer> queryBuilder = dao.queryBuilder();
+            queryBuilder.distinct()
+                    .selectColumns(Programacion.DOMICILIO_ID_WS)
+                    .where().ge(Programacion.ID_WS, 0).and().eq(Programacion.STATUS_WS, Constant.SI);
+            resultList = queryBuilder.query();
+            for (Programacion programacion : resultList) {
+                result += programacion.getDomicilio_id() + ",";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarConexion();
+        }
+        return result;
+    }
 }
