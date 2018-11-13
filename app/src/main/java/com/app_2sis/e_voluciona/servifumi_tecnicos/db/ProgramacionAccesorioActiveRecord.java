@@ -3,7 +3,9 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.db;
 import android.content.Context;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatAccesorio;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ProgramacionAccesorio;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.AccesorioBeanAdapter;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramacionAccesorioActiveRecord extends MyActiveRecord {
-    
+
     public ProgramacionAccesorioActiveRecord(Context context) {
         super(context);
     }
@@ -80,7 +82,23 @@ public class ProgramacionAccesorioActiveRecord extends MyActiveRecord {
         try {
             dao = getHelper().getProgramacionAccesorioDao();
             QueryBuilder<ProgramacionAccesorio, Integer> queryBuilder = dao.queryBuilder();
-            queryBuilder.where().ge(ProgramacionAccesorio.ID_WS, 0).and().eq(ProgramacionAccesorio.STATUS_WS, Constant.SI);
+            queryBuilder.where().ge(ProgramacionAccesorio.ID_WS, 0);
+            resultList = queryBuilder.query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarConexion();
+        }
+        return resultList;
+    }
+
+    public List<ProgramacionAccesorio> getProgramacionAccesorios(String col, String val) {
+        Dao<ProgramacionAccesorio, Integer> dao;
+        List<ProgramacionAccesorio> resultList = new ArrayList<>();
+        try {
+            dao = getHelper().getProgramacionAccesorioDao();
+            QueryBuilder<ProgramacionAccesorio, Integer> queryBuilder = dao.queryBuilder();
+            queryBuilder.where().eq(col, val);
             resultList = queryBuilder.query();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,18 +114,22 @@ public class ProgramacionAccesorioActiveRecord extends MyActiveRecord {
 
     /**
      * Listado que requiere el recyclerview de las accesorioContratos trabajadas
+     *
      * @return List viene con informacion default para un nuevo registro
      */
-//    public List<AccesorioContratoBeanAdapter> getAccesorioContratoBeanAdapter() {
-//        List<AccesorioContratoBeanAdapter> accesorioContratoBAList = new ArrayList<>();
-//        List<ProgramacionAccesorio> programacionAccesorioList = getProgramacionAccesorio();
-//
-//        for (ProgramacionAccesorio accesorioContrato : programacionAccesorioList) {
-//            accesorioContratoBAList.add(new AccesorioContratoBeanAdapter(
-//                    accesorioContrato.getNombre(),
-//                    accesorioContrato.getCat_accesorioContratos_id()
-//            ));
-//        }
-//        return accesorioContratoBAList;
-//    }
+    public List<AccesorioBeanAdapter> getAccesorioBeanAdapter() {
+        List<AccesorioBeanAdapter> accesorioContratoBAList = new ArrayList<>();
+        List<ProgramacionAccesorio> programacionAccesorioList = getProgramacionAccesorio();
+
+        for (ProgramacionAccesorio accesorioContrato : programacionAccesorioList) {
+            accesorioContratoBAList.add(new AccesorioBeanAdapter(
+                    new CatAccesorioActiveRecord(context).
+                            getCatAccesorios(CatAccesorio.CAT_ACCESORIO_ID_WS, accesorioContrato.getCat_accesorio_id())
+                            .getNombre(),
+                    accesorioContrato.getCantidad(),
+                    accesorioContrato.getCat_accesorio_id()
+            ));
+        }
+        return accesorioContratoBAList;
+    }
 }

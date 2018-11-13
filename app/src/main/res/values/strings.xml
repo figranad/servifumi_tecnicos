@@ -121,4 +121,5 @@
     <string name="limpiar">LIMPIAR</string>
     <string name="title_activity_enviar">Enviar Datos</string>
     <string name="enviar">ENVIAR TODO</string>
+    <string name="constancia_sf_accesorios">ACCESORIOS ASIGNADOS*</string>
 </resources>

@@ -46,28 +46,35 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatAccesorioActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatPlagaActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatProductoActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatTipoInstalacionActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiAccesoriosActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiPlagasActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiProductosActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiVehiculosActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.MetodoPagoActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ProgramacionAccesorioActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ProgramacionActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.UsuarioActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.MisPreferencias;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAccesorios;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ProgramacionAccesorio;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Usuario;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.AccesorioBeanAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.PlagaBeanAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ProductoBeanAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.VehiculoBeanAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.AccesorioAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.PlagaAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.ProductoAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.VehiculoAdapter;
@@ -92,7 +99,8 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private Button btnFecha, btnHoraEntrada, btnHoraSalida, btnVehiculoGuardar, btnVehiculoLimpiar;
     private TextView tvAreas, tvTipoServ, tvAplicacion, tvColocacion, tvPlagas, tvPlagasError,
             tvProductos, tvProductosError, tvModoPago, tvFirma, tvErrorSpTipoServ, tvVehiculos,
-            tvVehiculosError, tvTipoInstalacion, tvErrorSpTipoInstalacion;
+            tvVehiculosError, tvTipoInstalacion, tvErrorSpTipoInstalacion, tvAccesorios,
+            tvAccesoriosError;
     private CheckBox chkAreaInterior, chkAreaExterior, chkAreaVehiculo, chkAspersion, chkMicroniz,
             chkTermoneb, chkInyeccion, chkCeboRoden, chkCeboGel, chkTrampas, chkLiquidado;
     private Spinner spTipoServ, spModoPago, spTipoInstalacion;
@@ -100,11 +108,13 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private ImageView ivFirma;
     private LinearLayout llVehiculo;
 
-    private RecyclerView rvPlaga, rvProducto, rvVehiculo;
+    private RecyclerView rvPlaga, rvProducto, rvVehiculo, rvAccesorio;
     private PlagaAdapter plagaAdapter;
     private List<PlagaBeanAdapter> plagaBeanAdapterList;
     private ProductoAdapter productoAdapter;
+    private AccesorioAdapter accesorioAdapter;
     private List<ProductoBeanAdapter> productoBeanAdapterList;
+    private List<AccesorioBeanAdapter> accesorioBeanAdapterList;
     private VehiculoAdapter vehiculoAdapter;
     private List<VehiculoBeanAdapter> vehiculoBeanAdapterList;
     private List<String> vehiculosBean;
@@ -113,6 +123,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private String constanciaFumiID_bd; //Si es new no lo envia
 
     private Programacion programacion;
+    private List<ProgramacionAccesorio> programacionAccesorios = new ArrayList<>();
     private ConstanciaFumi constanciaFumi;
     private MisPreferencias misPreferencias;
     private UsuarioActiveRecord usuarioActiveRecord;
@@ -120,10 +131,13 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private ConstanciaFumiActiveRecord constanciaFumiActiveRecord;
     private CatPlagaActiveRecord catPlagaActiveRecord;
     private CatProductoActiveRecord catProductoActiveRecord;
+    private CatAccesorioActiveRecord catAccesorioActiveRecord;
     private CatTipoInstalacionActiveRecord catTipoInstalacionActiveRecord;
     private MetodoPagoActiveRecord metodoPagoActiveRecord;
     private ConstanciaFumiPlagasActiveRecord constanciaFumiPlagasActiveRecord;
     private ConstanciaFumiProductosActiveRecord constanciaFumiProductosActiveRecord;
+    private ConstanciaFumiAccesoriosActiveRecord constanciaFumiAccesoriosActiveRecord;
+    private ProgramacionAccesorioActiveRecord programacionAccesorioActiveRecord;
     private ConstanciaFumiVehiculosActiveRecord constanciaFumiVehiculosActiveRecord;
 
     //DateFormat para fechas y horas separadas
@@ -210,6 +224,8 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         tvPlagasError = findViewById(R.id.tv_constancia_fumi_form_plagas_error);
         tvProductos = findViewById(R.id.tv_constancia_fumi_form_productos);
         tvProductosError = findViewById(R.id.tv_constancia_fumi_form_productos_error);
+        tvAccesorios = findViewById(R.id.tv_constancia_fumi_form_accesorios);
+        tvAccesoriosError = findViewById(R.id.tv_constancia_fumi_form_accesorios_error);
         tvModoPago = findViewById(R.id.tv_constancia_fumi_form_modo_pago);
         tvFirma = findViewById(R.id.tv_constancia_fumi_form_firma);
         tvVehiculos = findViewById(R.id.tv_constancia_fumi_form_vehiculos);
@@ -236,6 +252,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
 
         rvPlaga = findViewById(R.id.rv_constancia_fumi_form_plagas);
         rvProducto = findViewById(R.id.rv_constancia_fumi_form_productos);
+        rvAccesorio = findViewById(R.id.rv_constancia_fumi_form_accesorios);
         rvVehiculo = findViewById(R.id.rv_constancia_fumi_form_list_vehiculos);
 
         ivFirma = findViewById(R.id.iv_constancia_fumi_form_firma);
@@ -246,22 +263,27 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private void iniComponents() {
         plagaAdapter = new PlagaAdapter(this);
         productoAdapter = new ProductoAdapter(this);
+        accesorioAdapter = new AccesorioAdapter(this);
         vehiculoAdapter = new VehiculoAdapter(this);
         vehiculoBeanAdapterList = new ArrayList<>();
         vehiculosBean = new ArrayList<>();
         misPreferencias = new MisPreferencias(this);
         usuarioActiveRecord = new UsuarioActiveRecord(this);
         programacionActiveRecord = new ProgramacionActiveRecord(this);
+        programacionAccesorioActiveRecord = new ProgramacionAccesorioActiveRecord(this);
         constanciaFumiActiveRecord = new ConstanciaFumiActiveRecord(this);
         catTipoInstalacionActiveRecord = new CatTipoInstalacionActiveRecord(this);
         metodoPagoActiveRecord = new MetodoPagoActiveRecord(this);
         catPlagaActiveRecord = new CatPlagaActiveRecord(this);
         catProductoActiveRecord = new CatProductoActiveRecord(this);
+        catAccesorioActiveRecord = new CatAccesorioActiveRecord(this);
         constanciaFumiPlagasActiveRecord = new ConstanciaFumiPlagasActiveRecord(this);
         constanciaFumiProductosActiveRecord = new ConstanciaFumiProductosActiveRecord(this);
+        constanciaFumiAccesoriosActiveRecord = new ConstanciaFumiAccesoriosActiveRecord(this);
         constanciaFumiVehiculosActiveRecord = new ConstanciaFumiVehiculosActiveRecord(this);
         context = getApplicationContext();
         programacion = programacionActiveRecord.getProgramacion(Programacion.ID_WS, programacionID_bd);
+
         if (hayInfoCatalogos()) {
             setFechayHoras();
             iniSpinners();
@@ -271,6 +293,21 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
                 cargarPlagas();
             if (!catProductoActiveRecord.isEmpty())
                 cargarProductos();
+
+            if (programacion != null) {
+                programacionAccesorios = programacionAccesorioActiveRecord.getProgramacionAccesorios(ProgramacionAccesorio.DOMICILIO_ID_WS, programacion.getDomicilio_id());
+                if (!programacionAccesorios.isEmpty()) {
+                    tvAccesorios.setVisibility(View.VISIBLE);
+                    tvAccesoriosError.setVisibility(View.VISIBLE);
+                    rvAccesorio.setVisibility(View.VISIBLE);
+                    cargarAccesorios();
+                } else {
+                    tvAccesorios.setVisibility(View.GONE);
+                    tvAccesoriosError.setVisibility(View.GONE);
+                    rvAccesorio.setVisibility(View.GONE);
+                }
+            }
+
             if (programacion != null)
                 etCliente.setText(programacion.getTitulo());
 
@@ -349,6 +386,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         return !(programacionActiveRecord.isEmpty()
                 || catPlagaActiveRecord.isEmpty()
                 || catProductoActiveRecord.isEmpty()
+                || catAccesorioActiveRecord.isEmpty()
                 || catTipoInstalacionActiveRecord.isEmpty()
                 || metodoPagoActiveRecord.isEmpty());
     }
@@ -397,6 +435,13 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         rvProducto.setLayoutManager(lm);
         rvProducto.addItemDecoration(mDivider);
         rvProducto.setAdapter(productoAdapter);
+
+        lm = new LinearLayoutManager(this);
+        mDivider = new DividerItemDecoration(rvAccesorio.getContext(), LinearLayoutManager.VERTICAL);
+        mDivider.setDrawable(getResources().getDrawable(R.drawable.line_divider_black));
+        rvAccesorio.setLayoutManager(lm);
+        rvAccesorio.addItemDecoration(mDivider);
+        rvAccesorio.setAdapter(accesorioAdapter);
 
         lm = new LinearLayoutManager(this);
         mDivider = new DividerItemDecoration(rvVehiculo.getContext(), LinearLayoutManager.VERTICAL);
@@ -475,6 +520,21 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
                 vehiculoBeanAdapterList.add(vehiculoBeanAdapter);
                 vehiculosBean.add(text);
                 vehiculoAdapter.add(text);
+            }
+            //</editor-fold>
+
+            //<editor-fold desc="Cargar Accesorios">
+            programacionAccesorios = programacionAccesorioActiveRecord.getProgramacionAccesorios(ProgramacionAccesorio.DOMICILIO_ID_WS, constanciaFumi.getDomicilio_id());
+
+            if (!programacionAccesorios.isEmpty()) {
+                tvAccesorios.setVisibility(View.VISIBLE);
+                tvAccesoriosError.setVisibility(View.VISIBLE);
+                rvAccesorio.setVisibility(View.VISIBLE);
+                cargarAccesorios();
+            } else {
+                tvAccesorios.setVisibility(View.GONE);
+                tvAccesoriosError.setVisibility(View.GONE);
+                rvAccesorio.setVisibility(View.GONE);
             }
             //</editor-fold>
 
@@ -569,6 +629,16 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             cargarPlagas();
         if (!catProductoActiveRecord.isEmpty())
             cargarProductos();
+        if (!programacionAccesorios.isEmpty()) {
+            tvAccesorios.setVisibility(View.VISIBLE);
+            tvAccesoriosError.setVisibility(View.VISIBLE);
+            rvAccesorio.setVisibility(View.VISIBLE);
+            cargarAccesorios();
+        } else {
+            tvAccesorios.setVisibility(View.GONE);
+            tvAccesoriosError.setVisibility(View.GONE);
+            rvAccesorio.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -608,6 +678,25 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         productoAdapter.deleteAll();
         if (productoBeanAdapterList != null && !productoBeanAdapterList.isEmpty()) {
             productoAdapter.addAll(productoBeanAdapterList);
+        }
+    }
+
+    /**
+     * Crea la interfaz para los accesorios y la inicializa con datos si ya existía la constancia
+     */
+    private void cargarAccesorios() {
+        //Si el comportamiento es de View; en el adapter se bloquean los componentes de accesorios
+        accesorioAdapter.setComportamientoAdapter(COMPORTAMIENTO_THIS_ACTIVITY);
+
+        if (COMPORTAMIENTO_THIS_ACTIVITY != Constant.COMPORTAMIENTO_ACTIVITY_NEW) {
+            //Cargar la informacion de la constancia para que se muestre en los componentes
+            accesorioBeanAdapterList = constanciaFumi.getAccesorioBeanAdapter(context);
+        } else
+            accesorioBeanAdapterList = programacionAccesorioActiveRecord.getAccesorioBeanAdapter();
+
+        accesorioAdapter.deleteAll();
+        if (accesorioBeanAdapterList != null && !accesorioBeanAdapterList.isEmpty()) {
+            accesorioAdapter.addAll(accesorioBeanAdapterList);
         }
     }
 
@@ -786,6 +875,20 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             }
             //</editor-fold>
 
+            //<editor-fold desc="ConstanciaFumiAccesorios">
+            ConstanciaFumiAccesorios constanciaFumiAccesorios;
+            for (AccesorioBeanAdapter accesorioBeanAdapter : accesorioBeanAdapterList) {
+                constanciaFumiAccesorios = new ConstanciaFumiAccesorios();
+                constanciaFumiAccesorios.setConstancia_fumi_id(constanciaFumiID);
+                constanciaFumiAccesorios.setCliente_id(constanciaFumi.getCliente_id());
+                constanciaFumiAccesorios.setDomicilio_id(constanciaFumi.getDomicilio_id());
+                constanciaFumiAccesorios.setCat_accesorio_id(accesorioBeanAdapter.getAccesorioID());
+                constanciaFumiAccesorios.setCantidad(accesorioBeanAdapter.getCantidad());
+                constanciaFumiAccesorios.setCondiciones(accesorioBeanAdapter.getCondicionID());
+                constanciaFumiAccesoriosActiveRecord.save(constanciaFumiAccesorios);
+            }
+            //</editor-fold>
+
             //<editor-fold desc="ConstanciaFumiVehiculos">
             if (chkAreaVehiculo.isChecked()) {
                 ConstanciaFumiVehiculos constanciaFumiVehiculos;
@@ -896,10 +999,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
 
         //<editor-fold desc="Validacion RV de productos">
         haySeleccionado = false;
-        for (
-                ProductoBeanAdapter productoTrabajado : productoBeanAdapterList)
-
-        {
+        for (ProductoBeanAdapter productoTrabajado : productoBeanAdapterList) {
             if (productoTrabajado.isCheck()) { //Si se marca como que se trabajo el producto
                 haySeleccionado = true;
                 try {
@@ -920,13 +1020,33 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
                 }
             }
         }
-        if (!haySeleccionado)
-
-        {
+        if (!haySeleccionado) {
             tvProductos.setError(Constant.MSJ_MINIMO_1);
             tvProductosError.setText(Constant.MSJ_MINIMO_1);
             tvProductosError.setVisibility(View.VISIBLE);
             exito = false;
+        }
+        //</editor-fold>
+
+        //<editor-fold desc="Validacion RV de accesorios">
+        for (AccesorioBeanAdapter accesorioRevisado : accesorioBeanAdapterList) {
+            try {
+                cantidad = Integer.parseInt(accesorioRevisado.getCantidad());
+                if (cantidad < 0) {  //Si se ingresó menos de 0 en un accesorio seleccionado
+                    tvAccesorios.setError(Constant.MSJ_NO_MENOR_0);
+                    tvAccesoriosError.setText(Constant.MSJ_NO_MENOR_0);
+                    tvAccesoriosError.setVisibility(View.VISIBLE);
+                    exito = false;
+                    break;
+                }
+            } catch (NumberFormatException ex) { //Si se ingresa texto en el campo de cantidad
+                tvAccesorios.setError(Constant.MSJ_CAMPO_NUMERICO);
+                tvAccesoriosError.setText(Constant.MSJ_CAMPO_NUMERICO);
+                tvAccesoriosError.setVisibility(View.VISIBLE);
+                exito = false;
+                break;
+            }
+
         }
         //</editor-fold>
 
@@ -955,6 +1075,8 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         tvPlagasError.setVisibility(View.GONE);
         tvProductos.setError(null);
         tvProductosError.setVisibility(View.GONE);
+        tvAccesorios.setError(null);
+        tvAccesoriosError.setVisibility(View.GONE);
         tvFirma.setError(null);
     }
 

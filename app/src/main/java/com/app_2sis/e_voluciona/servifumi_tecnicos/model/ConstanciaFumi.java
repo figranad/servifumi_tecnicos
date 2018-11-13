@@ -2,10 +2,14 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.model;
 
 import android.content.Context;
 
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatAccesorioActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatPlagaActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatProductoActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiAccesoriosActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiPlagasActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiProductosActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ProgramacionAccesorioActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.AccesorioBeanAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.PlagaBeanAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ProductoBeanAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -570,5 +574,30 @@ public class ConstanciaFumi {
             }
         }
         return productoBeanAdapterList;
+    }
+
+    /**
+     * Entrega la relación de los accesorios y cantidades que se trabajaron en esta constancia
+     * @param context
+     * @return BeanAdapter requerido por el RecyclerView para seleccionar accesorios trabajados en la constancia
+     */
+    public List<AccesorioBeanAdapter> getAccesorioBeanAdapter(Context context) {
+        ConstanciaFumiAccesoriosActiveRecord constanciaFumiAccesoriosActiveRecord = new ConstanciaFumiAccesoriosActiveRecord(context);
+        ProgramacionAccesorioActiveRecord programacionAccesorioActiveRecord = new ProgramacionAccesorioActiveRecord(context);
+
+        List<AccesorioBeanAdapter> accesorioBeanAdapterList = programacionAccesorioActiveRecord.getAccesorioBeanAdapter();
+        List<ConstanciaFumiAccesorios> constanciaFumiAccesoriosList = constanciaFumiAccesoriosActiveRecord
+                .getConstanciaFumiAccesorios(ConstanciaFumiAccesorios.CONSTANCIA_FUMI_ID_WS, id + "");
+
+        for (ConstanciaFumiAccesorios constanciaFumiAccesorio : constanciaFumiAccesoriosList) {
+            for (AccesorioBeanAdapter accesorioBeanAdapter : accesorioBeanAdapterList) {
+                if (constanciaFumiAccesorio.getCat_accesorio_id().equals(accesorioBeanAdapter.getAccesorioID())) {
+                    accesorioBeanAdapter.setCondicionID(constanciaFumiAccesorio.getCondiciones());
+                    accesorioBeanAdapter.setCantidad(constanciaFumiAccesorio.getCantidad());
+                    break;
+                }
+            }
+        }
+        return accesorioBeanAdapterList;
     }
 }

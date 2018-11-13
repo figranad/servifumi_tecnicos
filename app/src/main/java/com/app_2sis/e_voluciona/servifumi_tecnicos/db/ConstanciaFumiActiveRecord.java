@@ -184,6 +184,8 @@ public class ConstanciaFumiActiveRecord extends MyActiveRecord {
                 ConstanciaFumiPlagas.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
         new ConstanciaFumiProductosActiveRecord(context).delete(
                 ConstanciaFumiProductos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
+        new ConstanciaFumiAccesoriosActiveRecord(context).delete(
+                ConstanciaFumiProductos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
         new ConstanciaFumiVehiculosActiveRecord(context).delete(
                 ConstanciaFumiVehiculos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
     }

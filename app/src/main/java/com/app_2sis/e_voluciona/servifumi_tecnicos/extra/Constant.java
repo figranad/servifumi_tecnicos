@@ -9,6 +9,7 @@ public class Constant {
     public static final String MSJ_GUARDADO_EXITOSO = "Guardado Exitosamente";
     public static final String MSJ_VERIFICAR_ERRORES = "VERIFICAR ERRORES";
     public static final String MSJ_NO_MENOR_1 = "Se requiere marcar al menos 1 elemento";
+    public static final String MSJ_NO_MENOR_0 = "Se requieren numero positivos";
     public static final String MSJ_CAMPO_NUMERICO = "La cantidad debe ser número";
     public static final String MSJ_MINIMO_1 = "Marque al menos 1 elemento";
 
@@ -90,4 +91,9 @@ public class Constant {
     public static final int COMPORTAMIENTO_ACTIVITY_NEW = 0;
     public static final int COMPORTAMIENTO_ACTIVITY_VIEW = 1;
     public static final int COMPORTAMIENTO_ACTIVITY_UPDATE = 2;
+
+    public static final String CONDICION_ACCESORIO_BUENA = "1";
+    public static final String CONDICION_ACCESORIO_MALA = "2";
+    public static final String CONDICION_ACCESORIO_BUENA_VALUE = "BUENA";
+    public static final String CONDICION_ACCESORIO_MALA_VALUE = "MALA";
 }

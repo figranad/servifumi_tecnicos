@@ -169,6 +169,42 @@ public class Utileria {
         return nombre;
     }
 
+    public static String[] getAccesorioCondicion() {
+        return new String[]{
+                Constant.CONDICION_ACCESORIO_BUENA_VALUE,
+                Constant.CONDICION_ACCESORIO_MALA_VALUE
+        };
+    }
+
+    public static String[] getAccesorioCondicionID() {
+        return new String[]{
+                Constant.CONDICION_ACCESORIO_BUENA,
+                Constant.CONDICION_ACCESORIO_MALA
+        };
+    }
+
+    public static String getAccesorioCondicionID(String value) {
+        switch (value) {
+            case Constant.CONDICION_ACCESORIO_BUENA_VALUE:
+                return Constant.CONDICION_ACCESORIO_BUENA;
+            case Constant.CONDICION_ACCESORIO_MALA_VALUE:
+                return Constant.CONDICION_ACCESORIO_MALA;
+            default:
+                return "";
+        }
+    }
+
+    public static String getAccesorioCondicionNombre(String condicionID) {
+        switch (condicionID) {
+            case Constant.CONDICION_ACCESORIO_BUENA:
+                return Constant.CONDICION_ACCESORIO_BUENA_VALUE;
+            case Constant.CONDICION_ACCESORIO_MALA:
+                return Constant.CONDICION_ACCESORIO_MALA_VALUE;
+            default:
+                return "";
+        }
+    }
+
     public static String[] getTipoServicio() {
         return new String[]{
                 Constant.PROMPT,
