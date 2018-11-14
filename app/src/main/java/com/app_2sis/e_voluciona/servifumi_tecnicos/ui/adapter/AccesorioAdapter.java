@@ -92,6 +92,7 @@ public class AccesorioAdapter extends RecyclerView.Adapter<AccesorioAdapter.Acce
 
         if (comportamientoAdapter == Constant.COMPORTAMIENTO_ACTIVITY_VIEW) {
             holder.etCantidad.setEnabled(false);
+            holder.spCondicion.setEnabled(false);
         }
     }
 

@@ -114,7 +114,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private ProductoAdapter productoAdapter;
     private AccesorioAdapter accesorioAdapter;
     private List<ProductoBeanAdapter> productoBeanAdapterList;
-    private List<AccesorioBeanAdapter> accesorioBeanAdapterList;
+    private List<AccesorioBeanAdapter> accesorioBeanAdapterList = new ArrayList<>();
     private VehiculoAdapter vehiculoAdapter;
     private List<VehiculoBeanAdapter> vehiculoBeanAdapterList;
     private List<String> vehiculosBean;

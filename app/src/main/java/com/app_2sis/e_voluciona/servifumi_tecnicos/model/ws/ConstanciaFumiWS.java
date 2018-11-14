@@ -2,6 +2,7 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAccesorios;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
@@ -13,6 +14,7 @@ public class ConstanciaFumiWS {
     private ConstanciaFumi constanciaFumi;
     private List<ConstanciaFumiPlagas> constanciaFumiPlagasList = new ArrayList<>();
     private List<ConstanciaFumiProductos> constanciaFumiProductosList = new ArrayList<>();
+    private List<ConstanciaFumiAccesorios> constanciaFumiAccesoriosList = new ArrayList<>();
     private List<ConstanciaFumiVehiculos> constanciaFumiVehiculosList = new ArrayList<>();
 
     public ConstanciaFumiWS() {
@@ -40,6 +42,14 @@ public class ConstanciaFumiWS {
 
     public void setConstanciaFumiProductosList(List<ConstanciaFumiProductos> constanciaFumiProductosList) {
         this.constanciaFumiProductosList = constanciaFumiProductosList;
+    }
+
+    public List<ConstanciaFumiAccesorios> getConstanciaFumiAccesoriosList() {
+        return constanciaFumiAccesoriosList;
+    }
+
+    public void setConstanciaFumiAccesoriosList(List<ConstanciaFumiAccesorios> constanciaFumiAccesoriosList) {
+        this.constanciaFumiAccesoriosList = constanciaFumiAccesoriosList;
     }
 
     public List<ConstanciaFumiVehiculos> getConstanciaFumiVehiculosList() {

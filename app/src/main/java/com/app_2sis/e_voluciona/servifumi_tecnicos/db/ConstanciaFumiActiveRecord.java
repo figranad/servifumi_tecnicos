@@ -5,6 +5,7 @@ import android.content.Context;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAccesorios;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
@@ -235,6 +236,11 @@ public class ConstanciaFumiActiveRecord extends MyActiveRecord {
         constanciaFumiWS.setConstanciaFumiProductosList(
                 new ConstanciaFumiProductosActiveRecord(context)
                         .getConstanciaFumiProductos(ConstanciaFumiProductos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID)
+        );
+
+        constanciaFumiWS.setConstanciaFumiAccesoriosList(
+                new ConstanciaFumiAccesoriosActiveRecord(context)
+                        .getConstanciaFumiAccesorios(ConstanciaFumiAccesorios.CONSTANCIA_FUMI_ID_WS, constanciaFumiID)
         );
 
         constanciaFumiWS.setConstanciaFumiVehiculosList(
