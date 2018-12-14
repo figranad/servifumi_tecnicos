@@ -196,6 +196,7 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
             else
                 intent = new Intent(getApplicationContext(), ConstanciaFumiFormularioActivity.class);
             intent.putExtra("programacionID_bd", programacionID_bd);
+            intent.putExtra("programacion_saldo", programacion.getSaldo());
             startActivity(intent);
             finish();
         }

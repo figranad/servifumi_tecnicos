@@ -100,7 +100,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private TextView tvAreas, tvTipoServ, tvAplicacion, tvColocacion, tvPlagas, tvPlagasError,
             tvProductos, tvProductosError, tvModoPago, tvFirma, tvErrorSpTipoServ, tvVehiculos,
             tvVehiculosError, tvTipoInstalacion, tvErrorSpTipoInstalacion, tvAccesorios,
-            tvAccesoriosError;
+            tvAccesoriosError, tvSaldo;
     private CheckBox chkAreaInterior, chkAreaExterior, chkAreaVehiculo, chkAspersion, chkMicroniz,
             chkTermoneb, chkInyeccion, chkCeboRoden, chkCeboGel, chkTrampas, chkLiquidado;
     private Spinner spTipoServ, spModoPago, spTipoInstalacion;
@@ -158,6 +158,8 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private Context context;
     private int COMPORTAMIENTO_THIS_ACTIVITY;
 
+    private String programacionSaldo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +173,9 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
 
         constanciaFumiID_bd = getIntent().getStringExtra("constanciaFumiID_bd");
         constanciaFumiID_bd = constanciaFumiID_bd == null ? "" : constanciaFumiID_bd;
+
+        programacionSaldo = getIntent().getStringExtra("programacion_saldo");
+        programacionSaldo = programacionSaldo == null ? "" : programacionSaldo;
 
         findViewById();
         iniComponents();
@@ -230,6 +235,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         tvFirma = findViewById(R.id.tv_constancia_fumi_form_firma);
         tvVehiculos = findViewById(R.id.tv_constancia_fumi_form_vehiculos);
         tvVehiculosError = findViewById(R.id.tv_constancia_fumi_form_vehiculos_error);
+        tvSaldo = findViewById(R.id.tv_constancia_fumi_form_saldo);
 
         chkAreaInterior = findViewById(R.id.chk_constancia_fumi_form_area_interior);
         chkAreaExterior = findViewById(R.id.chk_constancia_fumi_form_area_exterior);
@@ -336,6 +342,12 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
                     loadInfo(false);
                     break;
             }
+
+            if (programacionSaldo.isEmpty())
+                tvSaldo.setVisibility(View.GONE);
+            else
+                tvSaldo.setText("SALDO: " + programacionSaldo);
+
         } else {
             Toast.makeText(this, "Necesita descargar Catalogos", Toast.LENGTH_LONG).show();
             exit();

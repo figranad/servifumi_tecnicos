@@ -4,7 +4,7 @@ public class ApiConstants {
 
 //    public static final String BASE_URL = "http://www.aplicaciones2sis.com/";
     public static final String BASE_URL = "http://192.168.1.124/";
-//    public static final String BASE_URL = "http://192.168.0.38/";
+//    public static final String BASE_URL = "http://192.168.0.28/";
 
     public static final String URL_PDF_INSP_FUMI = "/servifumi/web/index.php/ws-tecnicos/get-pdf-insp-fumi?id=";
     public static final String URL_PDF_INSP_PLATA = "/servifumi/web/index.php/ws-tecnicos/get-pdf-insp-plata?id=";

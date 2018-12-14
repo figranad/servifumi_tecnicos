@@ -75,7 +75,7 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
     private EditText etFecha, etCliente, etContacto, etHoraEntrada, etHoraSalida, etMatOtro,
             etObservaciones, etDineroRecibido;
     private Button btnFecha, btnHoraEntrada, btnHoraSalida;
-    private TextView tvUtiliza, tvAplica, tvMaterial, tvTanques, tvFirma, tvErrorTanques;
+    private TextView tvUtiliza, tvAplica, tvMaterial, tvTanques, tvFirma, tvErrorTanques, tvSaldo;
     private CheckBox chkUtilPlataColoidal, chkUtilHipoclorito, chkUtilDesincrustante,
             chkApliAsperjado, chkApliRodillo, chkApliDirecto, chkMatPvc, chkMatFibrocemento,
             chkMatOtro, chkLiquidado;
@@ -119,6 +119,8 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
     private Context context;
     private int COMPORTAMIENTO_THIS_ACTIVITY;
 
+    private String programacionSaldo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +134,9 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
 
         constanciaPlataID_bd = getIntent().getStringExtra("constanciaPlataID_bd");
         constanciaPlataID_bd = constanciaPlataID_bd == null ? "" : constanciaPlataID_bd;
+
+        programacionSaldo = getIntent().getStringExtra("programacion_saldo");
+        programacionSaldo = programacionSaldo == null ? "" : programacionSaldo;
 
         findViewById();
         iniComponents();
@@ -195,6 +200,12 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
                     loadInfo(false);
                     break;
             }
+
+            if (programacionSaldo.isEmpty())
+                tvSaldo.setVisibility(View.GONE);
+            else
+                tvSaldo.setText("SALDO: " + programacionSaldo);
+
         } else {
             Toast.makeText(this, "Necesita descargar Catalogos", Toast.LENGTH_LONG).show();
             exit();
@@ -238,6 +249,7 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         tvTanques = findViewById(R.id.tv_constancia_plata_form_tanques);
         tvErrorTanques = findViewById(R.id.tv_constancia_plata_form_tanques_error);
         tvFirma = findViewById(R.id.tv_constancia_plata_form_firma);
+        tvSaldo = findViewById(R.id.tv_constancia_plata_form_saldo);
 
         chkUtilPlataColoidal = findViewById(R.id.chk_constancia_plata_form_utiliza_plata_coloidal);
         chkUtilHipoclorito = findViewById(R.id.chk_constancia_plata_form_utiliza_hipoclorito);

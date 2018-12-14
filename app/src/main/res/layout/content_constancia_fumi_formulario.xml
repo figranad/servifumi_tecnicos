@@ -449,6 +449,17 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
+                android:id="@+id/tv_constancia_fumi_form_saldo"
+                style="@style/EtiquetaSpinner"
+                android:text="@string/saldo_constancia"
+                android:textColor="@color/colorNegro"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
                 android:id="@+id/tv_constancia_fumi_form_firma"
                 style="@style/EtiquetaSpinner"
                 android:text="@string/firma" />

@@ -122,4 +122,5 @@
     <string name="title_activity_enviar">Enviar Datos</string>
     <string name="enviar">ENVIAR TODO</string>
     <string name="constancia_sf_accesorios">ACCESORIOS ASIGNADOS*</string>
+    <string name="saldo_constancia">SALDO:</string>
 </resources>
