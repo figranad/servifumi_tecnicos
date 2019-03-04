@@ -64,7 +64,7 @@ public class CheckUpdate implements Callback<String> {
                 .setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.app_2sis.e_voluciona.servifumi_tecnicos"))); // TODO: 17/08/2018 verificar al subirlo
+                        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.app_2sis.e_voluciona.servifumi_tecnicos")));
                         activity.finish();
                     }
 

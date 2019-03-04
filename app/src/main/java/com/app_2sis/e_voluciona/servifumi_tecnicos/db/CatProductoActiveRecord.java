@@ -174,7 +174,7 @@ public class CatProductoActiveRecord extends MyActiveRecord {
 
         for (CatProducto producto : catProductoList) {
             productoBAList.add(new ProductoBeanAdapter(
-                    producto.getNombre(),
+                    producto.getNombre() + " - " + producto.getIngrediente_act(),
                     producto.getCat_productos_id()
             ));
         }
