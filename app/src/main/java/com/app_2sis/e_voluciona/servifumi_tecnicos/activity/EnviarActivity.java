@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.download.CheckUpdate;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.upload.ProgramacionEnviar;
 
 public class EnviarActivity extends AppCompatActivity
@@ -45,6 +46,7 @@ public class EnviarActivity extends AppCompatActivity
 
         findViewById();
         iniComponents();
+        new CheckUpdate(this);
     }
 
     private void findViewById() {
