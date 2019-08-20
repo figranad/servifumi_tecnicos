@@ -261,6 +261,19 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/liquidado" />
 
+            <TextView
+                android:id="@+id/tv_constancia_plata_form_modo_pago"
+                style="@style/EtiquetaSpinner"
+                android:text="@string/modo_pago" />
+
+            <Spinner
+                android:id="@+id/sp_constancia_plata_form_modo_pago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp" />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_dinero_recibido"
                 style="@style/TIL">

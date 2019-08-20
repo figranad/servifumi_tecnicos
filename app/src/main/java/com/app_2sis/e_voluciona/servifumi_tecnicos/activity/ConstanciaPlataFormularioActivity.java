@@ -40,6 +40,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.CatTanqueActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaPlataActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaPlataTanquesActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.MetodoPagoActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ProgramacionActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.UsuarioActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
@@ -75,13 +77,15 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
     private EditText etFecha, etCliente, etContacto, etHoraEntrada, etHoraSalida, etMatOtro,
             etObservaciones, etDineroRecibido;
     private Button btnFecha, btnHoraEntrada, btnHoraSalida;
-    private TextView tvUtiliza, tvAplica, tvMaterial, tvTanques, tvFirma, tvErrorTanques, tvSaldo;
+    private TextView tvUtiliza, tvAplica, tvMaterial, tvTanques, tvFirma, tvErrorTanques, tvSaldo,
+            tvModoPago;
     private CheckBox chkUtilPlataColoidal, chkUtilHipoclorito, chkUtilDesincrustante,
             chkApliAsperjado, chkApliRodillo, chkApliDirecto, chkMatPvc, chkMatFibrocemento,
             chkMatOtro, chkLiquidado;
     private ImageButton btnFirma;
     private ImageView ivFirma;
     private FloatingActionButton fabGuardar;
+    private Spinner spModoPago;
 
     // Recycler view para los tanques trabajados
     private RecyclerView rvTanque;
@@ -98,6 +102,7 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
     private ProgramacionActiveRecord programacionActiveRecord;
     private ConstanciaPlataActiveRecord constanciaPlataActiveRecord;
     private CatTanqueActiveRecord catTanqueActiveRecord;
+    private MetodoPagoActiveRecord metodoPagoActiveRecord;
     private ConstanciaPlataTanquesActiveRecord constanciaPlataTanquesActiveRecord;
 
 
@@ -157,10 +162,12 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         constanciaPlataActiveRecord = new ConstanciaPlataActiveRecord(this);
         catTanqueActiveRecord = new CatTanqueActiveRecord(this);
         constanciaPlataTanquesActiveRecord = new ConstanciaPlataTanquesActiveRecord(this);
+        metodoPagoActiveRecord = new MetodoPagoActiveRecord(this);
         context = getApplicationContext();
         programacion = programacionActiveRecord.getProgramacion(Programacion.ID_WS, programacionID_bd);
         if (hayInfoCatalogos()) {
             setFechayHoras();
+            iniSpinners();
 
             LinearLayoutManager lm = new LinearLayoutManager(this);
             DividerItemDecoration mDivider = new DividerItemDecoration(rvTanque.getContext(), LinearLayoutManager.VERTICAL);
@@ -212,6 +219,12 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         }
     }
 
+    private void iniSpinners(){
+        spModoPago.setAdapter(new ArrayAdapter<>(
+                getApplicationContext(), R.layout.item_spinner,
+                metodoPagoActiveRecord.getMetodoPagosNombres()));
+    }
+
     private void findViewById() {
         fabGuardar = findViewById(R.id.fab_save);
         fabGuardar.setOnClickListener(this);
@@ -250,6 +263,7 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         tvErrorTanques = findViewById(R.id.tv_constancia_plata_form_tanques_error);
         tvFirma = findViewById(R.id.tv_constancia_plata_form_firma);
         tvSaldo = findViewById(R.id.tv_constancia_plata_form_saldo);
+        tvModoPago = findViewById(R.id.tv_constancia_plata_form_modo_pago);
 
         chkUtilPlataColoidal = findViewById(R.id.chk_constancia_plata_form_utiliza_plata_coloidal);
         chkUtilHipoclorito = findViewById(R.id.chk_constancia_plata_form_utiliza_hipoclorito);
@@ -261,6 +275,8 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         chkMatFibrocemento = findViewById(R.id.chk_constancia_plata_form_material_fibrocemento);
         chkMatOtro = findViewById(R.id.chk_constancia_plata_form_material_otro);
         chkLiquidado = findViewById(R.id.chk_constancia_plata_form_liquidado);
+
+        spModoPago = findViewById(R.id.sp_constancia_plata_form_modo_pago);
 
         ivFirma = findViewById(R.id.iv_constancia_plata_form_firma);
         btnFirma = findViewById(R.id.btn_constancia_plata_form_firma);
@@ -289,7 +305,8 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
 
     private boolean hayInfoCatalogos() {
         return !(programacionActiveRecord.isEmpty()
-                || catTanqueActiveRecord.isEmpty());
+                || catTanqueActiveRecord.isEmpty()
+                || metodoPagoActiveRecord.isEmpty());
     }
 
     /**
@@ -316,6 +333,8 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
             etMatOtro.setText(constanciaPlata.getTip_material_observacion());
             etObservaciones.setText(constanciaPlata.getObservaciones());
             chkLiquidado.setCheckedImmediately(constanciaPlata.getRecibe_dinero().equals(Constant.SI));
+            spModoPago.setSelection(metodoPagoActiveRecord.getPositionInlista(
+                    constanciaPlata.getModo_pago_id()));
             etDineroRecibido.setText(constanciaPlata.getDinero_recibido());
             firmaPath = constanciaPlata.getFirma();
             showFirmaEnImageView(firmaPath);
@@ -346,6 +365,7 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
         chkMatOtro.setEnabled(false);
         etMatOtro.setEnabled(false);
         etObservaciones.setEnabled(false);
+        spModoPago.setEnabled(false);
         chkLiquidado.setEnabled(false);
         etDineroRecibido.setEnabled(false);
     }
@@ -512,6 +532,8 @@ public class ConstanciaPlataFormularioActivity extends AppCompatActivity impleme
             constanciaPlata.setObservaciones(etObservaciones.getText().toString().trim());
             constanciaPlata.setRecibe_dinero(
                     chkLiquidado.isChecked() ? Constant.SI : Constant.NO);
+            constanciaPlata.setModo_pago_id(metodoPagoActiveRecord.getIDInlista(
+                    spModoPago.getSelectedItem().toString()));
             constanciaPlata.setDinero_recibido(etDineroRecibido.getText().toString().trim());
             constanciaPlata.setFirma(firmaPath);
             constanciaPlata.setSincronizado(Constant.NO);

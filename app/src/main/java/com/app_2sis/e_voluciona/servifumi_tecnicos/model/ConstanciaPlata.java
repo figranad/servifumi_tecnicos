@@ -37,6 +37,7 @@ public class ConstanciaPlata {
     public static final String FIRMA_WS = "firma_pic";
     public static final String FOLIO_CERTIFICADO_WS = "folio_certificado";
     public static final String TITULO_PROGRAMACION_WS = "titulo_programacion";
+    public static final String MODO_PAGO_ID = "modo_pago_id";
 
     public static final String PROGRAMACION_ID_WS = "programacion_id";
     public static final String USUARIO_ID_WS = "usuario_id";
@@ -150,6 +151,10 @@ public class ConstanciaPlata {
     @SerializedName(TITULO_PROGRAMACION_WS)
     @DatabaseField(columnName = TITULO_PROGRAMACION_WS)
     private String titulo_programacion;
+
+    @SerializedName(MODO_PAGO_ID)
+    @DatabaseField(columnName = MODO_PAGO_ID)
+    private String modo_pago_id;
 
     //*******************************************
 
@@ -354,6 +359,14 @@ public class ConstanciaPlata {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public String getModo_pago_id() {
+        return modo_pago_id;
+    }
+
+    public void setModo_pago_id(String modo_pago_id) {
+        this.modo_pago_id = modo_pago_id;
     }
 
     public String getRecibe_dinero() {  //Servicio Liaquidado

@@ -32,7 +32,8 @@ public class DB extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "servifumi_tecnicos.db";
 
-    private static final int DATABASE_VERSION = 1;
+    //Version 2: Se agrega el campo de modo_pago_id a las constancias de plata
+    private static final int DATABASE_VERSION = 2;
     // TODO: 06/07/2018 aumentar la version si hago cambios
 
     private Dao<Usuario, Integer> usuarioDao;
