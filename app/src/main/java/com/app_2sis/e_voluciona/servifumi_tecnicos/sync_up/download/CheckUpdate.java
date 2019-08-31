@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
-import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.DatosAplicacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter.ApiAdapter;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cv_programacion_detalle"
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                         style="@style/TextoDetallesInCard" />
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/ll_programacion_telefonos"
@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="15dp" />
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cv_programacion_orden"
                 android:layout_width="match_parent"
@@ -162,13 +162,13 @@
                         android:id="@+id/tv_programacion_orden_observaciones"
                         style="@style/TextoDetallesInCard" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="15dp" />
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cv_programacion_insp_plata"
                 android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                         android:id="@+id/tv_programacion_insp_plata_cisternas"
                         style="@style/TextoDetallesInCard" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/btn_programacion_pdf_plata"
@@ -216,7 +216,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="15dp" />
 
-            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cv_programacion_insp_fumi"
                 android:layout_width="match_parent"
@@ -244,7 +244,7 @@
                         android:id="@+id/tv_programacion_insp_fumi_lugares"
                         style="@style/TextoDetallesInCard" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/ll_programacion_insp_fumi_botones"
@@ -304,7 +304,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_programacion_imposible_realizar"
                     style="@style/TIL">
 
@@ -315,7 +315,7 @@
                         android:ems="10"
                         android:hint="@string/observacion_visita"
                         android:inputType="textCapCharacters" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/btn_programacion_imposible_realizar"
@@ -333,4 +333,4 @@
         </LinearLayout>
     </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

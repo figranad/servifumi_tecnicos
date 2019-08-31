@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +8,7 @@
     tools:context=".activity.ConstanciaPlataFormularioActivity"
     tools:showIn="@layout/activity_constancia_plata_formulario">
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_fecha"
                 style="@style/TIL">
 
@@ -31,7 +31,7 @@
                     android:enabled="false"
                     android:hint="@string/fecha"
                     android:inputType="date" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_constancia_plata_form_fecha"
@@ -39,7 +39,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="@string/modificar_fecha" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_cliente"
                 style="@style/TIL">
 
@@ -51,9 +51,9 @@
                     android:enabled="false"
                     android:hint="@string/cliente"
                     android:inputType="textCapCharacters" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_contacto"
                 style="@style/TIL">
 
@@ -64,10 +64,10 @@
                     android:ems="10"
                     android:hint="@string/contacto"
                     android:inputType="textCapCharacters" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_hora_entrada"
                 style="@style/TIL"
                 android:layout_marginBottom="12dp">
@@ -80,7 +80,7 @@
                     android:enabled="false"
                     android:hint="@string/hora_entrada"
                     android:inputType="time" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_constancia_plata_form_hora_entrada"
@@ -88,7 +88,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="@string/modificar_hora" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_hora_salida"
                 style="@style/TIL">
 
@@ -100,7 +100,7 @@
                     android:enabled="false"
                     android:hint="@string/hora_salida"
                     android:inputType="time" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_constancia_plata_form_hora_salida"
@@ -210,7 +210,7 @@
                     android:text="@string/otro" />
             </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_material_otro"
                 style="@style/TIL">
 
@@ -221,7 +221,7 @@
                     android:ems="10"
                     android:hint="@string/material_otro"
                     android:inputType="textCapCharacters" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_constancia_plata_form_tanques"
@@ -235,13 +235,13 @@
                 android:textSize="15sp"
                 android:visibility="gone" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_constancia_plata_form_tanques"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scrollbars="vertical" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_observaciones"
                 style="@style/TIL">
 
@@ -252,7 +252,7 @@
                     android:ems="10"
                     android:hint="@string/observaciones"
                     android:inputType="textCapCharacters" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.rey.material.widget.CheckBox
                 android:id="@+id/chk_constancia_plata_form_liquidado"
@@ -274,7 +274,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_plata_form_dinero_recibido"
                 style="@style/TIL">
 
@@ -285,7 +285,7 @@
                     android:ems="10"
                     android:hint="@string/dinero_recibido"
                     android:inputType="numberDecimal" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_constancia_plata_form_saldo"
@@ -326,5 +326,5 @@
                     android:contentDescription="@string/firma" />
             </LinearLayout>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</android.support.constraint.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
