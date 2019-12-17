@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             MisPreferencias prefs = new MisPreferencias(this);
             prefs.setIdUsuarioLogueado(user.getUsuarioId());
             prefs.setIdTurnoUsuarioLogueado(user.getTurno_id());
+            prefs.setIdTecnicoLogueado(user.getTecnico_id());
             startActivity(new Intent(this, MainActivity.class));
             return true;
         } else {

@@ -25,7 +25,7 @@ public class ProgramacionSincronizar implements Callback<ProgramacionResponse> {
 
         ApiAdapter.getApiService_upload()
                 .create(ApiService.class)
-                .getProgramacion(new MisPreferencias(descargaActivity).getIdTurnoUsuarioLogueado())
+                .getProgramacion(new MisPreferencias(descargaActivity).getIdTecnicoLogueado())
                 .enqueue(this);
     }
 
