@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.app_2sis.e_voluciona.servifumi_tecnicos"
         minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 4
-        versionName "1.0.3"
+        targetSdkVersion 29
+        versionCode 5
+        versionName "1.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
