@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-servifumi_tecnicos.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-servifumi_tecnicos.iml" group="servifumi_tecnicos" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/servifumi_tecnicos.iml" filepath="$PROJECT_DIR$/servifumi_tecnicos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/servifumi_tecnicos-app.iml" filepath="$PROJECT_DIR$/app/servifumi_tecnicos-app.iml" group="servifumi_tecnicos/app" />
     </modules>
   </component>
 </project>

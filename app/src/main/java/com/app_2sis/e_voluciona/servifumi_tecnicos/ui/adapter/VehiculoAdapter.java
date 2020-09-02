@@ -54,6 +54,7 @@ public class VehiculoAdapter extends RecyclerView.Adapter<VehiculoAdapter.Vehicu
         String vehiculo = vehiculosArrayList.get(position);
         holder.setDescripcion(vehiculo);
         holder.descripcion.setTag(position);
+        holder.setIsRecyclable(false);  //Para que no se limpien las selecciones
     }
 
     @Override

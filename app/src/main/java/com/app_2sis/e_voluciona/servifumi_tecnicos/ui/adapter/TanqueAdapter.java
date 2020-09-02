@@ -58,6 +58,7 @@ public class TanqueAdapter extends RecyclerView.Adapter<TanqueAdapter.TanqueHold
         holder.setDescripcion(currentTanque.getText());
         holder.setCantidad(currentTanque.getCantidad());
         holder.setTanqueID(currentTanque.getTanqueID());
+        holder.setIsRecyclable(false);  //Para que no se limpien las selecciones
 
         holder.chkIsCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
