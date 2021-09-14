@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.R;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.ProductoBeanAdapter;
-import com.rey.material.widget.CheckBox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,7 +129,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         }
 
         public void setChecked(boolean isCheck) {
-            this.chkIsCheck.setCheckedImmediately(isCheck);
+            this.chkIsCheck.setChecked(isCheck);
         }
 
 

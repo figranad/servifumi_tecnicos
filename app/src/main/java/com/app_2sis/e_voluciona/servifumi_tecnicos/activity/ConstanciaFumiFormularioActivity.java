@@ -15,6 +15,11 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.Bundle;
+
+import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ConstanciaFumiAreasActiveRecord;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAreas;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.adapter.AreaBeanAdapter;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.AreaAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,6 +39,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -78,7 +84,6 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.AccesorioAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.PlagaAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.ProductoAdapter;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.ui.adapter.VehiculoAdapter;
-import com.rey.material.widget.CheckBox;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -92,23 +97,24 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private FloatingActionButton fabGuardar;
     private TextInputLayout tilFecha, tilCliente, tilContacto, tilHoraEntrada, tilHoraSalida,
             tilTipoServOtro, tilObservaciones, tilDineroRecibido, tilVehiculoMarca,
-            tilVehiculoMatricula, tilVehiculoNumEco;
+            tilVehiculoMatricula, tilVehiculoNumEco, tilAreaNombre;
     private EditText etFecha, etCliente, etContacto, etHoraEntrada, etHoraSalida, etTipoServOtro,
             etObservaciones, etDineroRecibido, etVehiculoMarca, etVehiculoMatricula,
-            etVehiculoNumEco;
-    private Button btnFecha, btnHoraEntrada, btnHoraSalida, btnVehiculoGuardar, btnVehiculoLimpiar;
+            etVehiculoNumEco, etAreaNombre;
+    private Button btnFecha, btnHoraEntrada, btnHoraSalida, btnVehiculoGuardar, btnVehiculoLimpiar,
+            btnAreaGuardar, btnAreaLimpiar;
     private TextView tvAreas, tvTipoServ, tvAplicacion, tvColocacion, tvPlagas, tvPlagasError,
             tvProductos, tvProductosError, tvModoPago, tvFirma, tvErrorSpTipoServ, tvVehiculos,
             tvVehiculosError, tvTipoInstalacion, tvErrorSpTipoInstalacion, tvAccesorios,
-            tvAccesoriosError, tvSaldo;
+            tvAccesoriosError, tvSaldo, tvAreasDetallada, tvAreasDetalladaError;
     private CheckBox chkAreaInterior, chkAreaExterior, chkAreaVehiculo, chkAspersion, chkMicroniz,
-            chkTermoneb, chkInyeccion, chkCeboRoden, chkCeboGel, chkTrampas, chkLiquidado;
+            chkTermoneb, chkInyeccion, chkCeboRoden, chkCeboGel, chkTrampas, chkLiquidado, chkArea;
     private Spinner spTipoServ, spModoPago, spTipoInstalacion;
     private ImageButton btnFirma;
     private ImageView ivFirma;
-    private LinearLayout llVehiculo;
+    private LinearLayout llVehiculo, llArea;
 
-    private RecyclerView rvPlaga, rvProducto, rvVehiculo, rvAccesorio;
+    private RecyclerView rvPlaga, rvProducto, rvVehiculo, rvAccesorio, rvArea;
     private PlagaAdapter plagaAdapter;
     private List<PlagaBeanAdapter> plagaBeanAdapterList;
     private ProductoAdapter productoAdapter;
@@ -118,6 +124,10 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private VehiculoAdapter vehiculoAdapter;
     private List<VehiculoBeanAdapter> vehiculoBeanAdapterList;
     private List<String> vehiculosBean;
+
+    private AreaAdapter areaAdapter;
+    private List<AreaBeanAdapter> areaBeanAdapterList;
+    private List<String> areasBean;
 
     private String programacionID_bd; //Si es view no lo envia
     private String constanciaFumiID_bd; //Si es new no lo envia
@@ -139,6 +149,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
     private ConstanciaFumiAccesoriosActiveRecord constanciaFumiAccesoriosActiveRecord;
     private ProgramacionAccesorioActiveRecord programacionAccesorioActiveRecord;
     private ConstanciaFumiVehiculosActiveRecord constanciaFumiVehiculosActiveRecord;
+    private ConstanciaFumiAreasActiveRecord constanciaFumiAreasActiveRecord;
 
     //DateFormat para fechas y horas separadas
     private SimpleDateFormat dateFFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -196,6 +207,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         tilVehiculoMarca = findViewById(R.id.til_constancia_fumi_form_marca);
         tilVehiculoMatricula = findViewById(R.id.til_constancia_fumi_form_matricula);
         tilVehiculoNumEco = findViewById(R.id.til_constancia_fumi_form_num_economico);
+        tilAreaNombre = findViewById(R.id.til_constancia_fumi_form_area_nombre);
 
         etFecha = findViewById(R.id.et_constancia_fumi_form_fecha);
         etCliente = findViewById(R.id.et_constancia_fumi_form_cliente);
@@ -208,6 +220,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         etVehiculoMarca = findViewById(R.id.et_constancia_fumi_form_marca);
         etVehiculoMatricula = findViewById(R.id.et_constancia_fumi_form_matricula);
         etVehiculoNumEco = findViewById(R.id.et_constancia_fumi_form_num_economico);
+        etAreaNombre = findViewById(R.id.et_constancia_fumi_form_area_nombre);
 
         btnFecha = findViewById(R.id.btn_constancia_fumi_form_fecha);
         btnFecha.setOnClickListener(this);
@@ -219,6 +232,10 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         btnVehiculoGuardar.setOnClickListener(this);
         btnVehiculoLimpiar = findViewById(R.id.btn_constancia_fumi_form_limpiar_vehiculo);
         btnVehiculoLimpiar.setOnClickListener(this);
+        btnAreaGuardar = findViewById(R.id.btn_constancia_fumi_form_guardar_area);
+        btnAreaGuardar.setOnClickListener(this);
+        btnAreaLimpiar = findViewById(R.id.btn_constancia_fumi_form_limpiar_area);
+        btnAreaLimpiar.setOnClickListener(this);
 
         tvAreas = findViewById(R.id.tv_constancia_fumi_form_areas);
         tvTipoServ = findViewById(R.id.tv_constancia_fumi_form_tipo_servicio);
@@ -235,11 +252,14 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         tvFirma = findViewById(R.id.tv_constancia_fumi_form_firma);
         tvVehiculos = findViewById(R.id.tv_constancia_fumi_form_vehiculos);
         tvVehiculosError = findViewById(R.id.tv_constancia_fumi_form_vehiculos_error);
+        tvAreasDetallada = findViewById(R.id.tv_constancia_fumi_form_areas_detalladas);
+        tvAreasDetalladaError = findViewById(R.id.tv_constancia_fumi_form_areas_error);
         tvSaldo = findViewById(R.id.tv_constancia_fumi_form_saldo);
 
         chkAreaInterior = findViewById(R.id.chk_constancia_fumi_form_area_interior);
         chkAreaExterior = findViewById(R.id.chk_constancia_fumi_form_area_exterior);
         chkAreaVehiculo = findViewById(R.id.chk_constancia_fumi_form_area_vehiculo);
+        chkArea = findViewById(R.id.chk_constancia_fumi_form_area_area);
         chkAspersion = findViewById(R.id.chk_constancia_fumi_form_aspersion);
         chkMicroniz = findViewById(R.id.chk_constancia_fumi_form_micronizacion);
         chkTermoneb = findViewById(R.id.chk_constancia_fumi_form_termoneb);
@@ -260,10 +280,12 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         rvProducto = findViewById(R.id.rv_constancia_fumi_form_productos);
         rvAccesorio = findViewById(R.id.rv_constancia_fumi_form_accesorios);
         rvVehiculo = findViewById(R.id.rv_constancia_fumi_form_list_vehiculos);
+        rvArea = findViewById(R.id.rv_constancia_fumi_form_list_areas);
 
         ivFirma = findViewById(R.id.iv_constancia_fumi_form_firma);
 
         llVehiculo = findViewById(R.id.ll_constancia_fumi_form_vehiculos);
+        llArea = findViewById(R.id.ll_constancia_fumi_form_areas);
     }
 
     private void iniComponents() {
@@ -273,6 +295,9 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         vehiculoAdapter = new VehiculoAdapter(this);
         vehiculoBeanAdapterList = new ArrayList<>();
         vehiculosBean = new ArrayList<>();
+        areaAdapter = new AreaAdapter(this);
+        areaBeanAdapterList = new ArrayList<>();
+        areasBean = new ArrayList<>();
         misPreferencias = new MisPreferencias(this);
         usuarioActiveRecord = new UsuarioActiveRecord(this);
         programacionActiveRecord = new ProgramacionActiveRecord(this);
@@ -287,6 +312,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         constanciaFumiProductosActiveRecord = new ConstanciaFumiProductosActiveRecord(this);
         constanciaFumiAccesoriosActiveRecord = new ConstanciaFumiAccesoriosActiveRecord(this);
         constanciaFumiVehiculosActiveRecord = new ConstanciaFumiVehiculosActiveRecord(this);
+        constanciaFumiAreasActiveRecord = new ConstanciaFumiAreasActiveRecord(this);
         context = getApplicationContext();
         programacion = programacionActiveRecord.getProgramacion(Programacion.ID_WS, programacionID_bd);
 
@@ -327,6 +353,17 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
                         llVehiculo.setVisibility(View.VISIBLE);
                     else
                         llVehiculo.setVisibility(View.GONE);
+                }
+            });
+
+            llArea.setVisibility(View.GONE);
+            chkArea.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    if (isChecked)
+                        llArea.setVisibility(View.VISIBLE);
+                    else
+                        llArea.setVisibility(View.GONE);
                 }
             });
 
@@ -461,6 +498,13 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         rvVehiculo.setLayoutManager(lm);
         rvVehiculo.addItemDecoration(mDivider);
         rvVehiculo.setAdapter(vehiculoAdapter);
+
+        lm = new LinearLayoutManager(this);
+        mDivider = new DividerItemDecoration(rvArea.getContext(), LinearLayoutManager.VERTICAL);
+        mDivider.setDrawable(getResources().getDrawable(R.drawable.line_divider_gris));
+        rvArea.setLayoutManager(lm);
+        rvArea.addItemDecoration(mDivider);
+        rvArea.setAdapter(areaAdapter);
     }
 
     /**
@@ -499,9 +543,10 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             etHoraEntrada.setText(constanciaFumi.getHora_entrada());
             etHoraSalida.setText(constanciaFumi.getHora_salida());
 
-            chkAreaInterior.setCheckedImmediately(constanciaFumi.getAreas_tratadas_interior().equals(Constant.SI));
-            chkAreaExterior.setCheckedImmediately(constanciaFumi.getAreas_tratadas_exterior().equals(Constant.SI));
-            chkAreaVehiculo.setCheckedImmediately(constanciaFumi.getAreas_tratadas_vehiculo().equals(Constant.SI));
+            chkAreaInterior.setChecked(constanciaFumi.getAreas_tratadas_interior().equals(Constant.SI));
+            chkAreaExterior.setChecked(constanciaFumi.getAreas_tratadas_exterior().equals(Constant.SI));
+            chkAreaVehiculo.setChecked(constanciaFumi.getAreas_tratadas_vehiculo().equals(Constant.SI));
+            chkArea.setChecked(constanciaFumi.getAreas_tratadas_detalladas().equals(Constant.SI));
 
             spTipoServ.setSelection(Utileria.getPositionSpinner(
                     Utileria.getTipoServicioID(), constanciaFumi.getTipo_servicio()));
@@ -509,13 +554,13 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             spTipoInstalacion.setSelection(catTipoInstalacionActiveRecord.getPositionInlista(
                     constanciaFumi.getTipo_instalacion_id()));
 
-            chkAspersion.setCheckedImmediately(constanciaFumi.getTip_aplica_aspersion().equals(Constant.SI));
-            chkMicroniz.setCheckedImmediately(constanciaFumi.getTip_aplica_micronizacion().equals(Constant.SI));
-            chkTermoneb.setCheckedImmediately(constanciaFumi.getTip_aplica_termoneb().equals(Constant.SI));
-            chkInyeccion.setCheckedImmediately(constanciaFumi.getTip_aplica_inyeccion().equals(Constant.SI));
-            chkCeboRoden.setCheckedImmediately(constanciaFumi.getTip_aplica_cebo_rodent().equals(Constant.SI));
-            chkCeboGel.setCheckedImmediately(constanciaFumi.getTip_aplica_cebo_gel().equals(Constant.SI));
-            chkTrampas.setCheckedImmediately(constanciaFumi.getTip_aplica_trampas().equals(Constant.SI));
+            chkAspersion.setChecked(constanciaFumi.getTip_aplica_aspersion().equals(Constant.SI));
+            chkMicroniz.setChecked(constanciaFumi.getTip_aplica_micronizacion().equals(Constant.SI));
+            chkTermoneb.setChecked(constanciaFumi.getTip_aplica_termoneb().equals(Constant.SI));
+            chkInyeccion.setChecked(constanciaFumi.getTip_aplica_inyeccion().equals(Constant.SI));
+            chkCeboRoden.setChecked(constanciaFumi.getTip_aplica_cebo_rodent().equals(Constant.SI));
+            chkCeboGel.setChecked(constanciaFumi.getTip_aplica_cebo_gel().equals(Constant.SI));
+            chkTrampas.setChecked(constanciaFumi.getTip_aplica_trampas().equals(Constant.SI));
 
             //<editor-fold desc="Cargar Vehiculos en UI">
             List<ConstanciaFumiVehiculos> constanciaFumiVehiculos = constanciaFumiVehiculosActiveRecord
@@ -535,6 +580,22 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             }
             //</editor-fold>
 
+            //<editor-fold desc="Cargar Areas en UI">
+            List<ConstanciaFumiAreas> constanciaFumiAreas = constanciaFumiAreasActiveRecord
+                    .getConstanciaFumiAreas(ConstanciaFumiAreas.CONSTANCIA_FUMI_ID_WS, constanciaFumiID_bd);
+            AreaBeanAdapter areaBeanAdapter;
+
+            for (ConstanciaFumiAreas area : constanciaFumiAreas) {
+                areaBeanAdapter = new AreaBeanAdapter(
+                        area.getNombre()
+                );
+                String text = area.getNombre();
+                areaBeanAdapterList.add(areaBeanAdapter);
+                areasBean.add(text);
+                areaAdapter.add(text);
+            }
+            //</editor-fold>
+
             //<editor-fold desc="Cargar Accesorios">
             programacionAccesorios = programacionAccesorioActiveRecord.getProgramacionAccesorios(ProgramacionAccesorio.DOMICILIO_ID_WS, constanciaFumi.getDomicilio_id());
 
@@ -551,7 +612,7 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             //</editor-fold>
 
             etObservaciones.setText(constanciaFumi.getObservaciones());
-            chkLiquidado.setCheckedImmediately(constanciaFumi.getServicio_liquidado().equals(Constant.SI));
+            chkLiquidado.setChecked(constanciaFumi.getServicio_liquidado().equals(Constant.SI));
             spModoPago.setSelection(metodoPagoActiveRecord.getPositionInlista(
                     constanciaFumi.getModo_pago_id()));
             etDineroRecibido.setText(constanciaFumi.getDinero_recibido());
@@ -572,11 +633,13 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         btnHoraSalida.setEnabled(false);
         btnFirma.setEnabled(false);
         btnVehiculoGuardar.setEnabled(false);
+        btnAreaGuardar.setEnabled(false);
 
         etContacto.setEnabled(false);
         chkAreaInterior.setEnabled(false);
         chkAreaExterior.setEnabled(false);
         chkAreaVehiculo.setEnabled(false);
+        chkArea.setEnabled(false);
         spTipoServ.setEnabled(false);
         spTipoInstalacion.setEnabled(false);
         etTipoServOtro.setEnabled(false);
@@ -597,6 +660,9 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         etVehiculoMarca.setEnabled(false);
         etVehiculoMatricula.setEnabled(false);
         etVehiculoNumEco.setEnabled(false);
+
+        areaAdapter.hideDelete(true);
+        etAreaNombre.setEnabled(false);
     }
 
     @Override
@@ -736,6 +802,12 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             case R.id.btn_constancia_fumi_form_limpiar_vehiculo:
                 clearVehiculoUI();
                 break;
+            case R.id.btn_constancia_fumi_form_guardar_area:
+                addAreaList();
+                break;
+            case R.id.btn_constancia_fumi_form_limpiar_area:
+                clearAreaUI();
+                break;
         }
     }
 
@@ -782,6 +854,43 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         }
     }
 
+    private void addAreaList() {
+        if (validarArea()) {
+            AreaBeanAdapter areaBeanAdapter = new AreaBeanAdapter(
+                    etAreaNombre.getText().toString().trim()
+            );
+            areaBeanAdapterList.add(areaBeanAdapter);
+            String text = areaBeanAdapter.getNombre();
+            areasBean.add(text);
+            areaAdapter.add(text);
+            clearAreaUI();
+        }
+    }
+
+    private void clearAreaUI() {
+        etAreaNombre.setText(null);
+    }
+
+    private void loadInfoAreasInUI(AreaBeanAdapter beanAdapter) {
+        etAreaNombre.setText(beanAdapter.getNombre());
+    }
+
+    public void loadInfoAreasDesdeAdapter(int position) {
+        if (areaBeanAdapterList != null && !areaBeanAdapterList.isEmpty()) {
+            AreaBeanAdapter beanAdapter = areaBeanAdapterList.get(position);
+            loadInfoAreasInUI(beanAdapter);
+        }
+    }
+
+    public void deleteInfoAreasDesdeAdapter(int position) {
+        if (areaBeanAdapterList != null && !areaBeanAdapterList.isEmpty()) {
+            clearAreaUI();
+            areaBeanAdapterList.remove(position);
+            areasBean.remove(position);
+            areaAdapter.remove(position);
+        }
+    }
+
     private void saveOrUpdate() {
         if (validar()) {
             Usuario usuario = usuarioActiveRecord.getUsuario(Usuario.USER_ID_WS, misPreferencias.getIdUsuarioLogueado());
@@ -800,6 +909,8 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
                     chkAreaExterior.isChecked() ? Constant.SI : Constant.NO);
             constanciaFumi.setAreas_tratadas_vehiculo(
                     chkAreaVehiculo.isChecked() ? Constant.SI : Constant.NO);
+            constanciaFumi.setAreas_tratadas_detalladas(
+                    chkArea.isChecked() ? Constant.SI : Constant.NO);
             constanciaFumi.setTip_aplica_aspersion(
                     chkAspersion.isChecked() ? Constant.SI : Constant.NO);
             constanciaFumi.setTip_aplica_micronizacion(
@@ -915,6 +1026,18 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             }
             //</editor-fold>
 
+            //<editor-fold desc="ConstanciaFumiAreas">
+            if (chkArea.isChecked()) {
+                ConstanciaFumiAreas constanciaFumiAreas;
+                for (AreaBeanAdapter areaBeanAdapter : areaBeanAdapterList) {
+                    constanciaFumiAreas = new ConstanciaFumiAreas();
+                    constanciaFumiAreas.setConstancia_fumi_id(constanciaFumiID);
+                    constanciaFumiAreas.setNombre(areaBeanAdapter.getNombre());
+                    constanciaFumiAreasActiveRecord.save(constanciaFumiAreas);
+                }
+            }
+            //</editor-fold>
+
             Toast.makeText(this, "Guardado Exitosamente", Toast.LENGTH_LONG).show();
             exit();
         }
@@ -929,6 +1052,18 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         }
         if (etVehiculoMatricula.getText().toString().trim().isEmpty()) {
             tilVehiculoMatricula.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
+            exito = false;
+        }
+        if (!exito)
+            Snackbar.make(findViewById(android.R.id.content), Constant.MSJ_VERIFICAR_ERRORES, Snackbar.LENGTH_SHORT).show();
+        return exito;
+    }
+
+    private boolean validarArea() {
+        clearErrorsArea();
+        boolean exito = true;
+        if (etAreaNombre.getText().toString().trim().isEmpty()) {
+            tilAreaNombre.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
             exito = false;
         }
         if (!exito)
@@ -983,6 +1118,15 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
             tvVehiculos.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
             tvVehiculosError.setText("Agregue al menos 1 vehículo");
             tvVehiculosError.setVisibility(View.VISIBLE);
+            exito = false;
+        }
+        //</editor-fold>
+
+        //<editor-fold desc="Validacion List Areas">
+        if (chkArea.isChecked() && areaBeanAdapterList.size() < 1) {
+            tvAreas.setError(Constant.MSJ_CAMPO_OBLIGATORIO);
+            tvAreasDetalladaError.setText("Agregue al menos 1 Área");
+            tvAreasDetalladaError.setVisibility(View.VISIBLE);
             exito = false;
         }
         //</editor-fold>
@@ -1076,6 +1220,12 @@ public class ConstanciaFumiFormularioActivity extends AppCompatActivity implemen
         tvVehiculosError.setVisibility(View.GONE);
         tilVehiculoMarca.setError(null);
         tilVehiculoMatricula.setError(null);
+    }
+
+    private void clearErrorsArea() {
+        tvAreas.setError(null);
+        tvAreasDetalladaError.setVisibility(View.GONE);
+        tilAreaNombre.setError(null);
     }
 
     private void clearErrors() {

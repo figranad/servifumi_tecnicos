@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,7 +31,6 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.Programacion;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.adapter.ApiConstants;
-import com.rey.material.widget.CheckBox;
 
 import java.util.Objects;
 
@@ -375,7 +375,7 @@ public class ProgramacionDetalleActivity extends AppCompatActivity implements Vi
                 || programacion.getImposible_realizar().equals(Constant.NO)) {  //Si es posible realizar no pide motivos
             llNoRealizar.setVisibility(View.GONE);
         } else {
-            chkNoRealizar.setCheckedImmediately(true);
+            chkNoRealizar.setChecked(true);
             etNoRealizarMotivo.setText(programacion.getImposible_realizar());
         }
     }

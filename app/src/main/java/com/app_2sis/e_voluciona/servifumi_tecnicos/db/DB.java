@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatAccesorio;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAccesorios;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAreas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ProgramacionAccesorio;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatPlaga;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.CatProducto;
@@ -33,7 +34,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "servifumi_tecnicos.db";
 
     //Version 2: Se agrega el campo de modo_pago_id a las constancias de plata
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     // TODO: 06/07/2018 aumentar la version si hago cambios
 
     private Dao<Usuario, Integer> usuarioDao;
@@ -54,6 +55,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
     private Dao<ConstanciaFumiProductos, Integer> constanciaFumiProductosDao;
     private Dao<ConstanciaFumiAccesorios, Integer> constanciaFumiAccesoriosDao;
     private Dao<ConstanciaFumiVehiculos, Integer> constanciaFumiVehiculosDao;
+    private Dao<ConstanciaFumiAreas, Integer> constanciaFumiAreasDao;
 
 
     public DB(Context context) {
@@ -79,6 +81,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
             TableUtils.createTableIfNotExists(connectionSource, ConstanciaFumiProductos.class);
             TableUtils.createTableIfNotExists(connectionSource, ConstanciaFumiAccesorios.class);
             TableUtils.createTableIfNotExists(connectionSource, ConstanciaFumiVehiculos.class);
+            TableUtils.createTableIfNotExists(connectionSource, ConstanciaFumiAreas.class);
             TableUtils.createTableIfNotExists(connectionSource, CatPlaga.class);
             TableUtils.createTableIfNotExists(connectionSource, CatAccesorio.class);
         } catch (SQLException e) {
@@ -106,6 +109,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
                 TableUtils.dropTable(connectionSource, ConstanciaFumiProductos.class, true);
                 TableUtils.dropTable(connectionSource, ConstanciaFumiAccesorios.class, true);
                 TableUtils.dropTable(connectionSource, ConstanciaFumiVehiculos.class, true);
+                TableUtils.dropTable(connectionSource, ConstanciaFumiAreas.class, true);
                 TableUtils.dropTable(connectionSource, CatPlaga.class, true);
                 TableUtils.dropTable(connectionSource, CatAccesorio.class, true);
             } catch (SQLException e) {
@@ -227,6 +231,13 @@ public class DB extends OrmLiteSqliteOpenHelper {
         return constanciaFumiVehiculosDao;
     }
 
+    public Dao<ConstanciaFumiAreas, Integer> getConstanciaFumiAreasDao() throws SQLException {
+        if (constanciaFumiAreasDao == null) {
+            constanciaFumiAreasDao = getDao(ConstanciaFumiAreas.class);
+        }
+        return constanciaFumiAreasDao;
+    }
+
     public Dao<CatPlaga, Integer> getCatPlagaDao() throws SQLException {
         if (catPlagaDao == null) {
             catPlagaDao = getDao(CatPlaga.class);
@@ -260,6 +271,7 @@ public class DB extends OrmLiteSqliteOpenHelper {
         constanciaFumiProductosDao = null;
         constanciaFumiAccesoriosDao = null;
         constanciaFumiVehiculosDao = null;
+        constanciaFumiAreasDao = null;
         catPlagaDao = null;
         catAccesorioDao = null;
     }

@@ -120,21 +120,21 @@
                 android:layout_marginBottom="2dp"
                 android:orientation="horizontal">
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_utiliza_plata_coloidal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/plata_coloidal" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_utiliza_hipoclorito"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/hipoclorito" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_utiliza_desincrustante"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -154,21 +154,21 @@
                 android:layout_marginBottom="2dp"
                 android:orientation="horizontal">
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_aplica_asperjado"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/asperjado" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_aplica_rodillo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/rodillo" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_aplica_directo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -188,21 +188,21 @@
                 android:layout_marginBottom="2dp"
                 android:orientation="horizontal">
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_material_pvc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:text="@string/pvc" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_material_fibrocemento"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:text="@string/fibrocemento" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_plata_form_material_otro"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -254,7 +254,7 @@
                     android:inputType="textCapCharacters" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.rey.material.widget.CheckBox
+            <CheckBox
                 android:id="@+id/chk_constancia_plata_form_liquidado"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

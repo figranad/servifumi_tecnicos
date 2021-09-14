@@ -4,8 +4,8 @@ public class ApiConstants {
 
     // TODO: 01/02/2019 Colocar url servidor al poner en produccion
     public static final String BASE_URL = "http://www.aplicaciones2sis.com/";
-//    public static final String BASE_URL = "http://192.168.1.124/";
-//    public static final String BASE_URL = "http://192.168.0.34/";
+//    public static final String BASE_URL = "http://192.168.1.86/";
+//    public static final String BASE_URL = "http://192.168.0.4/";
 
     public static final String URL_PDF_INSP_FUMI = "/servifumi/web/index.php/ws-tecnicos/get-pdf-insp-fumi?id=";
     public static final String URL_PDF_INSP_PLATA = "/servifumi/web/index.php/ws-tecnicos/get-pdf-insp-plata?id=";

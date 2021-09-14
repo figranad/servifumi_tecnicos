@@ -132,26 +132,41 @@
                 android:layout_marginBottom="2dp"
                 android:orientation="horizontal">
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_area_interior"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/area_interior" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_area_exterior"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/area_exterior" />
+            </LinearLayout>
 
-                <com.rey.material.widget.CheckBox
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_area_vehiculo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/area_vehiculo" />
+
+                <CheckBox
+                    android:id="@+id/chk_constancia_fumi_form_area_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/area_area" />
             </LinearLayout>
 
             <TextView
@@ -192,28 +207,28 @@
                 android:layout_marginBottom="2dp"
                 android:orientation="horizontal">
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_aspersion"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/aspersion" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_micronizacion"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/micronizacion" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_termoneb"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/termoneb" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_inyeccion"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -233,21 +248,21 @@
                 android:layout_marginBottom="2dp"
                 android:orientation="horizontal">
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_cebo_roden"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/cebo_roden" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_cebo_gel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/cebo_gel" />
 
-                <com.rey.material.widget.CheckBox
+                <CheckBox
                     android:id="@+id/chk_constancia_fumi_form_trampas"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -402,6 +417,71 @@
                     android:scrollbars="vertical" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_constancia_fumi_form_areas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_constancia_fumi_form_areas_detalladas"
+                    style="@style/EtiquetaSpinner"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/constancia_sf_areas_detalladas" />
+
+                <TextView
+                    android:id="@+id/tv_constancia_fumi_form_areas_error"
+                    style="@style/EtiquetaSpinner"
+                    android:textColor="@color/colorNegro"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_constancia_fumi_form_area_nombre"
+                    style="@style/TIL">
+
+                    <EditText
+                        android:id="@+id/et_constancia_fumi_form_area_nombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/hint_area_nombre"
+                        android:inputType="textCapSentences" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_constancia_fumi_form_guardar_area"
+                        style="@style/ButtonMaterial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="@string/guardar" />
+
+                    <Button
+                        android:id="@+id/btn_constancia_fumi_form_limpiar_area"
+                        style="@style/ButtonMaterial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="@string/limpiar" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_constancia_fumi_form_list_areas"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/colorDisable"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_constancia_fumi_form_observaciones"
                 style="@style/TIL">
@@ -415,7 +495,7 @@
                     android:inputType="textCapCharacters" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.rey.material.widget.CheckBox
+            <CheckBox
                 android:id="@+id/chk_constancia_fumi_form_liquidado"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

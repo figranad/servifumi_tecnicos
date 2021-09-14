@@ -6,6 +6,7 @@ import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAccesorios;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAreas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
@@ -189,6 +190,8 @@ public class ConstanciaFumiActiveRecord extends MyActiveRecord {
                 ConstanciaFumiProductos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
         new ConstanciaFumiVehiculosActiveRecord(context).delete(
                 ConstanciaFumiVehiculos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
+        new ConstanciaFumiAreasActiveRecord(context).delete(
+                ConstanciaFumiAreas.CONSTANCIA_FUMI_ID_WS, constanciaFumiID);
     }
 
     public List<ConstanciaFumiBeanAdapter> getConstanciaFumiBeanAdapter(String usuarioID) {
@@ -246,6 +249,11 @@ public class ConstanciaFumiActiveRecord extends MyActiveRecord {
         constanciaFumiWS.setConstanciaFumiVehiculosList(
                 new ConstanciaFumiVehiculosActiveRecord(context)
                         .getConstanciaFumiVehiculos(ConstanciaFumiVehiculos.CONSTANCIA_FUMI_ID_WS, constanciaFumiID)
+        );
+
+        constanciaFumiWS.setConstanciaFumiAreasList(
+                new ConstanciaFumiAreasActiveRecord(context)
+                        .getConstanciaFumiAreas(ConstanciaFumiAreas.CONSTANCIA_FUMI_ID_WS, constanciaFumiID)
         );
 
         return constanciaFumiWS;

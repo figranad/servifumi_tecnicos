@@ -3,6 +3,7 @@ package com.app_2sis.e_voluciona.servifumi_tecnicos.model.ws;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Utileria;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumi;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAccesorios;
+import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiAreas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiPlagas;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiProductos;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.model.ConstanciaFumiVehiculos;
@@ -16,6 +17,7 @@ public class ConstanciaFumiWS {
     private List<ConstanciaFumiProductos> constanciaFumiProductosList = new ArrayList<>();
     private List<ConstanciaFumiAccesorios> constanciaFumiAccesoriosList = new ArrayList<>();
     private List<ConstanciaFumiVehiculos> constanciaFumiVehiculosList = new ArrayList<>();
+    private List<ConstanciaFumiAreas> constanciaFumiAreasList = new ArrayList<>();
 
     public ConstanciaFumiWS() {
     }
@@ -58,6 +60,14 @@ public class ConstanciaFumiWS {
 
     public void setConstanciaFumiVehiculosList(List<ConstanciaFumiVehiculos> constanciaFumiVehiculosList) {
         this.constanciaFumiVehiculosList = constanciaFumiVehiculosList;
+    }
+
+    public List<ConstanciaFumiAreas> getConstanciaFumiAreasList() {
+        return constanciaFumiAreasList;
+    }
+
+    public void setConstanciaFumiAreasList(List<ConstanciaFumiAreas> constanciaFumiAreasList) {
+        this.constanciaFumiAreasList = constanciaFumiAreasList;
     }
 
     public void changePathsByFiles() {

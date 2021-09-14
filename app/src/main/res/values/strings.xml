@@ -123,4 +123,7 @@
     <string name="enviar">ENVIAR TODO</string>
     <string name="constancia_sf_accesorios">ACCESORIOS ASIGNADOS*</string>
     <string name="saldo_constancia">SALDO:</string>
+    <string name="area_area">Área Detallada</string>
+    <string name="constancia_sf_areas_detalladas">ÁREAS TRABAJADAS*</string>
+    <string name="hint_area_nombre">NOMBRE*</string>
 </resources>

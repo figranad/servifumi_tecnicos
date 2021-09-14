@@ -10,7 +10,7 @@
         android:background="@color/colorGrisClaro"
         android:orientation="horizontal">
 
-        <com.rey.material.widget.CheckBox
+        <CheckBox
             android:id="@+id/chk_list_tanque"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

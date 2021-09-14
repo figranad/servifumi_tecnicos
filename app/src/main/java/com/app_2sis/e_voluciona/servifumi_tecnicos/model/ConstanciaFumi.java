@@ -33,6 +33,7 @@ public class ConstanciaFumi {
     public static final String AREAS_TRATADAS_INTERIOR = "areas_tratadas_interior";
     public static final String AREAS_TRATADAS_EXTERIOR = "areas_tratadas_exterior";
     public static final String AREAS_TRATADAS_VEHICULO = "areas_tratadas_vehiculo";
+    public static final String AREAS_TRATADAS_DETALLADAS = "areas_tratadas_detalladas";
     public static final String TIPO_SERVICIO = "tipo_servicio";
     public static final String TIPO_SERVICIO_OTRO = "tipo_servicio_otro";
     public static final String TIP_APLICA_ASPERSION = "tip_aplica_aspersion";
@@ -115,6 +116,10 @@ public class ConstanciaFumi {
     @SerializedName(AREAS_TRATADAS_VEHICULO)
     @DatabaseField(columnName = AREAS_TRATADAS_VEHICULO)
     private String areas_tratadas_vehiculo;
+
+    @SerializedName(AREAS_TRATADAS_DETALLADAS)
+    @DatabaseField(columnName = AREAS_TRATADAS_DETALLADAS)
+    private String areas_tratadas_detalladas;
 
     @SerializedName(TIPO_SERVICIO)
     @DatabaseField(columnName = TIPO_SERVICIO)
@@ -324,6 +329,14 @@ public class ConstanciaFumi {
 
     public void setAreas_tratadas_vehiculo(String areas_tratadas_vehiculo) {
         this.areas_tratadas_vehiculo = areas_tratadas_vehiculo;
+    }
+
+    public String getAreas_tratadas_detalladas() {
+        return areas_tratadas_detalladas;
+    }
+
+    public void setAreas_tratadas_detalladas(String areas_tratadas_detalladas) {
+        this.areas_tratadas_detalladas = areas_tratadas_detalladas;
     }
 
     public String getTipo_servicio() {

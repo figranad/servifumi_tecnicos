@@ -288,7 +288,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp" />
 
-            <com.rey.material.widget.CheckBox
+            <CheckBox
                 android:id="@+id/chk_programacion_imposible_realizar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
