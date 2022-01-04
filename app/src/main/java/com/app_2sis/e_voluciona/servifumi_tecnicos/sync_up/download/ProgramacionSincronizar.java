@@ -1,5 +1,7 @@
 package com.app_2sis.e_voluciona.servifumi_tecnicos.sync_up.download;
 
+import android.util.Log;
+
 import com.app_2sis.e_voluciona.servifumi_tecnicos.activity.DescargaActivity;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.db.ProgramacionActiveRecord;
 import com.app_2sis.e_voluciona.servifumi_tecnicos.extra.Constant;
@@ -22,7 +24,6 @@ public class ProgramacionSincronizar implements Callback<ProgramacionResponse> {
     public ProgramacionSincronizar(DescargaActivity descargaActivity) {
         this.descargaActivity = descargaActivity;
         programacionActiveRecord = new ProgramacionActiveRecord(descargaActivity);
-
         ApiAdapter.getApiService_upload()
                 .create(ApiService.class)
                 .getProgramacion(new MisPreferencias(descargaActivity).getIdTecnicoLogueado())
